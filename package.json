@@ -1,0 +1,25 @@
+{
+  "name": "leditor",
+  "version": "1.0.0",
+  "description": "Web富文本编辑器",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iq9891/lEditor.git"
+  },
+  "keywords": [
+    "富文本编辑器",
+    "编辑器",
+    "editor",
+    "leditor"
+  ],
+  "author": "李梦龙",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iq9891/lEditor/issues"
+  },
+  "homepage": "https://github.com/iq9891/lEditor#readme"
+}

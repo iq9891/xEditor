@@ -1,5 +1,5 @@
 {
-  "name": "xEditor",
+  "name": "xeditor",
   "version": "1.0.0",
   "description": "Web富文本编辑器",
   "main": "dist/xeditor.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iq9891/lEditor.git"
+    "url": "git+https://github.com/iq9891/xEditor.git"
   },
   "keywords": [
     "富文本编辑器",

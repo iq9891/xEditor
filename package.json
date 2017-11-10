@@ -1,8 +1,8 @@
 {
-  "name": "leditor",
+  "name": "xEditor",
   "version": "1.0.0",
   "description": "Web富文本编辑器",
-  "main": "index.js",
+  "main": "dist/xeditor.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,12 +14,12 @@
     "富文本编辑器",
     "编辑器",
     "editor",
-    "leditor"
+    "xEditor"
   ],
   "author": "李梦龙",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/iq9891/lEditor/issues"
+    "url": "https://github.com/iq9891/xEditor/issues"
   },
-  "homepage": "https://github.com/iq9891/lEditor#readme"
+  "homepage": "https://github.com/iq9891/xEditor#readme"
 }

@@ -12,7 +12,7 @@ var isDev = env.NODE_ENV === '"development"';
 var dist = ''; // 生成的文件夹目录是可以配的，根据环境的不同生成的文件夹不同
 
 var entry = {
-  main: ['./src/index.js']
+  main: ['./src/xeditor/index.js']
 };
 
 var plugins = [
@@ -60,6 +60,10 @@ if (isPro) {
   plugins.push(new webpack.BannerPlugin('@ license evente\n@ version '+ pkg.version +'\n@ time '+ oAllTime));
 }
 
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+
 module.exports = merge(webpackBaseConfig, {
   entry: entry,
   devServer: {
@@ -75,6 +79,12 @@ module.exports = merge(webpackBaseConfig, {
     library: pkg.name,
     libraryTarget: 'umd',
     umdNamedDefine: true
+  },
+  resolve: {
+    alias: {
+      '@': resolve('src'),
+      'assets': resolve('src/assets'),
+    }
   },
   plugins: plugins
 });

@@ -1,7 +1,7 @@
-.#{$prefix}toolbar {
+.#{$prefix}menu {
   display: flex;
   border: 1px solid $border-color;
-  background: $toolbar-color;
+  background: $menu-color;
 
   &-link {
     display: flex;

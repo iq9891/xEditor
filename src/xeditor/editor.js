@@ -1,3 +1,5 @@
+// XDom 主类
+import $ from './dom';
 /**
 * xEditor 对象
 * @example
@@ -14,6 +16,7 @@ const XEditor = class {
   constructor(params) {
     this.name = 'xEditor';
     this.params = params;
+    console.log($('<div>xEditor</div>'));
   }
 };
 /**

@@ -57,12 +57,23 @@ const XDom = class {
         // 处理 $('<div><p>xeditor</p></div>')
         } else {
           const rTag = (/^<([a-z][^/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>/i);
+          const rAttrTag = (/<([a-zA-Z]+)\s*[^><]*>/g);
           const rContent = />(.+)</;
           const tag = rTag.exec(match[1]);
           const testHtml = rContent.exec(match[1]);
-          if (tag && testHtml) {
+          console.log(tag, match[1], 'tag');
+          // 没有属性的全标签
+          if ((tag && testHtml)) {
             const eleHtml = testHtml[1];
             this[0] = document.createElement(tag[1]);
+            this[0].innerHTML = eleHtml;
+            this.length = 1;
+          }
+          // 如果有属性
+          if (rAttrTag.test(match[1])) {
+            const rAttrTag1 = (/<([a-zA-Z]+)\s*[^>]*>/g);
+            const eleHtml = match[1];
+            this[0] = document.createElement(rAttrTag1.exec(match[1])[1]);
             this[0].innerHTML = eleHtml;
             this.length = 1;
           }

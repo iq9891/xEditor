@@ -6,7 +6,7 @@
   </head>
   <body>
     <div id="xe" class="xe">
-      <div class="xe-menu">
+      <!-- <div class="xe-menu">
         <div class="xe-menu-area">
           <a href="javascript:void('粘贴');" title="粘贴" class="xe-menu-link">
             <i class="xe-icon xe-icon-p"></i>
@@ -76,10 +76,11 @@
       </div>
       <div class="xe-text-wrap">
         <div contenteditable="true" class="xe-text"></div>
-      </div>
+      </div> -->
     </div>
     <script>
-    new window.$xEditor({id: 123})
+    var xEditor = new window.$xEditor('#xe')
+    xEditor.create();
     // var xEditor = new window.$xEditor({id: 123})
     // document.write(xEditor.name + '<br /> 正常运行');
     </script>

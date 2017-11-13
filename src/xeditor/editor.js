@@ -1,5 +1,9 @@
 // XDom 主类
 import $ from './dom';
+import Menu from './menus';
+
+let editorId = 1; // 编辑器变化 多个编辑器自动累加
+
 /**
 * xEditor 对象
 * @example
@@ -9,14 +13,22 @@ const XEditor = class {
   /**
    * 构造函数
    *
-   * @param {Object} params 一个配置的对象
-   * @param {Function} params.callback A callback function on the config object
+   * @param {Object} selector 编辑器的选择器
+   * @param {Object} config 配置
    * @returns {Object} The constructed target object
    */
-  constructor(params) {
-    this.name = 'xEditor';
-    this.params = params;
-    console.log($('<div>xEditor</div>'));
+  constructor(selector) {
+    // id，用以区分单个页面不同的编辑器对象
+    this.uid = editorId++;
+    this.$editor = $(selector);
+    console.log(this.$editor);
+  }
+  /**
+   * 创建编辑器
+   */
+  create() {
+    // 初始化 菜单
+    this.menu = new Menu(this);
   }
 };
 /**

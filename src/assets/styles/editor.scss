@@ -1,6 +1,8 @@
-.xeditor {
-  border: 10px solid red;
-  display: flex;
-  height: 100px;
-  background: url(~assets/images/test.png);
+@import "./config.scss";
+@import "./icons.scss";
+@import "./toolbar.scss";
+@import "./text.scss";
+
+.#{$editor} {
+  height: 400px;
 }

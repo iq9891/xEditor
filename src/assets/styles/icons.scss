@@ -1,0 +1,149 @@
+.#{$prefix}icon {
+  width: 16px;
+  height: 16px;
+  background: url(~assets/images/icon.png) no-repeat;
+
+  &-a {
+    background-position: 0 -120px;
+
+    &:hover {
+      background-position: -24px -120px;
+    }
+
+    &-l {
+      background-position: 0 -144px;
+
+      &:hover {
+        background-position: -24px -144px;
+      }
+    }
+
+    &-c {
+      background-position: 0 -168px;
+
+      &:hover {
+        background-position: -24px -168px;
+      }
+    }
+
+    &-r {
+      background-position: 0 -192px;
+
+      &:hover {
+        background-position: -24px -192px;
+      }
+    }
+  }
+
+  &-b {
+    background-position: 0 0;
+
+    &:hover {
+      background-position: -24px 0;
+    }
+  }
+
+  &-bg {
+    background-position: 0 -96px;
+
+    &:hover {
+      background-position: -24px -96px;
+    }
+  }
+
+  &-c {
+    background-position: 0 -72px;
+
+    &:hover {
+      background-position: -24px -72px;
+    }
+  }
+
+  &-i {
+    background-position: 0 -24px;
+
+    &:hover {
+      background-position: -24px -24px;
+    }
+
+    &mg {
+      background-position: 0 -216px;
+
+      &:hover {
+        background-position: -24px -216px;
+      }
+    }
+  }
+
+  &-l {
+    background-position: 0 -288px;
+
+    &:hover {
+      background-position: -24px -288px;
+    }
+  }
+
+  &-m {
+    background-position: 0 -240px;
+
+    &:hover {
+      background-position: -24px -240px;
+    }
+  }
+
+  &-p {
+    background-position: 0 -360px;
+
+    &:hover {
+      background-position: -24px -360px;
+    }
+
+    &-t {
+      background-position: 0 -384px;
+
+      &:hover {
+        background-position: -24px -384px;
+      }
+    }
+
+    &-w {
+      background-position: 0 -408px;
+
+      &:hover {
+        background-position: -24px -408px;
+      }
+    }
+  }
+
+  &-q {
+    background-position: 0 -336px;
+
+    &:hover {
+      background-position: -24px -336px;
+    }
+  }
+
+  &-s {
+    background-position: 0 -432px;
+
+    &:hover {
+      background-position: -24px -432px;
+    }
+  }
+
+  &-u {
+    background-position: 0 -48px;
+
+    &:hover {
+      background-position: -24px -48px;
+    }
+  }
+
+  &-t {
+    background-position: 0 -264px;
+
+    &:hover {
+      background-position: -24px -264px;
+    }
+  }
+}

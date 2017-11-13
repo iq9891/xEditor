@@ -1,0 +1,20 @@
+.#{$prefix}toolbar {
+  display: flex;
+  border: 1px solid $border-color;
+  background: $toolbar-color;
+
+  &-link {
+    display: flex;
+    margin: 0 8px;
+  }
+
+  &-area {
+    display: flex;
+    border-right: 1px solid $border-color;
+    margin: 8px 0;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.#{$prefix}text {
+  height: calc(100% - 32px);
+  width: calc(100% - 32px);
+  padding: 16px;
+  overflow: auto;
+  color: $color;
+
+  &:focus {
+    outline: none;
+  }
+
+  &-wrap {
+    border: 1px solid $border-color;
+    border-top: none;
+    background: $bg-main;
+    height: calc(100% - 35px);
+    width: calc(100% - 2px);
+  }
+}

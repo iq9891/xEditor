@@ -2,11 +2,81 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>test 页面</title>
+    <title>xEditor 页面</title>
   </head>
   <body>
-    <div class="xeditor">
-
+    <div class="xe">
+      <div class="xe-toolbar">
+        <div class="xe-toolbar-area">
+          <a href="javascript:void('粘贴');" title="粘贴" class="xe-toolbar-link">
+            <i class="xe-icon xe-icon-p"></i>
+          </a>
+          <a href="javascript:void('粘贴为无格式文本');" title="粘贴为无格式文本" class="xe-toolbar-link">
+            <i class="xe-icon xe-icon-p-t"></i>
+          </a>
+          <a href="javascript:void('从 MS Word 粘贴');" title="从 MS Word 粘贴" class="xe-toolbar-link">
+            <i class="xe-icon xe-icon-p-w"></i>
+          </a>
+        </div>
+        <div class="xe-toolbar-area">
+          <a href="javascript:void('加粗');" title="加粗" class="xe-toolbar-link">
+            <i class="xe-icon xe-icon-b"></i>
+          </a>
+          <a href="javascript:void('倾斜');" title="倾斜" class="xe-toolbar-link">
+            <i class="xe-icon xe-icon-i"></i>
+          </a>
+          <a href="javascript:void('下划线');" title="下划线" class="xe-toolbar-link">
+            <i class="xe-icon xe-icon-u"></i>
+          </a>
+        </div>
+        <div class="xe-toolbar-area">
+          <a href="javascript:void('文本颜色');" title="文本颜色" class="xe-toolbar-link">
+            <i class="xe-icon xe-icon-c"></i>
+          </a>
+          <a href="javascript:void('背景颜色');" title="背景颜色" class="xe-toolbar-link">
+            <i class="xe-icon xe-icon-bg"></i>
+          </a>
+        </div>
+        <div class="xe-toolbar-area">
+          <a class="xe-toolbar-link" href="javascript:void('两端对齐');" title="两端对齐">
+            <i class="xe-icon xe-icon-a"></i>
+          </a>
+          <a href="javascript:void('左对齐');" title="左对齐" class="xe-toolbar-link">
+            <i class="xe-icon xe-icon-a-l"></i>
+          </a>
+          <a href="javascript:void('居中');" title="居中" class="xe-toolbar-link">
+            <i class="xe-icon xe-icon-a-c"></i>
+          </a>
+          <a href="javascript:void('右对齐');" title="右对齐" class="xe-toolbar-link">
+            <i class="xe-icon xe-icon-a-r"></i>
+          </a>
+        </div>
+        <div class="xe-toolbar-area">
+          <a href="javascript:void('图像');" title="图像" class="xe-toolbar-link">
+            <i class="xe-icon xe-icon-img"></i>
+          </a>
+          <a href="javascript:void('插入媒体');" title="插入媒体" class="xe-toolbar-link">
+            <i class="xe-icon xe-icon-m"></i>
+          </a>
+          <a href="javascript:void('表格');" title="表格" class="xe-toolbar-link">
+            <i class="xe-icon xe-icon-t"></i>
+          </a>
+          <a href="javascript:void('插入水平线');" title="插入水平线" class="xe-toolbar-link">
+            <i class="xe-icon xe-icon-l"></i>
+          </a>
+        </div>
+        <div class="xe-toolbar-area">
+          <a href="javascript:void('源代码');" title="源代码" class="xe-toolbar-link">
+            <i class="xe-icon xe-icon-s"></i>
+          </a>
+          <a href="javascript:void('全屏');" title="全屏" class="xe-toolbar-link">
+            <i class="xe-icon xe-icon-q"></i>
+          </a>
+        </div>
+      </div>
+      <div class="xe-text-wrap">
+        <div contenteditable="true" class="xe-text"></div>
+      </div>
     </div>
     <!-- <script>
     var xEditor = new window.$xEditor({id: 123})

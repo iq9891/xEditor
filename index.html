@@ -52,7 +52,7 @@
           </a>
         </div>
         <div class="xe-menu-area">
-          <a href="javascript:void('图像');" title="图像" class="xe-menu-link">
+          <a href="javascript:void('插入图像');" title="插入图像" class="xe-menu-link">
             <i class="xe-icon xe-icon-img"></i>
           </a>
           <a href="javascript:void('插入媒体');" title="插入媒体" class="xe-menu-link">
@@ -80,6 +80,9 @@
     </div>
     <script>
     var xEditor = new window.$xEditor('#xe')
+    xEditor.config({
+      menus: ['bold']
+    });
     xEditor.create();
     // var xEditor = new window.$xEditor({id: 123})
     // document.write(xEditor.name + '<br /> 正常运行');

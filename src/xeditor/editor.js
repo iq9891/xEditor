@@ -1,5 +1,6 @@
 // XDom 主类
 import $ from './dom';
+import config from './config';
 import Menu from './menus';
 
 let editorId = 1; // 编辑器变化 多个编辑器自动累加
@@ -21,7 +22,7 @@ const XEditor = class {
     // id，用以区分单个页面不同的编辑器对象
     this.uid = editorId++;
     this.$editor = $(selector);
-    console.log(this.$editor);
+    this.cfg = config;
   }
   /**
    * 创建编辑器
@@ -29,6 +30,15 @@ const XEditor = class {
   create() {
     // 初始化 菜单
     this.menu = new Menu(this);
+  }
+  /**
+   * 配置编辑器
+   *
+   * @param {Object} cfg 配置
+   * @returns {}
+   */
+  config(cfg) {
+    this.cfg = Object.assign({}, this.cfg, cfg);
   }
 };
 /**

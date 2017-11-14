@@ -59,7 +59,7 @@ const XDom = class {
         // 处理 $('<div><p>xeditor</p></div>') $('<br>')
         } else {
           const rAttrTag = (/<([a-zA-Z]+)\s*[^><]*>/g);
-          const rContent = />(.+)</;
+          const rContent = />(\s+.+\s+|.+)</;
           const testHtml = rContent.exec(match[1]);
           // 如果 匹配
           if (rAttrTag.test(match[1])) {

@@ -9,14 +9,11 @@ const XMenu = class {
   /**
    * 构造函数
    *
-   * @param {Object} params 一个配置的对象
-   * @param {Function} params.callback A callback function on the config object
-   * @returns {Object} The constructed target object
+   * @param {Object} editor 编辑器的对象
    */
   constructor(editor) {
-    console.log(123, editor);
     this.$editor = editor.$editor;
-
+    // 初始化菜单
     this.createMenu();
   }
 

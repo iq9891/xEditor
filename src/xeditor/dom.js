@@ -1,3 +1,5 @@
+import splitAttr from './tools/splitattr';
+import getStyle from './tools/getstyle';
 /**
 * XDom 对象
 * @example
@@ -54,28 +56,25 @@ const XDom = class {
         if (parsed) {
           this[0] = document.createElement(parsed[1]);
           this.length = 1;
-        // 处理 $('<div><p>xeditor</p></div>')
+        // 处理 $('<div><p>xeditor</p></div>') $('<br>')
         } else {
-          const rTag = (/^<([a-z][^/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>/i);
           const rAttrTag = (/<([a-zA-Z]+)\s*[^><]*>/g);
           const rContent = />(.+)</;
-          const tag = rTag.exec(match[1]);
           const testHtml = rContent.exec(match[1]);
-          console.log(tag, match[1], 'tag');
-          // 没有属性的全标签
-          if ((tag && testHtml)) {
-            const eleHtml = testHtml[1];
-            this[0] = document.createElement(tag[1]);
-            this[0].innerHTML = eleHtml;
-            this.length = 1;
-          }
-          // 如果有属性
+          // 如果 匹配
           if (rAttrTag.test(match[1])) {
-            const rAttrTag1 = (/<([a-zA-Z]+)\s*[^>]*>/g);
-            const eleHtml = match[1];
-            this[0] = document.createElement(rAttrTag1.exec(match[1])[1]);
-            this[0].innerHTML = eleHtml;
+            const rAttrTag1 = (/<([a-zA-Z]+)\s*([^><]*)>/g);
+            const element = rAttrTag1.exec(match[1]);
+            this[0] = document.createElement(element[1]);
             this.length = 1;
+            // 如果有内容或者子节点
+            if (testHtml) {
+              this.html(testHtml[1]);
+            }
+            // 设置属性
+            if (element[2]) {
+              this.attr(splitAttr(element[2]));
+            }
           }
         }
       // 操作 $('#id') $('.class') $('div')
@@ -128,7 +127,7 @@ const XDom = class {
           elem.style[params] = `${value}px`;
         });
       }
-      return this.getStyle(this[0])[params];
+      return getStyle(this[0])[params];
     }
     return this.forEach((elem) => {
       Object.keys(params).forEach((paramsKey) => {
@@ -137,20 +136,50 @@ const XDom = class {
     });
   }
   /**
-   * XDom 设置|获取样式
+   * XDom 设置|获取属性
    *
-   * @param {Object} ele 获取样式的元素
+   * @param {String} params 如果是一位，那么就是获取某个属性
+   * @param {Object} params 可以设置多个属性
    * @private
+   * @example
+   $('div').attr('class', 'xeditor');
+   $('div').attr('class'); // 'xeditor'
+   $('div').attr({
+   class: 'xeditor'
+ });
+   * @returns {Object} XDOM 对象
+   */
+  attr(params, value) {
+    if (typeof params === 'string') {
+      if (value) {
+        return this.forEach((elem) => {
+          elem.setAttribute(params, value);
+        });
+      }
+      return this[0].getAttribute(params);
+    }
+    return this.forEach((elem) => {
+      Object.keys(params).forEach((paramsKey) => {
+        elem.setAttribute(paramsKey, params[paramsKey]);
+      });
+    });
+  }
+  /**
+   * XDom 获取|设置 html
+   *
+   * @param {String} html 要设置的 html
+   * @private
+   * @example
+   $('div').html('<div><p>xeditor</p></div>')
    * @returns {Object} style 对象
    */
-  getStyle(ele) {
-    let style = null;
-    if (window.getComputedStyle) {
-      style = window.getComputedStyle(ele, null);
-    } else {
-      style = ele.currentStyle;
+  html(html) {
+    if (typeof html === 'string') {
+      return this.forEach((elem) => {
+        elem.innerHTML = html;
+      });
     }
-    return style;
+    return this[0].innerHTML;
   }
   /**
    * XDom 追加子元素

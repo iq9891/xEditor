@@ -3,6 +3,7 @@ import $ from './dom';
 import config from './config';
 import Menu from './menus';
 import Text from './text';
+import Selection from './selection';
 
 let editorId = 1; // 编辑器变化 多个编辑器自动累加
 
@@ -24,6 +25,8 @@ const XEditor = class {
     this.uid = editorId++;
     this.$editor = $(selector);
     this.cfg = config;
+    // 获取之前的内容
+    this.childrens = this.getChilds();
   }
   /**
    * 创建编辑器
@@ -33,6 +36,15 @@ const XEditor = class {
     this.menu = new Menu(this);
     // 内容
     this.text = new Text(this);
+    // 选区
+    this.selection = new Selection(this);
+    // 修复之前的内容
+    if (this.childrens.length > 0) {
+      this.setHtml();
+    } else {
+      // 新建一行
+      this.text.newline();
+    }
   }
   /**
    * 配置编辑器
@@ -42,6 +54,21 @@ const XEditor = class {
    */
   config(cfg) {
     this.cfg = Object.assign({}, this.cfg, cfg);
+  }
+  /**
+  * 获取之前里面内容
+  */
+  getChilds() {
+    const children = this.$editor.children();
+    this.$editor.html('');
+    return children;
+  }
+  /**
+  * 设置里面内容
+  * @param {Object} html 内容
+  */
+  setHtml(html = '') {
+    this.text.setHtml(html);
   }
 };
 /**

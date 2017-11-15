@@ -2,6 +2,7 @@
 import $ from './dom';
 import config from './config';
 import Menu from './menus';
+import Text from './text';
 
 let editorId = 1; // 编辑器变化 多个编辑器自动累加
 
@@ -30,6 +31,8 @@ const XEditor = class {
   create() {
     // 初始化 菜单
     this.menu = new Menu(this);
+    // 内容
+    this.text = new Text(this);
   }
   /**
    * 配置编辑器

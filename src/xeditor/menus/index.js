@@ -36,12 +36,11 @@ const XMenu = class {
    * @param {Object} editor 编辑器的对象
    */
   renderBtns() {
-    const tems = { length: 0 };
-    this.cfg.menus.forEach((menu, menuIndex) => {
+    const tems = [];
+    this.cfg.menus.forEach((menu) => {
       const menuBtn = new list[menu](this.editor);
       const $tem = menuBtn.$tem[0];
-      tems[menuIndex] = $tem;
-      tems.length++;
+      tems.push($tem);
     });
     $('.xe-menu').append(tems);
   }

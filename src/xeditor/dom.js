@@ -1,5 +1,6 @@
 import splitAttr from './tools/splitattr';
 import getStyle from './tools/getstyle';
+import px from './tools/px';
 /**
 * XDom 对象
 * @example
@@ -124,14 +125,14 @@ const XDom = class {
     if (typeof params === 'string') {
       if (value) {
         return this.forEach((elem) => {
-          elem.style[params] = `${value}px`;
+          elem.style[params] = px(value);
         });
       }
       return getStyle(this[0])[params];
     }
     return this.forEach((elem) => {
       Object.keys(params).forEach((paramsKey) => {
-        elem.style[paramsKey] = `${params[paramsKey]}px`;
+        elem.style[paramsKey] = px(params[paramsKey]);
       });
     });
   }

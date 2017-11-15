@@ -1,6 +1,16 @@
 import splitAttr from './tools/splitattr';
 import getStyle from './tools/getstyle';
 import px from './tools/px';
+import parsedom from './tools/parsedom';
+
+// 记录所有事件
+// body[0] 为元素路径
+// {
+//  body[0]: {
+//    click: [],
+//  }
+// }
+const events = {};
 /**
 * XDom 对象
 * @example
@@ -225,7 +235,12 @@ const XDom = class {
     });
     return this;
   }
-  // 获取第几个元素
+  //
+  /**
+   * XDom 获取第几个元素
+   * @param {Number} index 索引
+   * @returns {Object} XDOM 对象
+   */
   eq(index) {
     const { length } = this;
     let now = index;
@@ -234,17 +249,26 @@ const XDom = class {
     }
     return new XDom(this[now]);
   }
-  // 第一个
+  /**
+   * XDom 第一个
+   * @returns {Object} XDOM 对象
+   */
   first() {
     return this.eq(0);
   }
-  // 最后一个
+  /**
+   * XDom 最后一个
+   * @returns {Object} XDOM 对象
+   */
   last() {
     const { length } = this;
     const now = length - 1 > -1 ? length - 1 : 0;
     return this.eq(now);
   }
-  // 子节点
+  /**
+   * XDom 子节点
+   * @returns {Object} XDOM 对象
+   */
   children(elem) {
     const childs = [];
     if (elem) {
@@ -264,6 +288,97 @@ const XDom = class {
       });
     }
     return new XDom(childs);
+  }
+  /**
+   * XDom 绑定事件
+   * @param {string} type 事件类型
+   * @param {string|function} selector 代理的选择器|绑定方法
+   * @param {function} fn 绑定函数
+   * @example
+$('body').on('click', 'div', () => {
+  console.log('事件代理');
+});
+$('div').on('click', () => {
+  console.log('普通事件');
+});
+$('div').on('click mouserover', () => {
+  console.log('普通事件');
+});
+   * @returns {Object} XDOM 对象
+   */
+  on(type, selector, fn) {
+    // 如果是字符串
+    if (typeof type === 'string') {
+      // 如果是普通的绑定 $('div').on('click mouseover');
+      const types = type.split(' ');
+      const eventNoAgent = typeof selector === 'function';
+      return this.forEach((el) => {
+        types.forEach((tp) => {
+          if (!events[parsedom.getDomId(el)]) {
+            events[parsedom.getDomId(el)] = {};
+          }
+          if (!events[parsedom.getDomId(el)][tp]) {
+            events[parsedom.getDomId(el)][tp] = [];
+          }
+          if (eventNoAgent) {
+            events[parsedom.getDomId(el)][tp].push(selector);
+            // 无代理
+            el.addEventListener(tp, selector, false);
+          } else {
+            const agentFn = (e = window.event) => {
+              const { target } = e;
+              if (target.matches(selector)) {
+                fn.call(target, e);
+              }
+            };
+            events[parsedom.getDomId(el)][tp].push(agentFn);
+            // 有代理
+            el.addEventListener(tp, agentFn, false);
+          }
+        });
+      });
+    }
+    return this;
+  }
+  /**
+   * XDom 取消绑定事件
+   * @param {string} type 方法类型
+   * @param {function} fn 绑定函数
+   * @example
+$('body').off('click mouseover'); // 取消 click mouseover 绑定事件
+$('div').off('click'); // 取消 click 绑定事件
+$('p').off(); // 取消所有绑定事件
+   * @returns {Object} XDOM 对象
+   */
+  off(type, fn) {
+    // 如果传参数
+    if (typeof type === 'string') {
+      // 如果是普通的绑定 $('div').on('click mouseover');
+      const types = type.split(' ');
+
+      return this.forEach((el) => {
+        types.forEach((tp) => {
+          if (fn) {
+            el.removeEventListener(tp, fn, false);
+          } else {
+            const evs = events[parsedom.getDomId(el)][tp];
+            evs.forEach((ev) => {
+              el.removeEventListener(tp, ev, false);
+            });
+          }
+        });
+      });
+    }
+    // 如果不传参数
+    return this.forEach((el) => {
+      const elEvs = events[parsedom.getDomId(el)];
+      Object.keys(elEvs).forEach((elEvKey) => {
+        const evs = elEvs[elEvKey];
+        evs.forEach((ev) => {
+          el.removeEventListener(elEvKey, ev, false);
+        });
+      });
+    });
   }
 };
 

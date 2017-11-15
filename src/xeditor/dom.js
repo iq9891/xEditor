@@ -14,6 +14,7 @@ const XDom = class {
    * @returns {Object} XDOM 对象
    */
   constructor(selector) {
+    this.length = 0;
     this.init(selector);
     return this;
   }
@@ -38,6 +39,18 @@ const XDom = class {
 
     if (!selector) {
       return this;
+    }
+    // 如果是一个DOM元素（是element,或者document）
+    if (selector.nodeType === 1 || selector.nodeType === 9) {
+      this[0] = selector;
+      this.length = 1;
+    }
+    // 如果是 数组
+    if (Object.prototype.toString.call(selector) === '[object Array]') {
+      selector.forEach((sel, selIndex) => {
+        this[selIndex] = sel;
+      });
+      this.length = selector.length;
     }
     // 如果是 字符串
     if (typeof selector === 'string') {
@@ -172,7 +185,7 @@ const XDom = class {
    * @private
    * @example
    $('div').html('<div><p>xeditor</p></div>')
-   * @returns {Object} style 对象
+   * @returns {String} 内容
    */
   html(html) {
     if (typeof html === 'string') {
@@ -189,20 +202,73 @@ const XDom = class {
    * @private
    * @example
    $('div').append($('<div><p>xeditor</p></div>'))
-   * @returns {Object} style 对象
+   * @returns {Object} XDOM 对象
    */
   append(child) {
     this.forEach((elem) => {
-      elem.appendChild(child[0].cloneNode(true));
+      child.forEach((cd) => {
+        elem.appendChild(cd.cloneNode(true));
+      });
     });
     return this;
+  }
+  /**
+   * XDom 删除这个元素
+   * @returns {Object} XDOM 对象
+   */
+  remove() {
+    this.forEach((el) => {
+      const parent = el.parentElement;
+      if (parent) {
+        parent.removeChild(el);
+      }
+    });
+    return this;
+  }
+  // 获取第几个元素
+  eq(index) {
+    const { length } = this;
+    let now = index;
+    if (index >= length) {
+      now = index % length;
+    }
+    return new XDom(this[now]);
+  }
+  // 第一个
+  first() {
+    return this.eq(0);
+  }
+  // 最后一个
+  last() {
+    const { length } = this;
+    const now = length - 1 > -1 ? length - 1 : 0;
+    return this.eq(now);
+  }
+  // 子节点
+  children(elem) {
+    const childs = [];
+    if (elem) {
+      elem.forEach((el) => {
+        if (el.firstChild) {
+          childs.push(el.firstChild);
+        }
+      });
+    } else {
+      this.forEach((el) => {
+        const { children } = el;
+        if (children.length) {
+          Object.keys(children).forEach((elChild) => {
+            childs.push(children[elChild]);
+          });
+        }
+      });
+    }
+    return new XDom(childs);
   }
 };
 
 // new 一个对象
-function $(selector) {
-  return new XDom(selector);
-}
+const $ = selector => new XDom(selector);
 /**
  * XDom 模块.
  * 小型的 jQuery

@@ -84,6 +84,18 @@ const XSelection = class {
     // 存储 range
     this.saveRange(range);
   }
+  // 选区是否为空
+  isSelectionEmpty() {
+    const range = this.curRange;
+    if (range && range.startContainer) {
+      if (range.startContainer === range.endContainer) {
+        if (range.startOffset === range.endOffset) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
   /**
   * 恢复选区
   */

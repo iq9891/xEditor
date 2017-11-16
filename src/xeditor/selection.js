@@ -12,11 +12,16 @@ const XSelection = class {
     this.cfg = editor.cfg;
     this.curRange = null;
   }
-  // 获取 range 对象
+  /**
+  * 获取 range 对象
+  */
   getRange() {
     return this.curRange;
   }
-  // 选区的 $Elem
+  /**
+  * 选区的 $Elem
+  * @param {Object} rg 当前选区
+  */
   getSelectionContainerElem(rg) {
     const range = rg || this.curRange;
     let elem;
@@ -26,7 +31,10 @@ const XSelection = class {
     }
     return null;
   }
-  // 保存选区
+  /**
+  * 保存选区
+  * @param {Object} rg 当前选区
+  */
   saveRange(rg) {
     if (rg) {
       // 保存已有选区
@@ -50,11 +58,13 @@ const XSelection = class {
       this.curRange = range;
     }
   }
-  // 根据 $Elem 设置选区
+  /**
+  * 根据 $Elem 设置选区
+  * @param {Object} $elem XDom 对象元素
+  * @param {Boolean} toStart true 开始位置，false 结束位置
+  * @param {Boolean} isContent 是否选中Elem的内容
+  */
   createRangeByElem($elem, toStart, isContent) {
-    // $elem - 经过封装的 elem
-    // toStart - true 开始位置，false 结束位置
-    // isContent - 是否选中Elem的内容
     if (!$elem.length) {
       return;
     }
@@ -74,11 +84,31 @@ const XSelection = class {
     // 存储 range
     this.saveRange(range);
   }
-  // 恢复选区
+  /**
+  * 恢复选区
+  */
   restoreSelection() {
     const selection = window.getSelection();
     selection.removeAllRanges();
     selection.addRange(this.curRange);
+  }
+  /**
+  * 自定义 insertHTML 事件
+  * @param {String} html 添加的内容
+  */
+  insertHTML(html) {
+    const range = this.getRange();
+    if (document.queryCommandSupported('insertHTML')) {
+      // W3C
+      document.execCommand('insertHTML', false, html);
+    } else if (range.insertNode) {
+      // IE
+      range.deleteContents();
+      range.insertNode($(html)[0]);
+    } else if (range.pasteHTML) {
+      // IE <= 10
+      range.pasteHTML(html);
+    }
   }
 };
 /**

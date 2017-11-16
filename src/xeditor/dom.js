@@ -130,6 +130,16 @@ const XDom = class {
     }
     return this;
   }
+
+  /**
+   * XDom 获取节点名字
+   *
+   * @private
+   * @returns {string} 节点名字
+   */
+  getNodeName() {
+    return this[0].nodeName;
+  }
   /**
    * XDom 设置|获取样式
    *
@@ -288,6 +298,21 @@ const XDom = class {
       });
     }
     return new XDom(childs);
+  }
+  /**
+   * XDom 获取父节点
+   * @returns {Object} XDOM 对象
+   */
+  parent() {
+    const parents = [];
+    this.forEach((el) => {
+      const { parentNode } = el;
+      const hasParent = parents.some(pts => pts.isEqualNode(parentNode));
+      if (!hasParent) {
+        parents.push(parentNode);
+      }
+    });
+    return new XDom(parents);
   }
   /**
    * XDom 绑定事件

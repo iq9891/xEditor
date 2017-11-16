@@ -13,7 +13,7 @@ const XText = class {
     // 初始化内容
     this.create();
     // 绑定事件
-    this.on();
+    this.bind();
   }
 
   create() {
@@ -85,9 +85,37 @@ const XText = class {
   /**
   * 绑定事件
   */
-  on() {
+  bind() {
+    // 实时保存选取
+    // this.saveRangeRealTime();
     // 处理 tab 键
     this.tab();
+    // 清空之后
+    this.empty();
+  }
+  // 实时保存选取
+  saveRangeRealTime() {
+    const $textElem = this.$text;
+
+    // 保存当前的选区
+    const saveRange = () => {
+      const { selection } = this.editor;
+      // 随时保存选区
+      selection.saveRange();
+      // 更新按钮 ative 状态
+      // editor.menus.changeActive()
+    };
+    // 按键后保存
+    $textElem.on('keyup', saveRange);
+    $textElem.on('mousedown', () => {
+      // mousedown 状态下，鼠标滑动到编辑区域外面，也需要保存选区
+      $textElem.on('mouseleave', saveRange);
+    });
+    $textElem.on('mouseup', () => {
+      saveRange();
+      // 在编辑器区域之内完成点击，取消鼠标滑动到编辑区外面的事件
+      $textElem.off('mouseleave', saveRange);
+    });
   }
   /**
   * 处理 tab 键
@@ -116,6 +144,21 @@ const XText = class {
       }
 
       e.preventDefault();
+    });
+  }
+  /**
+  * 清空之后
+  */
+  empty() {
+    this.$text.on('keydown', (e = window.event) => {
+      if (e.keyCode !== 8) {
+        return;
+      }
+      const txtHtml = this.$text.html().toLowerCase().trim();
+
+      if (txtHtml === '<p><br></p>') {
+        e.preventDefault();
+      }
     });
   }
 };

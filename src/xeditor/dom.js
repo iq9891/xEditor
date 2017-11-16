@@ -214,6 +214,54 @@ const XDom = class {
     });
   }
   /**
+   * XDom 添加 class
+   *
+   * @param {String} name 添加的 class
+   * @private
+   * @example
+   $('div').addClass('xeditor')
+   * @returns {String} 内容
+   */
+  addClass(name) {
+    if (!name) {
+      return this;
+    }
+
+    return this.forEach((el) => {
+      const { className } = el;
+      if (className) {
+        // 如果最后有空格
+        const rs = /\s$/g;
+        // 如果没有被添加过
+        if (className.indexOf(name) === -1) {
+          el.className += rs.test(className) ? `${name}` : ` ${name}`;
+        }
+      } else {
+        el.className = name;
+      }
+    });
+  }
+  /**
+   * XDom 删除 class
+   *
+   * @param {String} name 添加的 class
+   * @private
+   * @example
+   $('div').removeClass('xeditor')
+   * @returns {String} 内容
+   */
+  removeClass(name) {
+    if (!name) {
+      return this;
+    }
+
+    return this.forEach((el) => {
+      const { className } = el;
+      const rName = new RegExp(`\\s${name}|${name}\\s|${name}`);
+      el.className = className.replace(rName, '');
+    });
+  }
+  /**
    * XDom 获取|设置 html
    *
    * @param {String} html 要设置的 html

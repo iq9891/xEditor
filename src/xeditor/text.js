@@ -12,6 +12,8 @@ const XText = class {
     this.cfg = editor.cfg;
     // 初始化内容
     this.create();
+    // 绑定事件
+    this.on();
   }
 
   create() {
@@ -79,6 +81,42 @@ const XText = class {
     this.editor.selection.createRangeByElem($last, false, true);
     // 光标挪到最后
     this.editor.selection.restoreSelection();
+  }
+  /**
+  * 绑定事件
+  */
+  on() {
+    // 处理 tab 键
+    this.tab();
+  }
+  /**
+  * 处理 tab 键
+  */
+  tab() {
+    this.$text.on('keydown', (e = window.event) => {
+      if (e.keyCode !== 9) {
+        return;
+      }
+      const { selection } = this.editor;
+      // 获取 选区的 $Elem
+      const $selectionElem = selection.getSelectionContainerElem();
+      if (!$selectionElem) {
+        return;
+      }
+      const $parentElem = $selectionElem.parent();
+      const selectionNodeName = $selectionElem.getNodeName();
+      const parentNodeName = $parentElem.getNodeName();
+
+      if (selectionNodeName === 'CODE' && parentNodeName === 'PRE') {
+        // <pre><code> 里面
+        selection.insertHTML('    ');
+      } else {
+        // 普通文字
+        selection.insertHTML('&nbsp;&nbsp;&nbsp;&nbsp;');
+      }
+
+      e.preventDefault();
+    });
   }
 };
 /**

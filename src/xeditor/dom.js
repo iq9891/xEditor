@@ -104,9 +104,15 @@ const XDom = class {
       // 操作 $('#id') $('.class') $('div')
       } else {
         const docSelector = document.querySelectorAll(selector);
-        docSelector.forEach((el, elIndex) => {
-          this[elIndex] = el;
-        });
+        if (docSelector.forEach) {
+          docSelector.forEach((el, elIndex) => {
+            this[elIndex] = el;
+          });
+        } else {
+          for (let i = 0, len = docSelector.length; i < len; i++) {
+            this[i] = docSelector[i];
+          }
+        }
         this.length = docSelector.length;
       }
     }
@@ -130,7 +136,6 @@ const XDom = class {
     }
     return this;
   }
-
   /**
    * XDom 获取节点名字
    *
@@ -139,6 +144,16 @@ const XDom = class {
    */
   getNodeName() {
     return this[0].nodeName;
+  }
+  /**
+   * XDom 是否包含某个子节点
+   *
+   * @param {String} $elem 检测的节点
+   * @private
+   * @returns {string} 节点名字
+   */
+  isContain($elem) {
+    return this[0].contains($elem[0]);
   }
   /**
    * XDom 设置|获取样式
@@ -292,7 +307,9 @@ const XDom = class {
         const { children } = el;
         if (children.length) {
           Object.keys(children).forEach((elChild) => {
-            childs.push(children[elChild]);
+            if (elChild !== 'length') {
+              childs.push(children[elChild]);
+            }
           });
         }
       });

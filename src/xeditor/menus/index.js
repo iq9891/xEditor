@@ -16,6 +16,7 @@ const XMenu = class {
     this.editor = editor;
     this.$editor = editor.$editor;
     this.cfg = editor.cfg;
+    this.btns = [];
     // 初始化菜单
     this.createMenu();
     //根据配置渲染创建功能按钮
@@ -41,8 +42,21 @@ const XMenu = class {
       const menuBtn = new list[menu](this.editor);
       const $tem = menuBtn.$tem[0];
       tems.push($tem);
+      this.btns.push(menuBtn);
     });
     $('.xe-menu').append(tems);
+
+    this.btns.forEach((btn) => {
+      btn.bind();
+    });
+  }
+  // 检测哪个是激活
+  testActive() {
+    this.btns.forEach((btn) => {
+      if (btn.isActive) {
+        btn.isActive();
+      }
+    });
   }
 };
 /**

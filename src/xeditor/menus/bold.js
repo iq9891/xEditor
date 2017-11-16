@@ -12,17 +12,34 @@ const XMenuBold = class {
    * @param {Object} editor 编辑器的对象
    */
   constructor(editor) {
+    this.editor = editor;
     this.$editor = editor.$editor;
     this.cfg = editor.cfg;
-    // 初始化菜单
-    this.createBold();
+    // 初始化
+    this.create();
   }
 
-  createBold() {
+  create() {
     const { lang } = this.cfg;
-    this.$tem = $(`<a href="javascript:void('${lang.bold}');" title="${lang.bold}" class="xe-menu-link">
+    this.$tem = $(`<a id="xe-bold${this.editor.uid}" href="javascript:void('${lang.bold}');" title="${lang.bold}" class="xe-menu-link">
       <i class="xe-icon xe-icon-b"></i>
     </a>`);
+  }
+
+  bind() {
+    $(`#xe-bold${this.editor.uid}`).on('click', () => {
+      const { text, selection } = this.editor;
+      // 只有选中了才有效果
+      if (!selection.isSelectionEmpty()) {
+        // 加粗操作
+        text.handle('bold');
+        this.isActive();
+      }
+    });
+  }
+  // 是否是加粗
+  isActive() {
+    console.log('queryCommandState', document.queryCommandState('bold'));
   }
 };
 /**

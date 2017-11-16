@@ -87,7 +87,7 @@ const XText = class {
   */
   bind() {
     // 实时保存选取
-    // this.saveRangeRealTime();
+    this.saveRangeRealTime();
     // 处理 tab 键
     this.tab();
     // 清空之后
@@ -99,11 +99,11 @@ const XText = class {
 
     // 保存当前的选区
     const saveRange = () => {
-      const { selection } = this.editor;
+      const { selection, menu } = this.editor;
       // 随时保存选区
       selection.saveRange();
       // 更新按钮 ative 状态
-      // editor.menus.changeActive()
+      menu.testActive();
     };
     // 按键后保存
     $textElem.on('keyup', saveRange);
@@ -160,6 +160,22 @@ const XText = class {
         e.preventDefault();
       }
     });
+  }
+  /**
+  * 按钮对文字的操作，如加粗。。
+  * @param {String} name 操作的类型，name 的类型可以参照 https://developer.mozilla.org/zh-CN/docs/Web/API/Document/execCommand
+  * @param {String} value 操作对应的值
+  */
+  handle(name, value) {
+    if (this[name]) {
+      this[name]();
+    } else {
+      document.execCommand(name, false, value);
+      const { selection } = this.editor;
+      // 可以多次操作
+      selection.saveRange();
+      selection.restoreSelection();
+    }
   }
 };
 /**

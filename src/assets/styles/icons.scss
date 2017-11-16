@@ -10,11 +10,23 @@
       background-position: -24px -120px;
     }
 
+    &-active,
+    &-active:hover,
+    &:active {
+      background-position: -72px -120px;
+    }
+
     &-l {
       background-position: 0 -144px;
 
       &:hover {
         background-position: -24px -144px;
+      }
+
+      &-active,
+      &-active:hover,
+      &:active {
+        background-position: -72px -144px;
       }
     }
 
@@ -24,6 +36,12 @@
       &:hover {
         background-position: -24px -168px;
       }
+
+      &-active,
+      &-active:hover,
+      &:active {
+        background-position: -72px -168px;
+      }
     }
 
     &-r {
@@ -31,6 +49,12 @@
 
       &:hover {
         background-position: -24px -192px;
+      }
+
+      &-active,
+      &-active:hover,
+      &:active {
+        background-position: -72px -192px;
       }
     }
   }
@@ -41,6 +65,12 @@
     &:hover {
       background-position: -24px 0;
     }
+
+    &-active,
+    &-active:hover,
+    &:active {
+      background-position: -72px 0;
+    }
   }
 
   &-bg {
@@ -49,6 +79,12 @@
     &:hover {
       background-position: -24px -96px;
     }
+
+    &-active,
+    &-active:hover,
+    &:active {
+      background-position: -72px -96px;
+    }
   }
 
   &-c {
@@ -56,6 +92,12 @@
 
     &:hover {
       background-position: -24px -72px;
+    }
+
+    &-active,
+    &-active:hover,
+    &:active {
+      background-position: -72px -72px;
     }
   }
 
@@ -66,11 +108,23 @@
       background-position: -24px -24px;
     }
 
+    &-active,
+    &-active:hover,
+    &:active {
+      background-position: -72px -24px;
+    }
+
     &mg {
       background-position: 0 -216px;
 
       &:hover {
         background-position: -24px -216px;
+      }
+
+      &-active,
+      &-active:hover,
+      &:active {
+        background-position: -72px -216px;
       }
     }
   }
@@ -81,6 +135,12 @@
     &:hover {
       background-position: -24px -288px;
     }
+
+    &-active,
+    &-active:hover,
+    &:active {
+      background-position: -72px -288px;
+    }
   }
 
   &-m {
@@ -88,6 +148,12 @@
 
     &:hover {
       background-position: -24px -240px;
+    }
+
+    &-active,
+    &-active:hover,
+    &:active {
+      background-position: -72px -240px;
     }
   }
 
@@ -98,11 +164,23 @@
       background-position: -24px -360px;
     }
 
+    &-active,
+    &-active:hover,
+    &:active {
+      background-position: -72px -360px;
+    }
+
     &-t {
       background-position: 0 -384px;
 
       &:hover {
         background-position: -24px -384px;
+      }
+
+      &-active,
+      &-active:hover,
+      &:active {
+        background-position: -72px -384px;
       }
     }
 
@@ -111,6 +189,12 @@
 
       &:hover {
         background-position: -24px -408px;
+      }
+
+      &-active,
+      &-active:hover,
+      &:active {
+        background-position: -72px -408px;
       }
     }
   }
@@ -121,6 +205,12 @@
     &:hover {
       background-position: -24px -336px;
     }
+
+    &-active,
+    &-active:hover,
+    &:active {
+      background-position: -72px -336px;
+    }
   }
 
   &-s {
@@ -128,6 +218,12 @@
 
     &:hover {
       background-position: -24px -432px;
+    }
+
+    &-active,
+    &-active:hover,
+    &:active {
+      background-position: -72px -432px;
     }
   }
 
@@ -137,6 +233,12 @@
     &:hover {
       background-position: -24px -48px;
     }
+
+    &-active,
+    &-active:hover,
+    &:active {
+      background-position: -72px -48px;
+    }
   }
 
   &-t {
@@ -144,6 +246,12 @@
 
     &:hover {
       background-position: -24px -264px;
+    }
+
+    &-active,
+    &-active:hover,
+    &:active {
+      background-position: -72px -264px;
     }
   }
 }

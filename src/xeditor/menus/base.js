@@ -50,11 +50,28 @@ const XMenuBase = class {
   // 是否是加粗
   isActive() {
     const { type, editor } = this;
-    const $item = $(`#xe-${type}${editor.uid} .xe-icon-${type}`);
-    if (document.queryCommandState(type)) {
-      $item.addClass(`xe-icon-${type}-active`);
+    if (type.indexOf('justify') > -1) {
+      const justifys = [
+        'justifycenter', // 两端对齐
+        'justifyfull', // 两端对齐
+        'justifyleft', // 左对齐
+        'justifyright', // 右对齐
+      ];
+      justifys.forEach((justify) => {
+        const $item = $(`#xe-${justify}${editor.uid} .xe-icon-${justify}`);
+        if (document.queryCommandState(justify)) {
+          $item.addClass(`xe-icon-${justify}-active`);
+        } else {
+          $item.removeClass(`xe-icon-${justify}-active`);
+        }
+      });
     } else {
-      $item.removeClass(`xe-icon-${type}-active`);
+      const $item = $(`#xe-${type}${editor.uid} .xe-icon-${type}`);
+      if (document.queryCommandState(type)) {
+        $item.addClass(`xe-icon-${type}-active`);
+      } else {
+        $item.removeClass(`xe-icon-${type}-active`);
+      }
     }
   }
 };

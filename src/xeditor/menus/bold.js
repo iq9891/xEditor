@@ -39,7 +39,12 @@ const XMenuBold = class {
   }
   // 是否是加粗
   isActive() {
-    console.log('queryCommandState', document.queryCommandState('bold'));
+    const $bold = $(`#xe-bold${this.editor.uid} .xe-icon-b`);
+    if (document.queryCommandState('bold')) {
+      $bold.addClass('xe-icon-b-active');
+    } else {
+      $bold.removeClass('xe-icon-b-active');
+    }
   }
 };
 /**

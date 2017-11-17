@@ -3,7 +3,7 @@
   height: 16px;
   background: url(~assets/images/icon.png) no-repeat;
   // 背景颜色
-  &-background {
+  &-backcolor {
     background-position: 0 -96px;
 
     &:hover {
@@ -45,7 +45,7 @@
     }
   }
   // 文本颜色
-  &-color {
+  &-forecolor {
     background-position: 0 -72px;
 
     &:hover {
@@ -102,33 +102,7 @@
   }
   // 对齐方式
   &-justify {
-    background-position: 0 -120px;
-
-    &:hover {
-      background-position: -24px -120px;
-    }
-
-    &-active,
-    &-active:hover,
-    &:active {
-      background-position: -72px -120px;
-    }
-
-    &-l {
-      background-position: 0 -144px;
-
-      &:hover {
-        background-position: -24px -144px;
-      }
-
-      &-active,
-      &-active:hover,
-      &:active {
-        background-position: -72px -144px;
-      }
-    }
-
-    &-c {
+    &center {
       background-position: 0 -168px;
 
       &:hover {
@@ -142,7 +116,35 @@
       }
     }
 
-    &-r {
+    &full {
+      background-position: 0 -120px;
+
+      &:hover {
+        background-position: -24px -120px;
+      }
+
+      &-active,
+      &-active:hover,
+      &:active {
+        background-position: -72px -120px;
+      }
+    }
+
+    &left {
+      background-position: 0 -144px;
+
+      &:hover {
+        background-position: -24px -144px;
+      }
+
+      &-active,
+      &-active:hover,
+      &:active {
+        background-position: -72px -144px;
+      }
+    }
+
+    &right {
       background-position: 0 -192px;
 
       &:hover {
@@ -157,7 +159,7 @@
     }
   }
   // 插入水平线
-  &-line {
+  &-inserthorizontalrule {
     background-position: 0 -288px;
 
     &:hover {

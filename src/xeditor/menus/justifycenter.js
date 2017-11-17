@@ -1,4 +1,3 @@
-
 import Base from './base';
 /**
 * XMenuJustifycenter 对象

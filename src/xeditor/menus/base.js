@@ -11,12 +11,14 @@ const XMenuBase = class {
    *
    * @param {Object} editor 编辑器的对象
    * @param {String} type 什么类型，如 bold
+   * @param {Boolean} selected 需不需要选中，默认不需要
    */
-  constructor(editor, type) {
+  constructor(editor, type, selected = false) {
     this.editor = editor;
     this.$editor = editor.$editor;
     this.cfg = editor.cfg;
     this.type = type;
+    this.selected = selected;
     // 初始化
     this.create();
   }
@@ -37,7 +39,7 @@ const XMenuBase = class {
       // insertHorizontalRule justifyLeft justifyCenter
       // justifyRight justifyFull insertOrderedList insertUnorderedList
       // undo redo removeFormat
-      if (!selection.isSelectionEmpty()) {
+      if (!selection.isSelectionEmpty() || !this.selected) {
         // bold italic underline subscript superscript
         // 加粗操作
         text.handle(type);

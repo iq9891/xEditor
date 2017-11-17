@@ -3,6 +3,7 @@ import italic from './italic';
 import justifycenter from './justifycenter';
 import justifyfull from './justifyfull';
 import justifyleft from './justifyleft';
+import justifyright from './justifyright';
 
 const list = {};
 
@@ -11,5 +12,6 @@ list.italic = italic;
 list.justifycenter = justifycenter;
 list.justifyfull = justifyfull;
 list.justifyleft = justifyleft;
+list.justifyright = justifyright;
 
 export default list;

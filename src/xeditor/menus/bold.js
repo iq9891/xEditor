@@ -22,7 +22,7 @@ const XMenuBold = class {
   create() {
     const { lang } = this.cfg;
     this.$tem = $(`<a id="xe-bold${this.editor.uid}" href="javascript:void('${lang.bold}');" title="${lang.bold}" class="xe-menu-link">
-      <i class="xe-icon xe-icon-b"></i>
+      <i class="xe-icon xe-icon-bold"></i>
     </a>`);
   }
 
@@ -41,9 +41,9 @@ const XMenuBold = class {
   isActive() {
     const $bold = $(`#xe-bold${this.editor.uid} .xe-icon-b`);
     if (document.queryCommandState('bold')) {
-      $bold.addClass('xe-icon-b-active');
+      $bold.addClass('xe-icon-bold-active');
     } else {
-      $bold.removeClass('xe-icon-b-active');
+      $bold.removeClass('xe-icon-bold-active');
     }
   }
 };

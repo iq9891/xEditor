@@ -11,7 +11,7 @@ class XMenuBold extends Base {
    * @param {Object} editor 编辑器的对象
    */
   constructor(editor) {
-    super(editor, 'bold');
+    super(editor, 'bold', true);
   }
 }
 /**

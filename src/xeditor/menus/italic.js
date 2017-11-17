@@ -11,7 +11,7 @@ class XMenuItalic extends Base {
    * @param {Object} editor 编辑器的对象
    */
   constructor(editor) {
-    super(editor, 'italic');
+    super(editor, 'italic', true);
   }
 }
 /**

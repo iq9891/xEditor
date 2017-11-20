@@ -2,7 +2,9 @@
 @import "./icons.scss";
 @import "./menu.scss";
 @import "./text.scss";
+@import "./dialog.scss";
 
 .#{$editor} {
   height: 400px;
+  position: relative;
 }

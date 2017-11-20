@@ -5,8 +5,8 @@
     <title>xEditor 页面</title>
   </head>
   <body>
-    <div id="xe" class="xe"></div>
-    <script>
+    <!-- <div id="xe" class="xe"></div> -->
+    <!-- <script>
     var xEditor = new window.$xEditor('#xe')
     xEditor.config({
       menus: [
@@ -23,9 +23,33 @@
     xEditor.create();
     // var xEditor = new window.$xEditor({id: 123})
     // document.write(xEditor.name + '<br /> 正常运行');
-    </script>
-    <!-- <div class="xe-menu">
-      <div class="xe-menu-area">
+    </script> -->
+    <div class="xe">
+      <div class="xe-menu">
+        <a href="javascript:void('粘贴');" title="粘贴" class="xe-menu-link">
+          <i class="xe-icon xe-icon-paste"></i>
+        </a>
+      </div>
+      <div class="xe-text-wrap">
+        <div contenteditable="true" class="xe-text"></div>
+      </div>
+      <div class="xe-dialog">
+        <a href="javascript:;" class="xe-dialog-close-btn">
+          <i class="xe-dialog-close"></i>
+        </a>
+        <div class="xe-dialog-header">
+          <a href="javascript:;" class="xe-dialog-title xe-dialog-title-active">上传</a>
+          <a href="javascript:;" class="xe-dialog-title">图片</a>
+        </div>
+        <div class="xe-dialog-box">
+          <div class="xe-dialog-content">
+            1
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="xe">
+      <div class="xe-menu">
         <a href="javascript:void('粘贴');" title="粘贴" class="xe-menu-link">
           <i class="xe-icon xe-icon-paste"></i>
         </a>
@@ -35,41 +59,12 @@
         <a href="javascript:void('从 MS Word 粘贴');" title="从 MS Word 粘贴" class="xe-menu-link">
           <i class="xe-icon xe-icon-paste-wordpaste"></i>
         </a>
-      </div>
-      <div class="xe-menu-area">
-        <a href="javascript:void('加粗');" title="加粗" class="xe-menu-link">
-          <i class="xe-icon xe-icon-bold"></i>
-        </a>
-        <a href="javascript:void('倾斜');" title="倾斜" class="xe-menu-link">
-          <i class="xe-icon xe-icon-italic"></i>
-        </a>
-        <a href="javascript:void('下划线');" title="下划线" class="xe-menu-link">
-          <i class="xe-icon xe-icon-underline"></i>
-        </a>
-      </div>
-      <div class="xe-menu-area">
         <a href="javascript:void('文本颜色');" title="文本颜色" class="xe-menu-link">
           <i class="xe-icon xe-icon-forecolor"></i>
         </a>
         <a href="javascript:void('背景颜色');" title="背景颜色" class="xe-menu-link">
           <i class="xe-icon xe-icon-backcolor"></i>
         </a>
-      </div>
-      <div class="xe-menu-area">
-        <a class="xe-menu-link" href="javascript:void('两端对齐');" title="两端对齐">
-          <i class="xe-icon xe-icon-justifyfull"></i>
-        </a>
-        <a href="javascript:void('左对齐');" title="左对齐" class="xe-menu-link">
-          <i class="xe-icon xe-icon-justifyleft"></i>
-        </a>
-        <a href="javascript:void('居中');" title="居中" class="xe-menu-link">
-          <i class="xe-icon xe-icon-justifycenter"></i>
-        </a>
-        <a href="javascript:void('右对齐');" title="右对齐" class="xe-menu-link">
-          <i class="xe-icon xe-icon-justifyright"></i>
-        </a>
-      </div>
-      <div class="xe-menu-area">
         <a href="javascript:void('插入图像');" title="插入图像" class="xe-menu-link">
           <i class="xe-icon xe-icon-image"></i>
         </a>
@@ -79,14 +74,9 @@
         <a href="javascript:void('表格');" title="表格" class="xe-menu-link">
           <i class="xe-icon xe-icon-table"></i>
         </a>
-        <a href="javascript:void('插入水平线');" title="插入水平线" class="xe-menu-link">
-          <i class="xe-icon xe-icon-inserthorizontalrule"></i>
-        </a>
         <a href="javascript:void('链接');" title="源代码" class="xe-menu-link">
           <i class="xe-icon xe-icon-link"></i>
         </a>
-      </div>
-      <div class="xe-menu-area">
         <a href="javascript:void('源代码');" title="源代码" class="xe-menu-link">
           <i class="xe-icon xe-icon-code"></i>
         </a>
@@ -94,9 +84,9 @@
           <i class="xe-icon xe-icon-full"></i>
         </a>
       </div>
-    </div>
-    <div class="xe-text-wrap">
-      <div contenteditable="true" class="xe-text"></div>
+      <div class="xe-text-wrap">
+        <div contenteditable="true" class="xe-text"></div>
+      </div>
     </div> -->
   </body>
 </html>

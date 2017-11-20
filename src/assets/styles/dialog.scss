@@ -1,0 +1,70 @@
+.#{$prefix}dialog {
+  border: 1px solid $border-color;
+  width: 320px;
+  height: 240px;
+  position: absolute;
+  top: 33px;
+  left: calc(50% - 160px);
+
+  &-close {
+    &::before,
+    &::after {
+      content: ' ';
+      width: 4px;
+      height: 16px;
+      display: block;
+      background: $icon-color;
+      border-radius: 1px;
+    }
+
+    &::before {
+      transform: rotate(45deg) translate(-6px, -4px);
+    }
+
+    &::after {
+      transform: rotate(-45deg) translate(15px, -17px);
+    }
+
+    &-btn {
+      display: block;
+      padding: 8px;
+      position: absolute;
+      right: 4px;
+      top: 6px;
+      width: 2px;
+      height: 2px;
+
+      &:hover {
+        & .#{$prefix}dialog-close {
+          &::before,
+          &::after {
+            background: $icon-color-hover;
+          }
+        }
+      }
+    }
+  } // end   &-close xe-dialog-close
+
+  &-header {
+    height: 30px;
+    padding: 0 8px 0 4px;
+    display: flex;
+    border-bottom: 1px solid $border-color;
+  }
+
+  &-title {
+    color: $title-color;
+    text-decoration: none;
+    font-size: 14px;
+    margin: 0 4px;
+    line-height: 30px;
+
+    &:hover {
+      color: $title-color-hover;
+    }
+
+    &-active {
+      color: $title-color-active;
+    }
+  }
+}

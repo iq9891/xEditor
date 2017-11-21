@@ -1,7 +1,6 @@
 .#{$prefix}dialog {
   border: 1px solid $border-color;
   width: 320px;
-  height: 240px;
   position: absolute;
   top: 33px;
   left: calc(50% - 160px);
@@ -65,6 +64,58 @@
 
     &-active {
       color: $title-color-active;
+    }
+  }
+
+  &-upload {
+    border: 1px dashed $border-color;
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 0 auto;
+    font-style: normal;
+    line-height: 98px;
+    text-align: center;
+    color: $title-color;
+    text-decoration: none;
+
+    &:hover {
+      color: $title-color-hover;
+      border: 1px dashed $title-color-hover;
+    }
+  }
+
+  &-content {
+    &-upload {
+      position: relative;
+      padding: 16px 0;
+    }
+
+    &-url {
+      padding: 16px;
+    }
+  }
+
+  &-file {
+    width: 102px;
+    height: 102px;
+    position: absolute;
+    left: 109px;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer;
+  }
+
+  &-url {
+    margin: 0 0 16px;
+  }
+
+  &-btn {
+    &-box {
+      display: flex;
+      justify-content: flex-end;
+      padding: 8px 0 0;
     }
   }
 }

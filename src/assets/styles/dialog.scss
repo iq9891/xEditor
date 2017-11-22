@@ -73,7 +73,6 @@
     height: 100px;
     display: block;
     margin: 0 auto;
-    font-style: normal;
     line-height: 98px;
     text-align: center;
     color: $title-color;
@@ -86,6 +85,8 @@
   }
 
   &-content {
+    background: $bg-main;
+
     &-upload {
       position: relative;
       padding: 16px 0;
@@ -105,6 +106,26 @@
     opacity: 0;
     filter: alpha(opacity=0);
     cursor: pointer;
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    &-tip {
+      font-style: normal;
+      transform: rotate(0);
+      transform-origin: center center;
+      display: block;
+
+      &-uping {
+        animation: 1s linear rotate infinite;
+      }
+    }
   }
 
   &-url {

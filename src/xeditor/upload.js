@@ -48,6 +48,8 @@ class Upload {
                 error(err, response, files[now]);
               },
             });
+          } else {
+            self.removeDialog();
           }
         };
         recursionAjax(files.length - 1);

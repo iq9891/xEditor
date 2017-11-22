@@ -64,6 +64,11 @@ export default {
       }
       return alert('上传错误');
     },
+    error() {
+      alert('上传错误');
+    },
+    multiple: true, // 允许多选
+    accept: 'image/jpg,image/jpeg,image/png,image/gif,image/bmp', // 选择的类型
   },
   debug: false, // debug 为 true ，抛出错误
   alert(info) { // 错误提示

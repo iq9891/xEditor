@@ -52,7 +52,7 @@ class XMenuImage extends Base {
   }
 
   createDialog() {
-    const { uid } = this.editor;
+    const { uid, cfg } = this.editor;
     const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog"></div>`);
     this.$editor.append($dialog);
     this.$dialog = $(`#xe-dialog${uid}`);
@@ -84,7 +84,7 @@ class XMenuImage extends Base {
     this.$box = $(`#xe-dialog-box${uid}`);
 
     const $contentUpload = $(`<div id="xe-dialog-content-upload${uid}" class="xe-dialog-content xe-dialog-content-upload">
-      <i id="xe-dialog-upload${uid}" class="xe-dialog-upload">+</i>
+      <div id="xe-dialog-upload${uid}" class="xe-dialog-upload"></div>
     </div>`);
     this.$box.append($contentUpload);
     this.$contentUpload = $(`#xe-dialog-upload${uid}`);
@@ -102,11 +102,18 @@ class XMenuImage extends Base {
     this.$contentUrl.append($btn);
     this.$btn = $(`#xe-dialog-btn${uid}`).on('click', () => {
       this.insertImage();
+      this.removeDialog();
     });
+    // 上传 +
+    const $uploadText = $(`<i id="xe-dialog-file-tip${uid}" class="xe-dialog-file-tip">+</i>`);
+    this.$contentUpload.append($uploadText);
+    this.$uploadText = $(`#xe-dialog-file-tip${uid}`);
     // 上传
-    const $file = $('<input class="xe-dialog-file" multiple="multiple" accept="image/jpg,image/jpeg,image/png,image/gif,image/bmp" type="file">');
+    const multiple = cfg.image.multiple ? ' multiple="multiple"' : '';
+    const $file = $(`<input class="xe-dialog-file"${multiple} accept="${cfg.image.accept}" type="file">`);
     this.$contentUpload.append($file).on('change', (ev = window.event) => {
       const { files } = ev.target;
+      this.$uploadText.addClass('xe-dialog-file-tip-uping');
       // 如果是 base64
       if (this.imageType === 'base64') {
         Upload.base64(files, this);
@@ -144,7 +151,6 @@ class XMenuImage extends Base {
       this.editor.selection.restoreSelection();
       this.editor.text.handle('insertText', urlVal);
     }
-    this.removeDialog();
   }
   // 是否是选中
   isActive() {

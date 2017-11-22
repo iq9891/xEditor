@@ -130,9 +130,29 @@
 
   &-url {
     margin: 0 0 16px;
+
+    &2 {
+      margin: 0 0 16px;
+      padding: 0 28px 0 8px;
+      width: calc(100% - 36px);
+    }
+
+    &-box {
+      position: relative;
+    }
+
+    &-symbol {
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      font-size: 14px;
+      color: $color;
+    }
   }
 
   &-btn {
+    cursor: pointer;
+
     &-box {
       display: flex;
       justify-content: flex-end;

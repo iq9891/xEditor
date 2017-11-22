@@ -25,7 +25,7 @@
     // var xEditor = new window.$xEditor({id: 123})
     // document.write(xEditor.name + '<br /> 正常运行');
     </script>
-    <!-- <div class="xe">
+    <div class="xe">
       <div class="xe-menu">
         <a href="javascript:void('插入图像');" title="插入图像" class="xe-menu-link">
           <i class="xe-icon xe-icon-image"></i>
@@ -34,7 +34,28 @@
       <div class="xe-text-wrap">
         <div contenteditable="true" class="xe-text"></div>
       </div>
+      <!-- 图片修改 -->
       <div class="xe-dialog">
+        <a href="javascript:;" class="xe-dialog-close-btn">
+          <i class="xe-dialog-close"></i>
+        </a>
+        <div class="xe-dialog-header">
+          <a href="javascript:;" class="xe-dialog-title xe-dialog-title-active">图片宽度：</a>
+        </div>
+        <div class="xe-dialog-box">
+          <div class="xe-dialog-content-url">
+            <div class="xe-dialog-url-box">
+              <input type="tel" minlength="1" maxlength="3" class="xe-input xe-dialog-url2" value="100" placeholder="图片宽度">
+              <i class="xe-dialog-url-symbol">%</i>
+            </div>
+            <div class="xe-dialog-btn-box">
+              <button class="xe-button xe-dialog-btn">删除</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 图片上传 -->
+      <!-- <div class="xe-dialog">
         <a href="javascript:;" class="xe-dialog-close-btn">
           <i class="xe-dialog-close"></i>
         </a>
@@ -54,8 +75,8 @@
             <input class="xe-dialog-file" type="file">
           </div>
         </div>
-      </div>
-    </div> -->
+      </div> -->
+    </div>
     <!-- <div class="xe">
       <div class="xe-menu">
         <a href="javascript:void('粘贴');" title="粘贴" class="xe-menu-link">

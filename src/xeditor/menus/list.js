@@ -6,6 +6,7 @@ import justifyfull from './justifyfull';
 import justifyleft from './justifyleft';
 import justifyright from './justifyright';
 import inserthorizontalrule from './inserthorizontalrule';
+import image from './image';
 
 const list = {};
 
@@ -17,5 +18,6 @@ list.justifyfull = justifyfull;
 list.justifyleft = justifyleft;
 list.justifyright = justifyright;
 list.inserthorizontalrule = inserthorizontalrule;
+list.image = image;
 
 export default list;

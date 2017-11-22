@@ -1,4 +1,5 @@
 // xEditor 配置文件
+/* eslint-disable no-alert */
 export default {
   menus: [
     'backcolor', // 背景颜色
@@ -51,5 +52,22 @@ export default {
     underline: '下划线',
     undo: '撤销',
     video: '插入视频',
+  },
+  image: {
+    type: 'ajax', // 上传图片显示的类型, base64, ajax
+    ajaxurl: 'http://gateway.inner.evente.cn:8000/public/upload', // ajax 类型的上传地址
+    emptyLinkTip: 'xEditor: 请设置请求链接', // 空连接报错提示信息
+    LinkErrorTip: 'xEditor: 请求链接错误', // 错误连接报错提示信息
+    success(res) { // 上传成功的处理， 需要返回 url 才能真正的添加内容
+      if (res.code === 10000) {
+        return res.data.url;
+      }
+      return alert('上传错误');
+    },
+  },
+  debug: false, // debug 为 true ，抛出错误
+  alert(info) { // 错误提示
+    console.log(info);
+    alert(info);
   },
 };

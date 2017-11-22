@@ -17,4 +17,12 @@
     height: calc(100% - 35px);
     width: calc(100% - 2px);
   }
+
+  & img {
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0 0 8px $blue;
+    }
+  }
 }

@@ -279,6 +279,23 @@ const XDom = class {
     return this[0].innerHTML;
   }
   /**
+   * XDom 获取|设置 value
+   *
+   * @param {String} value 要设置的 value
+   * @private
+   * @example
+   $('div').val('xeditor')
+   * @returns {String} 内容
+   */
+  val(value) {
+    if (typeof value === 'string') {
+      return this.forEach((elem) => {
+        elem.value = value;
+      });
+    }
+    return this[0].value;
+  }
+  /**
    * XDom 追加子元素
    *
    * @param {Object} child 要添加的 XDom 对象
@@ -356,7 +373,10 @@ const XDom = class {
         if (children.length) {
           Object.keys(children).forEach((elChild) => {
             if (elChild !== 'length') {
-              childs.push(children[elChild]);
+              const hasNode = childs.some(cds => cds.isEqualNode(children[elChild]));
+              if (!hasNode) {
+                childs.push(children[elChild]);
+              }
             }
           });
         }
@@ -378,6 +398,20 @@ const XDom = class {
       }
     });
     return new XDom(parents);
+  }
+  /**
+   * XDom 索引
+   * @returns {Number} 当前索引
+   */
+  index() {
+    const nowElParent = this.parent().children();
+    let now = 0;
+    nowElParent.forEach((npNode, npNodeIndex) => {
+      if (npNode.isEqualNode(this[0])) {
+        now = npNodeIndex;
+      }
+    });
+    return now;
   }
   /**
    * XDom 绑定事件

@@ -77,10 +77,19 @@ const XText = class {
   cursorEnd() {
     const { $text } = this;
     const $last = $text.children().last();
-    // 新建选区
-    this.editor.selection.createRangeByElem($last, false, true);
-    // 光标挪到最后
-    this.editor.selection.restoreSelection();
+    let range = null;
+    if (window.getSelection) {
+      $last[0].focus();
+      range = window.getSelection();
+      range.selectAllChildren($last[0]);
+      range.collapseToEnd();
+    } else if (document.selection) {
+      range = document.selection.createTextRange();
+      range.moveToElementText($last);
+      range.collapse(false);
+      // 避免产生空格
+      range.select();
+    }
   }
   /**
   * 绑定事件

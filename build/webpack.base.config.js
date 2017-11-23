@@ -22,6 +22,8 @@ module.exports = {
         include: [resolve('src')],
         exclude: resolve('node_modules'),
         options: {
+          cache: true,
+          fix: true,
           formatter: require('eslint-friendly-formatter')
         }
       },

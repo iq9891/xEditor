@@ -18,6 +18,8 @@ class XMenuImage extends Base {
     this.now = 0;
     // 图片点击记录
     this.$selectedImg = null;
+    // 当前菜单的状态
+    this.status = '';
     // 是 base64 还是 ajax
     this.imageType = this.editor.cfg.image.type;
   }
@@ -25,7 +27,18 @@ class XMenuImage extends Base {
   bind() {
     const { type, editor } = this;
     $(`#xe-${type}${editor.uid}`).on('click', () => {
-      this.createDialog();
+      // 如果选中了
+      if (this.$selectedImg) {
+        if (this.status === 'modify') {
+          this.removeSetImageDialog();
+        } else {
+          this.modifyImageDialog();
+        }
+      } else if (this.status === 'new') {
+        this.removeDialog();
+      } else {
+        this.createDialog();
+      }
     });
     // 图片点击
     setTimeout(() => {
@@ -36,7 +49,10 @@ class XMenuImage extends Base {
         this.$selectedImg = $img;
         // 修改选区并 restore ，防止用户此时点击退格键，会删除其他内容
         editor.selection.createRangeByElem($img);
-        editor.selection.restoreSelection();
+        this.restoreSelection();
+        // 点击图片其他地方 删除 dialog
+        this.removeAllDialog();
+        // 更新图片菜单状态
         this.isActive();
       }).on('click  keyup', (ev = window.evente) => {
         if (ev.target.matches('img')) {
@@ -45,13 +61,84 @@ class XMenuImage extends Base {
         }
         // 删除记录
         this.$selectedImg = null;
+        // 点击图片其他地方 删除 dialog
+        this.removeAllDialog();
+        // 更新图片菜单状态
         this.isActive();
         return false;
       });
     }, 0);
   }
+  // 修改
+  modifyImageDialog() {
+    this.status = 'modify';
+    const { uid, cfg } = this.editor;
+    const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog"></div>`);
+    this.$editor.append($dialog);
+    this.$setImageDialog = $(`#xe-dialog${uid}`);
 
+    const $close = $(`<a id="xe-dialog-close${uid}" href="javascript:;" class="xe-dialog-close-btn">
+      <i class="xe-dialog-close"></i>
+    </a>`);
+    this.$setImageDialog.append($close);
+    $(`#xe-dialog-close${uid}`).on('click', () => {
+      this.removeSetImageDialog();
+    });
+
+    const $header = $(`<div id="xe-dialog-header${uid}" class="xe-dialog-header"></div>`);
+    this.$setImageDialog.append($header);
+    this.$header = $(`#xe-dialog-header${uid}`);
+
+    const $upload = $('<a href="javascript:;" class="xe-dialog-title xe-dialog-title-active">图片宽度</a>');
+    this.$header.append($upload);
+
+    const $box = $(`<div id="xe-dialog-box${uid}" class="xe-dialog-box"></div>`);
+    this.$setImageDialog.append($box);
+    this.$box = $(`#xe-dialog-box${uid}`);
+
+    const $contentUrl = $(`<div id="xe-dialog-content-url2${uid}" class="xe-dialog-content xe-dialog-content-url">
+      <div id="xe-dialog-url-box${uid}" class="xe-dialog-url-box">
+      </div>
+    </div>`);
+    this.$box.append($contentUrl);
+    this.$contentUrl = $(`#xe-dialog-content-url2${uid}`);
+    this.$contentBox = $(`#xe-dialog-url-box${uid}`);
+    this.$url = $(`#xe-dialog-url${uid}`);
+    // 图片宽度
+    const selectedStyle = this.$selectedImg.attr('style');
+    let widthVal = '';
+
+    if (selectedStyle) {
+      widthVal = selectedStyle.match(new RegExp(`width:\\s?(\\d+)${cfg.image.unit};?`, 'i'));
+    }
+
+    const $width = $(`<input id="xe-dialog-width${uid}" type="tel" minlength="1" maxlength="3" class="xe-input xe-dialog-width" value="${widthVal ? widthVal[1] : ''}" placeholder="图片宽度">`);
+    this.$contentBox.append($width);
+    $(`#xe-dialog-width${uid}`).on('input', (ev = window.event) => {
+      this.changeImageWidth($(ev.target).val());
+      ev.preventDefault();
+      return false;
+    });
+    // 宽度单位
+    const $symbol = $(`<i class="xe-dialog-url-symbol">${cfg.image.unit}</i>`);
+    this.$contentBox.append($symbol);
+    // 删除
+    const $btn = $(`<div class="xe-dialog-btn-box">
+      <button id="xe-dialog-btn${uid}" class="xe-button xe-dialog-btn">删除</button>
+    </div>`);
+    this.$contentUrl.append($btn);
+    this.$btn = $(`#xe-dialog-btn${uid}`).on('click', () => {
+      this.$selectedImg.remove();
+      this.$selectedImg = null;
+      // 恢复选区，不然添加不上
+      this.restoreSelection();
+      this.removeSetImageDialog();
+      this.isActive();
+    });
+  }
+  // 创建
   createDialog() {
+    this.status = 'new';
     const { uid, cfg } = this.editor;
     const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog"></div>`);
     this.$editor.append($dialog);
@@ -129,6 +216,20 @@ class XMenuImage extends Base {
   // 删除
   removeDialog() {
     this.$dialog.remove();
+    this.status = '';
+  }
+  // 删除
+  removeSetImageDialog() {
+    this.$setImageDialog.remove();
+    this.status = '';
+  }
+  // 删除所有 dialog
+  removeAllDialog() {
+    if (this.status === 'new') {
+      this.removeDialog();
+    } else if (this.status === 'modify') {
+      this.removeSetImageDialog();
+    }
   }
 
   tab(now) {
@@ -139,7 +240,7 @@ class XMenuImage extends Base {
   insertImage(result) {
     const urlVal = result || this.$url.val();
     // 恢复选区，不然添加不上
-    this.editor.selection.restoreSelection();
+    this.restoreSelection();
     // 网址
     /* eslint-disable */
     const imgPattern = /https?:\/\/.+\.(jpg|gif|png|svg)/;
@@ -148,9 +249,18 @@ class XMenuImage extends Base {
       this.editor.text.handle('insertHTML', `<img src="${urlVal}" />`);
     } else {
       // 恢复选区，不然添加不上
-      this.editor.selection.restoreSelection();
+      this.restoreSelection();
       this.editor.text.handle('insertText', urlVal);
     }
+  }
+  // 恢复选区
+  restoreSelection() {
+    // 恢复选区，不然添加不上
+    this.editor.selection.restoreSelection();
+  }
+  // 改变图片宽度
+  changeImageWidth(width) {
+    this.$selectedImg.css('width', width ? `${width}${this.editor.cfg.image.unit}` : 'auto');
   }
   // 是否是选中
   isActive() {

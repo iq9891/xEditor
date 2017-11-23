@@ -67,6 +67,7 @@ export default {
     error() {
       alert('上传错误');
     },
+    unit: '%',
     multiple: true, // 允许多选
     accept: 'image/jpg,image/jpeg,image/png,image/gif,image/bmp', // 选择的类型
   },

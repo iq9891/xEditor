@@ -101,8 +101,18 @@ const XSelection = class {
   */
   restoreSelection() {
     const selection = window.getSelection();
-    selection.removeAllRanges();
-    selection.addRange(this.curRange);
+    if (this.curRange) {
+      try {
+        // 清空所有Range对象
+        selection.removeAllRanges();
+      } catch (ex) {
+        // IE
+        document.body.createTextRange().select();
+        document.selection.empty();
+      }
+      // 恢复保存的范围
+      selection.addRange(this.curRange);
+    }
   }
   /**
   * 自定义 insertHTML 事件

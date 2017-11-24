@@ -7,6 +7,8 @@ export default {
     'code', // 源代码
     'forecolor', // 文本颜色
     'full', // 全屏
+    'fontname', // 字体
+    'fontsize', // 字号
     'image', // 插入图像
     'italic', // 倾斜
     'justifycenter', // 两端对齐
@@ -33,6 +35,8 @@ export default {
     code: '源代码',
     forecolor: '文本颜色',
     full: '全屏',
+    fontname: '字体',
+    fontsize: '字号',
     image: '插入图像',
     italic: '倾斜',
     justifycenter: '两端对齐',
@@ -70,6 +74,16 @@ export default {
     unit: '%',
     multiple: true, // 允许多选
     accept: 'image/jpg,image/jpeg,image/png,image/gif,image/bmp', // 选择的类型
+  },
+  font: {
+    family: [
+      '宋体',
+      '微软雅黑',
+      'Arial',
+      'Comic Sans MS',
+      'Courier New',
+    ],
+    placeholder: '字体',
   },
   debug: false, // debug 为 true ，抛出错误
   alert(info) { // 错误提示

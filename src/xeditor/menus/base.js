@@ -83,7 +83,6 @@ const XMenuBase = class {
   isDisable() {
     const { type, editor } = this;
     const $item = $(`#xe-${type}${editor.uid} .xe-icon-${type}`);
-    console.log(1111222, editor.code, type);
     if (editor.code) {
       $item.addClass(`xe-icon-${type}-disable`);
     } else {

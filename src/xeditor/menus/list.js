@@ -8,6 +8,7 @@ import justifyright from './justifyright';
 import inserthorizontalrule from './inserthorizontalrule';
 import image from './image';
 import fontname from './fontname';
+import fontsize from './fontsize';
 
 const list = {};
 
@@ -21,5 +22,6 @@ list.justifyright = justifyright;
 list.inserthorizontalrule = inserthorizontalrule;
 list.image = image;
 list.fontname = fontname;
+list.fontsize = fontsize;
 
 export default list;

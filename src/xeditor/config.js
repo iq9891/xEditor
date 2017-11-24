@@ -76,14 +76,24 @@ export default {
     accept: 'image/jpg,image/jpeg,image/png,image/gif,image/bmp', // 选择的类型
   },
   font: {
-    family: [
+    fontname: [
       '宋体',
       '微软雅黑',
       'Arial',
       'Comic Sans MS',
       'Courier New',
     ],
-    placeholder: '字体',
+    fontnameplaceholder: '字体',
+    fontsize: [ // 只有 7 个， 多了不生效
+      '非常小',
+      '稍微小',
+      '正常',
+      '稍微大',
+      '大',
+      '很大',
+      '巨大',
+    ],
+    fontsizeplaceholder: '字号',
   },
   debug: false, // debug 为 true ，抛出错误
   alert(info) { // 错误提示

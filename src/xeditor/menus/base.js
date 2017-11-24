@@ -2,6 +2,7 @@
 import $ from '../dom';
 /**
 * XMenuBase 对象
+* bold，inserthorizontalrule，italic，justifycenter，justifyfull，justifyleft，justifyright，underline 继承
 * @example
 * new XMenuBase(editor);
 */

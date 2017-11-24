@@ -25,6 +25,7 @@ const XEditor = class {
     this.uid = editorId++;
     this.$editor = $(selector);
     this.cfg = config;
+    this.code = false;
     // 获取之前的内容
     this.childrens = this.getChilds();
   }

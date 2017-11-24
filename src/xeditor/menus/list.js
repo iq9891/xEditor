@@ -9,6 +9,7 @@ import inserthorizontalrule from './inserthorizontalrule';
 import image from './image';
 import fontname from './fontname';
 import fontsize from './fontsize';
+import code from './code';
 
 const list = {};
 
@@ -23,5 +24,6 @@ list.inserthorizontalrule = inserthorizontalrule;
 list.image = image;
 list.fontname = fontname;
 list.fontsize = fontsize;
+list.code = code;
 
 export default list;

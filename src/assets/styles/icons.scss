@@ -15,6 +15,12 @@
     &:active {
       background-position: -72px -96px;
     }
+
+    &-disable,
+    &-disable:hover,
+    &-disable:active {
+      background-position: -48px -96px;
+    }
   }
   // 加粗
   &-bold {
@@ -28,6 +34,12 @@
     &-active:hover,
     &:active {
       background-position: -72px 0;
+    }
+
+    &-disable,
+    &-disable:hover,
+    &-disable:active {
+      background-position: -48px 0;
     }
   }
   // 源代码
@@ -43,6 +55,12 @@
     &:active {
       background-position: -72px -432px;
     }
+
+    &-disable,
+    &-disable:hover,
+    &-disable:active {
+      background-position: -48px -432px;
+    }
   }
   // 文本颜色
   &-forecolor {
@@ -56,6 +74,12 @@
     &-active:hover,
     &:active {
       background-position: -72px -72px;
+    }
+
+    &-disable,
+    &-disable:hover,
+    &-disable:active {
+      background-position: -48px -72px;
     }
   }
   // 全屏
@@ -71,6 +95,12 @@
     &:active {
       background-position: -72px -336px;
     }
+
+    &-disable,
+    &-disable:hover,
+    &-disable:active {
+      background-position: -48px -336px;
+    }
   }
   // 插入图像
   &-image {
@@ -85,6 +115,12 @@
     &:active {
       background-position: -72px -216px;
     }
+
+    &-disable,
+    &-disable:hover,
+    &-disable:active {
+      background-position: -48px -216px;
+    }
   }
   // 倾斜
   &-italic {
@@ -98,6 +134,12 @@
     &-active:hover,
     &:active {
       background-position: -72px -24px;
+    }
+
+    &-disable,
+    &-disable:hover,
+    &-disable:active {
+      background-position: -48px -24px;
     }
   }
   // 对齐方式
@@ -114,6 +156,12 @@
       &:active {
         background-position: -72px -168px;
       }
+
+      &-disable,
+      &-disable:hover,
+      &-disable:active {
+        background-position: -48px -168px;
+      }
     }
 
     &full {
@@ -127,6 +175,12 @@
       &-active:hover,
       &:active {
         background-position: -72px -120px;
+      }
+
+      &-disable,
+      &-disable:hover,
+      &-disable:active {
+        background-position: -48px -120px;
       }
     }
 
@@ -142,6 +196,12 @@
       &:active {
         background-position: -72px -144px;
       }
+
+      &-disable,
+      &-disable:hover,
+      &-disable:active {
+        background-position: -48px -144px;
+      }
     }
 
     &right {
@@ -155,6 +215,12 @@
       &-active:hover,
       &:active {
         background-position: -72px -192px;
+      }
+
+      &-disable,
+      &-disable:hover,
+      &-disable:active {
+        background-position: -48px -192px;
       }
     }
   }
@@ -171,6 +237,12 @@
     &:active {
       background-position: -72px -288px;
     }
+
+    &-disable,
+    &-disable:hover,
+    &-disable:active {
+      background-position: -48px -288px;
+    }
   }
   // 插入链接
   &-link {
@@ -184,6 +256,12 @@
     &-active:hover,
     &:active {
       background-position: -72px -312px;
+    }
+
+    &-disable,
+    &-disable:hover,
+    &-disable:active {
+      background-position: -48px -312px;
     }
   }
   // 普通粘贴
@@ -200,6 +278,12 @@
       background-position: -72px -360px;
     }
 
+    &-disable,
+    &-disable:hover,
+    &-disable:active {
+      background-position: -48px -360px;
+    }
+
     &-plainpaste {
       background-position: 0 -384px;
 
@@ -211,6 +295,12 @@
       &-active:hover,
       &:active {
         background-position: -72px -384px;
+      }
+
+      &-disable,
+      &-disable:hover,
+      &-disable:active {
+        background-position: -48px -384px;
       }
     }
 
@@ -225,6 +315,12 @@
       &-active:hover,
       &:active {
         background-position: -72px -408px;
+      }
+
+      &-disable,
+      &-disable:hover,
+      &-disable:active {
+        background-position: -48px -408px;
       }
     }
   }
@@ -241,6 +337,12 @@
     &:active {
       background-position: -72px -264px;
     }
+
+    &-disable,
+    &-disable:hover,
+    &-disable:active {
+      background-position: -48px -264px;
+    }
   }
   // 下划线
   &-underline {
@@ -255,6 +357,12 @@
     &:active {
       background-position: -72px -48px;
     }
+
+    &-disable,
+    &-disable:hover,
+    &-disable:active {
+      background-position: -48px -48px;
+    }
   }
   // 插入视频
   &-video {
@@ -268,6 +376,12 @@
     &-active:hover,
     &:active {
       background-position: -72px -240px;
+    }
+
+    &-disable,
+    &-disable:hover,
+    &-disable:active {
+      background-position: -48px -240px;
     }
   }
 }

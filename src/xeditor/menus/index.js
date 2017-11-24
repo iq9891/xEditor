@@ -58,6 +58,14 @@ const XMenu = class {
       }
     });
   }
+  // 设置|取消禁用状态
+  testDisable() {
+    this.btns.forEach((btn) => {
+      if (btn.isDisable) {
+        btn.isDisable();
+      }
+    });
+  }
 };
 /**
  * XMenu 模块.

@@ -17,6 +17,10 @@
       text-overflow:ellipsis;
       white-space: nowrap;
       color: $title-color;
+
+      &-disable {
+        color: $icon-color;
+      }
     }
 
     &-arrow {
@@ -30,6 +34,10 @@
       position: absolute;
       right: 8px;
       top: 14px;
+
+      &-disable {
+        border-top-color: $icon-color;
+      }
     }
   }
 

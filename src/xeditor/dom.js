@@ -279,6 +279,23 @@ const XDom = class {
     return this[0].innerHTML;
   }
   /**
+   * XDom 获取|设置 text
+   *
+   * @param {String} text 要设置的 text
+   * @private
+   * @example
+   $('div').text('<div><p>xeditor</p></div>')
+   * @returns {String} 内容
+   */
+  text(text) {
+    if (typeof text === 'string') {
+      return this.forEach((elem) => {
+        elem.innerText = text;
+      });
+    }
+    return this[0].innerText;
+  }
+  /**
    * XDom 获取|设置 value
    *
    * @param {String} value 要设置的 value

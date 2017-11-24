@@ -35,7 +35,11 @@ const XMenuBase = class {
   bind() {
     const { type, editor } = this;
     $(`#xe-${type}${editor.uid}`).on('click', () => {
-      const { text, selection } = editor;
+      const { text, selection, code } = editor;
+      // 如果是源代码
+      if (code) {
+        return;
+      }
       // 只有选中了才有效果
       // insertHorizontalRule justifyLeft justifyCenter
       // justifyRight justifyFull insertOrderedList insertUnorderedList
@@ -73,6 +77,17 @@ const XMenuBase = class {
       } else {
         $item.removeClass(`xe-icon-${type}-active`);
       }
+    }
+  }
+  // 禁用
+  isDisable() {
+    const { type, editor } = this;
+    const $item = $(`#xe-${type}${editor.uid} .xe-icon-${type}`);
+    console.log(1111222, editor.code, type);
+    if (editor.code) {
+      $item.addClass(`xe-icon-${type}-disable`);
+    } else {
+      $item.removeClass(`xe-icon-${type}-disable`);
     }
   }
 };

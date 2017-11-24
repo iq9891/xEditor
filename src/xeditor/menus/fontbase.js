@@ -56,6 +56,10 @@ const XMenuFont = class {
     // 渲染其他元素
     this.render();
     this.$btn.on('click', () => {
+      // 如果是源代码
+      if (this.editor.code) {
+        return;
+      }
       if (this.$list) {
         this.removeList();
       } else {
@@ -134,6 +138,17 @@ const XMenuFont = class {
       this.$font.html(family[font - 1]);
     } else {
       this.$font.html(placeholder);
+    }
+  }
+  // 禁用
+  isDisable() {
+    const { editor } = this;
+    if (editor.code) {
+      this.$font.addClass('xe-select-btn-font-disable');
+      this.$arrow.addClass('xe-select-btn-arrow-disable');
+    } else {
+      this.$font.removeClass('xe-select-btn-font-disable');
+      this.$arrow.removeClass('xe-select-btn-arrow-disable');
     }
   }
 };

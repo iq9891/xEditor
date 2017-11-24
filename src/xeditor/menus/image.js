@@ -27,6 +27,10 @@ class XMenuImage extends Base {
   bind() {
     const { type, editor } = this;
     $(`#xe-${type}${editor.uid}`).on('click', () => {
+      // 如果是源代码
+      if (editor.code) {
+        return;
+      }
       // 如果选中了
       if (this.$selectedImg) {
         if (this.status === 'modify') {

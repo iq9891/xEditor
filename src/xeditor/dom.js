@@ -173,14 +173,14 @@ const XDom = class {
     if (typeof params === 'string') {
       if (value) {
         return this.forEach((elem) => {
-          elem.style[params] = px(value);
+          elem.style[params] = params === 'zIndex' ? value : px(value);
         });
       }
       return getStyle(this[0])[params];
     }
     return this.forEach((elem) => {
       Object.keys(params).forEach((paramsKey) => {
-        elem.style[paramsKey] = px(params[paramsKey]);
+        elem.style[paramsKey] = paramsKey === 'zIndex' ? params[paramsKey] : px(params[paramsKey]);
       });
     });
   }
@@ -212,6 +212,18 @@ const XDom = class {
         elem.setAttribute(paramsKey, params[paramsKey]);
       });
     });
+  }
+  /**
+   * XDom 删除属性
+   *
+   * @param {String} params 删除的属性
+   * @private
+   * @example
+   $('div').removeAttr('class');
+   * @returns {Object} XDOM 对象
+   */
+  removeAttr(params) {
+    return this[0].removeAttribute(params);
   }
   /**
    * XDom 添加 class

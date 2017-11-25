@@ -10,6 +10,7 @@ import image from './image';
 import fontname from './fontname';
 import fontsize from './fontsize';
 import code from './code';
+import full from './full';
 
 const list = {};
 
@@ -25,5 +26,6 @@ list.image = image;
 list.fontname = fontname;
 list.fontsize = fontsize;
 list.code = code;
+list.full = full;
 
 export default list;

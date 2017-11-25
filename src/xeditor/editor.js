@@ -33,6 +33,8 @@ const XEditor = class {
    * 创建编辑器
    */
   create() {
+    // 设置层级
+    this.setIndex();
     // 初始化 菜单
     this.menu = new Menu(this);
     // 内容
@@ -46,6 +48,14 @@ const XEditor = class {
       // 新建一行
       this.text.newline();
     }
+  }
+  /**
+   * 设置层级
+   *
+   * @returns {}
+   */
+  setIndex() {
+    this.$editor.css('zIndex', this.cfg.zindex);
   }
   /**
    * 配置编辑器

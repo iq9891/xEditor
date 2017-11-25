@@ -100,4 +100,5 @@ export default {
     console.log(info);
     alert(info);
   },
+  zindex: 10000, // 编辑器的层级
 };

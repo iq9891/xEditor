@@ -1,3 +1,7 @@
+$handle-size: 78px;
+$color-size: 200px + $handle-size;
+$input-size: $handle-size - 21;
+
 .#{$prefix}dialog {
   border: 1px solid $border-color;
   width: 320px;
@@ -157,6 +161,159 @@
       display: flex;
       justify-content: flex-end;
       padding: 8px 0 0;
+    }
+  }
+
+  // 颜色
+  &-color {
+    border: 1px solid $border-color;
+    background: linear-gradient(transparent, #000), linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
+    width: 170px;
+    height: 170px;
+    overflow: hidden;
+    cursor: crosshair;
+    float: left;
+    position: relative;
+
+    &-box {
+      padding: 8px;
+      height: 172px;
+    }
+
+    &-inner {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      top: -4px;
+      left: -4px;
+      box-shadow: 0 0 0 1px #fff, 0 0 0 2px #000;
+      border-radius: 4px;
+    }
+
+    &-hue {
+      border: 1px solid #dcdcdc;
+      width: 20px;
+      height: 170px;
+      cursor: n-resize;
+      background: linear-gradient(to bottom, #f00, #ff0080, #f0f, #8000ff, #00f, #0080ff, #0ff, #00ff80, #0f0, #80ff00, #ff0, #ff8000, #f00);
+      float: left;
+      margin: 0 16px;
+      position: relative;
+
+      &-move {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: rgba(0, 0, 0, 0.4);
+      }
+
+      &-left,
+      &-right {
+        content: ' ';
+        border-color: transparent;
+        border-style: solid;
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: -4px;
+      }
+
+      &-left {
+        right: -5px;
+        border-width: 5px 0 5px 5px;
+        border-left-color: rgba(0, 0, 0, 0.3);
+        left: -7px;
+      }
+
+      &-right {
+        left: -5px;
+        border-width: 5px 5px 5px 0;
+        border-right-color: rgba(0, 0, 0, 0.3);
+        left: auto;
+        right: -7px;
+      }
+    }
+
+    &-inner {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      top: -4px;
+      left: -4px;
+      box-shadow: 0 0 0 1px #fff, 0 0 0 2px #000;
+      border-radius: 4px;
+    }
+
+    &-field {
+      border: 1px solid #dcdcdc;
+      height: 22px;
+      width: $handle-size - 2;
+      overflow: hidden;
+      background: #fff;
+      color: $title-color;
+      font-size: 12px;
+      margin: 4px 0 0;
+    }
+
+    &-inp {
+      margin: 0;
+      height: 22px;
+      width: $input-size;
+      line-height: 22px;
+      background: transparent;
+      border: none;
+      font-size: 12px;
+      color: $title-color;
+      outline: none;
+      float: left;
+      padding: 0 4px;
+    }
+
+    &-handle {
+      float: left;
+      width: $handle-size;
+    }
+
+    &-title {
+      border-right: 1px solid #dcdcdc;
+      margin: 0;
+      width: 12px;
+      height: 22px;
+      line-height: 22px;
+      font-size: 10px;
+      background: #f4f4f4;
+      color: $title-color;
+      text-align: center;
+      float: left;
+    }
+
+    &-show-color {
+      border: 1px solid #dcdcdc;
+      height: 24px;
+      width: $handle-size - 2;
+    }
+
+    &-new-color,
+    &-current-color {
+      height: 24px;
+      width: $handle-size / 2 - 1;
+      float: left;
+    }
+
+    &-sub {
+      border: 1px solid #dcdcdc;
+      height: 26px;
+      line-height: 26px;
+      background: #f4f4f4;
+      text-align: center;
+      color: $title-color;
+      font-size: 12px;
+      display: block;
+      margin: 4px 0 0;
+      padding: 0 26px;
+      text-decoration: none;
     }
   }
 }

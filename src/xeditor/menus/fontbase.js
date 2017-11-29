@@ -126,10 +126,12 @@ const XMenuFont = class {
     const selectFont = selection.getSelectionContainerElem(selection.getRange());
 
     let font = null;
-    if (type === 'fontname') {
-      font = $(selectFont[0]).css('font-family');
-    } else if (type === 'fontsize') {
-      font = $(selectFont[0]).attr('size');
+    if (selectFont) {
+      if (type === 'fontname') {
+        font = $(selectFont[0]).css('font-family');
+      } else if (type === 'fontsize') {
+        font = $(selectFont[0]).attr('size');
+      }
     }
 
     if (type === 'fontname' && family.some(fml => fml === font)) {

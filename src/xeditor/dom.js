@@ -317,7 +317,7 @@ const XDom = class {
    * @returns {String} 内容
    */
   val(value) {
-    if (value !== 'undefined') {
+    if (typeof value !== 'undefined') {
       return this.forEach((elem) => {
         elem.value = value;
       });

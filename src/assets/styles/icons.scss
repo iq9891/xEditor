@@ -4,22 +4,34 @@
   background: url(~assets/images/icon.png) no-repeat;
   // 背景颜色
   &-backcolor {
-    background-position: 0 -96px;
+    // background-position: 0 -96px;
+    background: none;
+    font-style: normal;
+    line-height: 16px;
+    text-align: center;
+    border-radius: 4px;
+    background: $title-color-hover;
+    color: $white;
+    font-weight: bold;
+    font-size: 16px;
 
     &:hover {
-      background-position: -24px -96px;
+      // background-position: -24px -96px;
+      background: $color;
     }
 
     &-active,
     &-active:hover,
     &:active {
-      background-position: -72px -96px;
+      // background-position: -72px -96px;
+      background: $blue;
     }
 
     &-disable,
     &-disable:hover,
     &-disable:active {
-      background-position: -48px -96px;
+      // background-position: -48px -96px;
+      background: $icon-color-hover;
     }
   }
   // 加粗

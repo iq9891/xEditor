@@ -43,10 +43,13 @@ const XMenucolorBase = class {
       g: 255,
       b: 255,
     };
-    this.hex = 'fffffff';
+    this.hex = 'ffffff';
     this.left = 0;
     this.top = 0;
-    this.oldColor = 'rgb(255, 0, 0)';
+    this.hubTop = 0;
+    this.oldColor = 'rgb(255, 255, 255)';
+    this.newColor = 'rgb(255, 255, 255)';
+    this.color = 'rgb(255, 0, 0)';
     // 初始化
     this.create();
   }
@@ -54,13 +57,14 @@ const XMenucolorBase = class {
   create() {
     const { cfg, type, editor } = this;
     const { lang } = cfg;
-    this.$tem = $(`<a id="xe-${type}${editor.uid}" href="javascript:void('${lang[type]}');" title="${lang[type]}" class="xe-menu-link">
-      <i class="xe-icon xe-icon-${type}"></i>
+    this.$tem = $(`<a id="xe-${type}${editor.uid}" href="javascript:void('${lang[type]}');" title="${lang[type]}" class="xe-menu-link xe-menu-link-font">
+      <i class="xe-icon xe-icon-${type}">A</i>
     </a>`);
   }
 
   bind() {
     this.panel();
+    // this.setPanelColor('#1996f9');
 
     const { type, editor } = this;
     $(`#xe-${type}${editor.uid}`).on('click', () => {
@@ -103,7 +107,7 @@ const XMenucolorBase = class {
     this.$colorDialog.append($box);
     this.$box = $(`#xe-dialog-box${uid}`);
 
-    const $color = $(`<div id="xe-dialog-color${uid}" class="xe-dialog-color" style="background-color: ${this.oldColor};">
+    const $color = $(`<div id="xe-dialog-color${uid}" class="xe-dialog-color" style="background-color: ${this.color};">
       <div id="xe-dialog-inner${uid}" class="xe-dialog-color-inner"></div>
     </div>`);
     this.$box.append($color);
@@ -125,11 +129,11 @@ const XMenucolorBase = class {
     const $handle = $('<div class="xe-dialog-color-handle"></div>');
 
     const $show = $(`<div class="xe-dialog-color-show-color">
-      <div id="xe-dialog-new${uid}" class="xe-dialog-color-new-color" style="background: ${this.hex};"></div>
+      <div id="xe-dialog-new${uid}" class="xe-dialog-color-new-color" style="background: ${this.newColor};"></div>
     </div>`);
 
-    const $current = $(`<div id="xe-dialog-current${uid}" class="xe-dialog-color-current-color" style="background: rgb(255, 0, 0);"></div>`);
-    $show.append($current);
+    const $old = $(`<div id="xe-dialog-old${uid}" class="xe-dialog-color-old-color" style="background: ${this.oldColor};"></div>`);
+    $show.append($old);
 
     $handle.append($show);
 
@@ -161,7 +165,7 @@ const XMenucolorBase = class {
       <p class="xe-dialog-color-title">#</p>
     </div>`);
 
-    const $write = $(`<input id="xe-dialog-w${uid}" type="tel" maxlength="3" size="3" class="xe-dialog-color-inp">`);
+    const $write = $(`<input id="xe-dialog-w${uid}" type="tel" maxlength="6" size="6" class="xe-dialog-color-inp">`);
     $fieldWrite.append($write);
     $handle.append($fieldWrite);
 
@@ -170,17 +174,84 @@ const XMenucolorBase = class {
 
     this.$box.append($handle);
 
-    this.$r = $(`#xe-dialog-r${uid}`);
-    this.$g = $(`#xe-dialog-g${uid}`);
-    this.$b = $(`#xe-dialog-b${uid}`);
-    this.$w = $(`#xe-dialog-w${uid}`);
+    this.$r = $(`#xe-dialog-r${uid}`).on('input', () => {
+      this.writeColor();
+    });
+    this.$g = $(`#xe-dialog-g${uid}`).on('input', () => {
+      this.writeColor();
+    });
+    this.$b = $(`#xe-dialog-b${uid}`).on('input', () => {
+      this.writeColor();
+    });
+    this.$w = $(`#xe-dialog-w${uid}`).on('input', () => {
+      this.writeColor('hex');
+    });
     this.$new = $(`#xe-dialog-new${uid}`);
-    this.$current = $(`#xe-dialog-current${uid}`);
+    this.$old = $(`#xe-dialog-old${uid}`).on('click', () => {
+      const rgbMatch = this.oldColor.match(/rgb\((.+)\)/);
+      if (rgbMatch[1]) {
+        const rgb = rgbMatch[1].split(',');
+        const hex = color.rgbToHex({
+          r: rgb[0] - 0,
+          g: rgb[1] - 0,
+          b: rgb[2] - 0,
+        });
+        this.setPanelColor(`#${hex}`);
+      }
+    });
     this.$hue = $(`#xe-dialog-hue${uid}`);
 
     this.someEvent();
-    this.setVal();
+    this.setRgbVal();
+  } // end panel
+  // 输入色值
+  writeColor(type = 'rgb') {
+    const r = this.$r.val() - 0;
+    const g = this.$g.val() - 0;
+    const b = this.$b.val() - 0;
+    const w = this.$w.val();
+    this.updateOld();
+
+    if (type === 'rgb') {
+      /* eslint-disable */
+      if (!isNaN(r) && !isNaN(g) && !isNaN(b)) {
+        const hex = color.rgbToHex({
+          r,
+          g,
+          b,
+        });
+        this.$w.val(hex);
+        this.setPanelColor(`#${hex}`);
+      }
+    } else {
+      const rgb = color.hexToRgb(w);
+      this.$r.val(rgb.r);
+      this.$g.val(rgb.g);
+      this.$b.val(rgb.b);
+      this.setPanelColor(`#${w}`);
+    }
+    console.log(r, g, b, w, 999);
   }
+  // 设置初始颜色
+  setPanelColor(newColor) {
+    this.hsb = color.rgbToHsb(color.hexToRgb(newColor));
+    const sbPos = color.offsetSB(this, this.hsb);
+    this.left = sbPos.left;
+    this.top = sbPos.top;
+    this.hubTop = color.offsetH(this, this.hsb);
+
+    this.setMoveColor();
+    this.setInnerColor();
+
+    this.rgb = color.hsbToRgb({ h: this.hsb.h, s: 100, b: 100 });
+    // 主色系渲染
+    this.$color.css('background-color', `#${color.rgbToHex(this.rgb)}`);
+    // 设置新颜色
+    this.$new.css('background', newColor);
+    // 备份新颜色，切换颜色的时候替换旧颜色
+    this.oldColor = newColor;
+  }
+
   remove() {
     this.$colorDialog.remove();
   }
@@ -198,15 +269,13 @@ const XMenucolorBase = class {
   }
   // 颜色的点击
   colorDown(ev) {
+    console.log(this.oldColor, this.rgb);
     this.left = ev.pageX - getElementLeft(this.$color[0]) - dot;
     this.top = ev.pageY - getElementTop(this.$color[0]) - dot;
-    this.$inner.css({
-      left: this.left,
-      top: this.top,
-    });
 
+    this.setInnerColor();
     this.getRgbColor();
-    this.setVal();
+    this.setRgbVal();
 
     this.$doc.on('mousemove', (evMove = window.evente) => {
       this.colorMove(evMove);
@@ -231,27 +300,21 @@ const XMenucolorBase = class {
     if (this.top < -dot) {
       this.top = -dot;
     }
-    this.$inner.css({
-      left: this.left,
-      top: this.top,
-    });
 
+    this.setInnerColor();
     this.getRgbColor();
-    this.setVal();
+    this.setRgbVal();
   }
+
   colorUp() {
     this.$doc.off('mousemove mouseup');
   }
   // 颜色的点击
   hubDown(ev) {
-    console.log(1211);
-    this.top = ev.pageY - getElementTop(this.$color[0]) - dot;
-    this.$move.css({
-      top: this.top,
-    });
+    this.hubTop = ev.pageY - getElementTop(this.$color[0]) - dot;
+    this.setMoveColor();
 
-    this.getHueColor();
-    this.setVal();
+    this.setHubVal();
 
     this.$doc.on('mousemove', (evMove = window.evente) => {
       this.hubMove(evMove);
@@ -261,46 +324,78 @@ const XMenucolorBase = class {
   }
   // 左边颜色
   hubMove(ev) {
-    this.top = ev.pageY - getElementTop(this.$color[0]) - dot;
+    this.hubTop = ev.pageY - getElementTop(this.$color[0]) - dot;
     // 拖拽限制
-    if (this.top > hueMaxY) {
-      this.top = hueMaxY;
+    if (this.hubTop > hueMaxY) {
+      this.hubTop = hueMaxY;
     }
-    if (this.top < 0) {
-      this.top = 0;
+    if (this.hubTop < 0) {
+      this.hubTop = 0;
     }
-    this.$move.css({
-      top: this.top,
-    });
-
-    this.getHueColor();
-    this.setVal();
+    this.setMoveColor();
+    this.setHubVal();
   }
+
   hubUp() {
     this.$doc.off('mousemove mouseup');
   }
+  // 更新旧颜色
+  updateOld() {
+    console.log(this.oldColor, 111);
+    this.$old.css('background', this.oldColor);
+  }
+  // 设置移动盒子的颜色
+  setMoveColor() {
+    this.$move.css({
+      top: this.hubTop,
+    });
+  }
+  // 设置移动盒子的颜色
+  setInnerColor() {
+    this.$inner.css({
+      left: this.left,
+      top: this.top,
+    });
+  }
   // 根据 top 获取颜色
   getHueColor() {
-    this.hsb.h = color.getH(this, this.top);
+    const { r, g, b } = this.rgb;
+    this.hsb.h = color.getH(this, this.hubTop);
+    this.oldColor = `rgb(${r}, ${g}, ${b})`;
     this.rgb = color.hsbToRgb(this.hsb);
     this.hex = color.rgbToHex(this.rgb);
+
+    this.color = color.rgbToHex(color.hsbToRgb({
+      h: this.hsb.h,
+      s: 100,
+      b: 100,
+    }));
   }
   // 根据 left top 获取颜色
   getRgbColor() {
     const sb = color.getSB(this, this.left, this.top);
+    const { r, g, b } = this.rgb;
     this.hsb.s = sb.s;
     this.hsb.b = sb.b;
+    this.oldColor = `rgb(${r}, ${g}, ${b})`;
     this.rgb = color.hsbToRgb(this.hsb);
     this.hex = color.rgbToHex(this.rgb);
   }
   // 设置数值
-  setVal() {
+  setRgbVal() {
     this.$r.val(this.rgb.r);
     this.$g.val(this.rgb.g);
     this.$b.val(this.rgb.b);
     this.$w.val(this.hex);
-    this.oldColor = this.$new.css('background-color');
+    this.updateOld();
     this.$new.css('background', `#${this.hex}`);
+  }
+  // 设置数值
+  setHubVal() {
+    this.getHueColor();
+    this.setRgbVal();
+
+    this.$color.css('background-color', `#${this.color}`);
   }
   // 是否是加粗
   isActive() {

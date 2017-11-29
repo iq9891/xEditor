@@ -3,15 +3,16 @@ export default {
   // 已知 hsb 中的 s 和 b，
   // return 坐标
   offsetSB(self, hsb) {
+    const sacle = 5.5; // 宽度高度转换 sb 色值的比例
     // 点的距离
     const pointInitial = 4;
     // 计算
     const newS = hsb.s / 100;
     const scaleS = self.colorboxSize * newS;
-    let iLseft = parseInt(scaleS / 2, 10);
+    let iLseft = parseInt(scaleS / sacle, 10);
     const newB = (100 - hsb.b) / 100;
     const scaleB = self.colorboxSize * newB;
-    let iTop = parseInt(scaleB / 2, 10);
+    let iTop = parseInt(scaleB / sacle, 10);
 
     iTop -= pointInitial;
     iLseft -= pointInitial;
@@ -24,9 +25,10 @@ export default {
   // 已知 hsb 中的 h，
   // return 坐标
   offsetH(self, hsb) {
+    const sacle = 5.28; // 宽度高度转换 sb 色值的比例
     const newH = hsb.h / 360;
     const sacleH = self.colorboxSize - (self.colorboxSize * newH);
-    return parseInt(sacleH / 2, 10);
+    return parseInt(sacleH / sacle, 10);
   },
   // 从坐标获取 hsb 中的 s 和 b
   getSB(self, left, top) {

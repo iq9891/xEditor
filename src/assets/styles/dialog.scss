@@ -297,7 +297,7 @@ $input-size: $handle-size - 21;
     }
 
     &-new-color,
-    &-current-color {
+    &-old-color {
       height: 24px;
       width: $handle-size / 2 - 1;
       float: left;

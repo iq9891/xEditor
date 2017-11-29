@@ -8,6 +8,7 @@ $input-size: $handle-size - 21;
   position: absolute;
   top: 33px;
   left: calc(50% - 160px);
+  user-select:none;
 
   &-close {
     &::before,
@@ -260,7 +261,7 @@ $input-size: $handle-size - 21;
     &-inp {
       margin: 0;
       height: 22px;
-      width: $input-size;
+      width: $input-size - 2;
       line-height: 22px;
       background: transparent;
       border: none;
@@ -304,8 +305,8 @@ $input-size: $handle-size - 21;
 
     &-sub {
       border: 1px solid #dcdcdc;
-      height: 26px;
-      line-height: 26px;
+      height: 28px;
+      line-height: 28px;
       background: #f4f4f4;
       text-align: center;
       color: $title-color;

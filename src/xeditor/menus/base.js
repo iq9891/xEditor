@@ -47,7 +47,7 @@ const XMenuBase = class {
       if (!selection.isSelectionEmpty() || !this.selected) {
         // bold italic underline subscript superscript
         // 加粗操作
-        text.handle('backcolor', '#0f0');
+        text.handle(type);
         this.isActive();
       }
     });

@@ -240,8 +240,8 @@ const XMenucolorBase = class {
     this.top = sbPos.top;
     this.hubTop = color.offsetH(this, this.hsb);
 
-    this.setMoveColor();
-    this.setInnerColor();
+    this.setMoveElem();
+    this.setInnerElem();
 
     this.rgb = color.hsbToRgb({ h: this.hsb.h, s: 100, b: 100 });
     // 主色系渲染
@@ -273,7 +273,7 @@ const XMenucolorBase = class {
     this.left = ev.pageX - getElementLeft(this.$color[0]) - dot;
     this.top = ev.pageY - getElementTop(this.$color[0]) - dot;
 
-    this.setInnerColor();
+    this.setInnerElem();
     this.getRgbColor();
     this.setRgbVal();
 
@@ -301,7 +301,7 @@ const XMenucolorBase = class {
       this.top = -dot;
     }
 
-    this.setInnerColor();
+    this.setInnerElem();
     this.getRgbColor();
     this.setRgbVal();
   }
@@ -312,7 +312,7 @@ const XMenucolorBase = class {
   // 颜色的点击
   hubDown(ev) {
     this.hubTop = ev.pageY - getElementTop(this.$color[0]) - dot;
-    this.setMoveColor();
+    this.setMoveElem();
 
     this.setHubVal();
 
@@ -332,7 +332,7 @@ const XMenucolorBase = class {
     if (this.hubTop < 0) {
       this.hubTop = 0;
     }
-    this.setMoveColor();
+    this.setMoveElem();
     this.setHubVal();
   }
 
@@ -341,17 +341,16 @@ const XMenucolorBase = class {
   }
   // 更新旧颜色
   updateOld() {
-    console.log(this.oldColor, 111);
     this.$old.css('background', this.oldColor);
   }
   // 设置移动盒子的颜色
-  setMoveColor() {
+  setMoveElem() {
     this.$move.css({
       top: this.hubTop,
     });
   }
   // 设置移动盒子的颜色
-  setInnerColor() {
+  setInnerElem() {
     this.$inner.css({
       left: this.left,
       top: this.top,
@@ -362,7 +361,9 @@ const XMenucolorBase = class {
     const { r, g, b } = this.rgb;
     this.hsb.h = color.getH(this, this.hubTop);
     this.oldColor = `rgb(${r}, ${g}, ${b})`;
-    this.rgb = color.hsbToRgb(this.hsb);
+    const oldHsb = color.rgbToHsb(this.rgb);
+    oldHsb.h = this.hsb.h;
+    this.rgb = color.hsbToRgb(oldHsb);
     this.hex = color.rgbToHex(this.rgb);
 
     this.color = color.rgbToHex(color.hsbToRgb({

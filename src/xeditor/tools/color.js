@@ -3,7 +3,7 @@ export default {
   // 已知 hsb 中的 s 和 b，
   // return 坐标
   offsetSB(self, hsb) {
-    const sacle = 5.5; // 宽度高度转换 sb 色值的比例
+    const sacle = 12; // 宽度高度转换 sb 色值的比例
     // 点的距离
     const pointInitial = 4;
     // 计算
@@ -25,7 +25,7 @@ export default {
   // 已知 hsb 中的 h，
   // return 坐标
   offsetH(self, hsb) {
-    const sacle = 5.28; // 宽度高度转换 sb 色值的比例
+    const sacle = 11.2; // 宽度高度转换 sb 色值的比例
     const newH = hsb.h / 360;
     const sacleH = self.colorboxSize - (self.colorboxSize * newH);
     return parseInt(sacleH / sacle, 10);
@@ -49,7 +49,7 @@ export default {
     };
   },
   getH(self, top) {
-    const sacle = 5.28; // 宽度高度转换 sb 色值的比例
+    const sacle = 11.2; // 宽度高度转换 sb 色值的比例
     const size = self.colorboxSize + 6;
     const iTop = top * sacle;
     const newTop = size - iTop;
@@ -122,7 +122,12 @@ export default {
     return hex.join('');
   },
   hexToRgb(hex) {
-    const newHex = hex.replace(/#/, '');
+    let newHex = hex.replace(/#/, '');
+    // 处理 #f00 -> #ff0000
+    if (newHex.length === 3) {
+      newHex = newHex.replace(/(.)/g, '$1$1');
+    }
+
     const hex16 = parseInt(newHex, 16);
     return {
       r: hex16 >> 16,

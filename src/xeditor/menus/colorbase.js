@@ -43,13 +43,10 @@ const XMenucolorBase = class {
       g: 255,
       b: 255,
     };
-    this.hex = 'ffffff';
-    this.left = 0;
-    this.top = 0;
-    this.hubTop = 0;
-    this.oldColor = 'rgb(255, 255, 255)';
-    this.newColor = 'rgb(255, 255, 255)';
-    this.color = 'rgb(255, 0, 0)';
+    // 默认颜色
+    this.defaultHex = 'ffffff';
+    // 重置一下
+    this.reset();
     // 初始化
     this.create();
   }
@@ -58,28 +55,27 @@ const XMenucolorBase = class {
     const { cfg, type, editor } = this;
     const { lang } = cfg;
     this.$tem = $(`<a id="xe-${type}${editor.uid}" href="javascript:void('${lang[type]}');" title="${lang[type]}" class="xe-menu-link xe-menu-link-font">
-      <i class="xe-icon xe-icon-${type}">A</i>
+      <i id="xe-icon-${type}${editor.uid}" class="xe-icon xe-icon-${type}">A</i>
     </a>`);
   }
 
   bind() {
-    this.panel();
+    // this.panel();
     // this.setPanelColor('#1996f9');
 
     const { type, editor } = this;
     $(`#xe-${type}${editor.uid}`).on('click', () => {
-      // const { text, selection, code } = editor;
-      // // 如果是源代码
-      // if (code) {
-      //   return;
-      // }
-      // // 只有选中了才有效果
-      // if (!selection.isSelectionEmpty()) {
-      //   // 加粗操作
-      //   text.handle('backcolor', '#0f0');
-      //   this.isActive();
-      // }
-      this.panel();
+      const { selection, code } = editor;
+      // 如果是源代码
+      if (code) {
+        return;
+      }
+      // 只有选中了才有效果
+      if (!selection.isSelectionEmpty()) {
+        // 加粗操作
+        // text.handle('backcolor', '#0f0');
+        this.panel();
+      }
     });
   }
   // 创建颜色面板
@@ -169,10 +165,14 @@ const XMenucolorBase = class {
     $fieldWrite.append($write);
     $handle.append($fieldWrite);
 
-    const $fieldSub = $('<a class="xe-dialog-color-sub" href="javascript:;">确定</a>');
+    const $fieldSub = $(`<a id="xe-dialog-sub${uid}" class="xe-dialog-color-sub" href="javascript:;">确定</a>`);
     $handle.append($fieldSub);
 
     this.$box.append($handle);
+
+    $(`#xe-dialog-sub${uid}`).on('click', () => {
+      this.sub();
+    });
 
     this.$r = $(`#xe-dialog-r${uid}`).on('input', () => {
       this.writeColor();
@@ -200,6 +200,8 @@ const XMenucolorBase = class {
       }
     });
     this.$hue = $(`#xe-dialog-hue${uid}`);
+
+    this.$icon = $(`#xe-icon-${this.type}${uid}`);
 
     this.someEvent();
     this.setRgbVal();
@@ -230,12 +232,12 @@ const XMenucolorBase = class {
       this.$b.val(rgb.b);
       this.setPanelColor(`#${w}`);
     }
-    console.log(r, g, b, w, 999);
   }
   // 设置初始颜色
   setPanelColor(newColor) {
     this.hsb = color.rgbToHsb(color.hexToRgb(newColor));
     const sbPos = color.offsetSB(this, this.hsb);
+
     this.left = sbPos.left;
     this.top = sbPos.top;
     this.hubTop = color.offsetH(this, this.hsb);
@@ -251,9 +253,33 @@ const XMenucolorBase = class {
     // 备份新颜色，切换颜色的时候替换旧颜色
     this.oldColor = newColor;
   }
+  // 确定
+  sub() {
+    const { editor } = this;
+    const { selection, text } = editor;
+    // 恢复选区，不然添加不上
+    selection.restoreSelection();
+
+    const type = this.type.replace(/(c)o/, ($1) => `${$1[0].toUpperCase()}${$1[1]}`);
+
+    text.handle(type, `#${this.hex}`);
+    this.remove();
+  }
 
   remove() {
     this.$colorDialog.remove();
+    this.isActive();
+    this.reset();
+  }
+  // 重置
+  reset() {
+    this.hex = this.defaultHex;
+    this.left = 0;
+    this.top = 0;
+    this.hubTop = 0;
+    this.oldColor = 'rgb(255, 255, 255)';
+    this.newColor = 'rgb(255, 255, 255)';
+    this.color = 'rgb(255, 0, 0)';
   }
   // 拖拽绑定事件
   someEvent() {
@@ -269,7 +295,6 @@ const XMenucolorBase = class {
   }
   // 颜色的点击
   colorDown(ev) {
-    console.log(this.oldColor, this.rgb);
     this.left = ev.pageX - getElementLeft(this.$color[0]) - dot;
     this.top = ev.pageY - getElementTop(this.$color[0]) - dot;
 
@@ -400,7 +425,15 @@ const XMenucolorBase = class {
   }
   // 是否是加粗
   isActive() {
-
+    const { selection, uid } = this.editor;
+    const $rang = selection.getSelectionContainerElem(selection.getRange());
+    console.log(document.queryCommandState(this.type));
+    console.log(this.$icon, this.hex, this.defaultHex);
+    console.log($rang, );
+    if (this.$icon) {
+      const color = $rang.css('background-color');
+      this.$icon.css('background', /rgba/.test(color) ? '#666' : color);
+    }
   }
   // 禁用
   isDisable() {

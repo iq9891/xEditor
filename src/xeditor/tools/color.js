@@ -3,7 +3,7 @@ export default {
   // 已知 hsb 中的 s 和 b，
   // return 坐标
   offsetSB(self, hsb) {
-    const sacle = 12; // 宽度高度转换 sb 色值的比例
+    const sacle = 0.915; // 宽度高度转换 sb 色值的比例
     // 点的距离
     const pointInitial = 4;
     // 计算
@@ -25,14 +25,14 @@ export default {
   // 已知 hsb 中的 h，
   // return 坐标
   offsetH(self, hsb) {
-    const sacle = 11.2; // 宽度高度转换 sb 色值的比例
+    const sacle = 0.9492; // 宽度高度转换 sb 色值的比例
     const newH = hsb.h / 360;
     const sacleH = self.colorboxSize - (self.colorboxSize * newH);
     return parseInt(sacleH / sacle, 10);
   },
   // 从坐标获取 hsb 中的 s 和 b
   getSB(self, left, top) {
-    const sacle = 5.5; // 宽度高度转换 sb 色值的比例
+    const sacle = 0.915; // 宽度高度转换 sb 色值的比例, 最外层的 width / (padding + width) -> 172 / ( 172 + ( 8 * 2 ) )
     const iLeft = left * sacle;
     const iTop = top * sacle;
     const minLeft = Math.min(self.colorboxSize, iLeft);
@@ -43,13 +43,14 @@ export default {
     const maxTop = Math.max(0, minTop);
     const newTop = 100 * (self.colorboxSize - maxTop);
     const rgTop = parseInt(newTop / self.colorboxSize, 10);
+
     return {
       s: 100 - rgLeft,
       b: rgTop,
     };
   },
   getH(self, top) {
-    const sacle = 11.2; // 宽度高度转换 sb 色值的比例
+    const sacle = 0.9492; // 宽度高度转换 sb 色值的比例
     const size = self.colorboxSize + 6;
     const iTop = top * sacle;
     const newTop = size - iTop;

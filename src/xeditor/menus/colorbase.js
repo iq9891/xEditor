@@ -429,7 +429,7 @@ const XMenucolorBase = class {
     const $rang = selection.getSelectionContainerElem(selection.getRange());
     console.log(document.queryCommandState(this.type));
     console.log(this.$icon, this.hex, this.defaultHex);
-    console.log($rang, );
+    console.log($rang);
     if (this.$icon) {
       const color = $rang.css('background-color');
       this.$icon.css('background', /rgba/.test(color) ? '#666' : color);

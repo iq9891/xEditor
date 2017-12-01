@@ -10,7 +10,8 @@
     "build:test": "export BABEL_ENV=testing && export NODE_ENV=testing && webpack --config build/webpack.build.config.js",
     "build:lab": "export BABEL_ENV=labing && export NODE_ENV=labing && webpack --config build/webpack.build.config.js",
     "build:pro": "export BABEL_ENV=production && export NODE_ENV=production && webpack --config build/webpack.build.config.js",
-    "doc": "./node_modules/.bin/jsdoc -c .jsdoc.js"
+    "doc": "./node_modules/.bin/jsdoc -c .jsdoc.js",
+    "changelog": "./node_modules/.bin/conventional-changelog -p jscs -i changelog.md -s -r 0"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
     "connect-history-api-fallback": "^1.4.0",
+    "conventional-changelog-cli": "^1.3.5",
     "css-loader": "^0.28.7",
     "eslint": "^4.10.0",
     "eslint-config-airbnb-base": "^12.1.0",

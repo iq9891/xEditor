@@ -12,6 +12,7 @@ import fontsize from './fontsize';
 import code from './code';
 import full from './full';
 import backcolor from './backcolor';
+import forecolor from './forecolor';
 
 const list = {};
 
@@ -29,5 +30,6 @@ list.fontsize = fontsize;
 list.code = code;
 list.full = full;
 list.backcolor = backcolor;
+list.forecolor = forecolor;
 
 export default list;

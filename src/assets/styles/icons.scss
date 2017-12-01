@@ -76,22 +76,32 @@
   }
   // 文本颜色
   &-forecolor {
-    background-position: 0 -72px;
+    // background-position: 0 -72px;
+    background: none;
+    font-style: normal;
+    line-height: 16px;
+    text-align: center;
+    border-radius: 4px;
+    color: $title-color-hover;
+    font-weight: bold;
+    font-size: 16px;
 
     &:hover {
-      background-position: -24px -72px;
+      // background-position: -24px -72px;
+      color: $color;
     }
 
     &-active,
     &-active:hover,
     &:active {
-      background-position: -72px -72px;
+      // background-position: -72px -72px;
+      color: $blue;
     }
 
     &-disable,
     &-disable:hover,
     &-disable:active {
-      background-position: -48px -72px;
+      color: $icon-color-hover;
     }
   }
   // 全屏

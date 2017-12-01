@@ -12,26 +12,28 @@ const dotMaxX = 172 - 5;
 const dotMaxY = 172 - 5;
 // hue 最大的 top
 const hueMaxY = 172 - 3;
+// 颜色对话框对象
+let $colorDialog = {
+  remove() {},
+};
 /**
-* XMenucolorBase 对象
+* XMenuColorBase 对象
 * fontcolor|backcolor 继承
 * @example
-* new XMenucolorBase(editor);
+* new XMenuColorBase(editor);
 */
-const XMenucolorBase = class {
+const XMenuColorBase = class {
   /**
    * 构造函数
    *
    * @param {Object} editor 编辑器的对象
-   * @param {String} type 什么类型，如 bold
-   * @param {Boolean} selected 需不需要选中，默认不需要
+   * @param {String} type 什么类型，如 backcolor
    */
-  constructor(editor, type, selected = false) {
+  constructor(editor, type) {
     this.editor = editor;
     this.$editor = editor.$editor;
     this.cfg = editor.cfg;
     this.type = type;
-    this.selected = selected;
     this.$doc = $(document);
     this.hsb = {
       h: 0,
@@ -72,35 +74,35 @@ const XMenucolorBase = class {
       }
       // 只有选中了才有效果
       if (!selection.isSelectionEmpty()) {
-        // 加粗操作
-        // text.handle('backcolor', '#0f0');
         this.panel();
       }
     });
   }
   // 创建颜色面板
   panel() {
-    const { uid } = this.editor;
+    const { uid, cfg } = this.editor;
+
+    this.remove();
 
     const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog"></div>`);
     this.$editor.append($dialog);
-    this.$colorDialog = $(`#xe-dialog${uid}`);
+    $colorDialog = $(`#xe-dialog${uid}`);
 
     const $close = $(`<a id="xe-dialog-close${uid}" href="javascript:;" class="xe-dialog-close-btn">
       <i class="xe-dialog-close"></i>
     </a>`);
-    this.$colorDialog.append($close);
+    $colorDialog.append($close);
     $(`#xe-dialog-close${uid}`).on('click', () => {
       this.remove();
     });
 
     const $header = $(`<div class="xe-dialog-header">
-      <a href="javascript:;" class="xe-dialog-title xe-dialog-title-active">颜色</a>
+      <a href="javascript:;" class="xe-dialog-title xe-dialog-title-active">${cfg.lang[this.type]}</a>
     </div>`);
-    this.$colorDialog.append($header);
+    $colorDialog.append($header);
 
     const $box = $(`<div id="xe-dialog-box${uid}" class="xe-dialog-color-box">`);
-    this.$colorDialog.append($box);
+    $colorDialog.append($box);
     this.$box = $(`#xe-dialog-box${uid}`);
 
     const $color = $(`<div id="xe-dialog-color${uid}" class="xe-dialog-color" style="background-color: ${this.color};">
@@ -267,7 +269,7 @@ const XMenucolorBase = class {
   }
 
   remove() {
-    this.$colorDialog.remove();
+    $colorDialog.remove();
     this.isActive();
     this.reset();
   }
@@ -427,13 +429,31 @@ const XMenucolorBase = class {
   isActive() {
     const { selection, uid } = this.editor;
     const $rang = selection.getSelectionContainerElem(selection.getRange());
-    console.log(document.queryCommandState(this.type));
-    console.log(this.$icon, this.hex, this.defaultHex);
-    console.log($rang);
+
     if (this.$icon) {
-      const color = $rang.css('background-color');
-      this.$icon.css('background', /rgba/.test(color) ? '#666' : color);
+      if (this.type === 'backcolor') {
+        const color = this.getBackColor($rang);
+        this.$icon.css('background', /rgba/.test(color) ? '#666' : color);
+        ;
+      } else {
+        const color = $rang.css('color');
+        this.$icon.css('color', /rgba/.test(color) ? '#666' : color);
+      }
     }
+  }
+  // 获取背景
+  getBackColor($rang) {
+    let backColor = null;
+    const getback = ($rang) => {
+      const $parent = $rang.parent();
+      backColor = $rang.css('background-color');
+      console.log(123, $parent[0].tagName, backColor);
+      if (/rgba/.test(backColor) && $parent.length > 0 && $parent[0].tagName !== 'P' && $rang[0].tagName !== 'P') {
+        getback($parent);
+      }
+    }
+    getback($rang);
+    return backColor;
   }
   // 禁用
   isDisable() {
@@ -447,7 +467,7 @@ const XMenucolorBase = class {
   }
 };
 /**
- * XMenucolorBase 模块.
- * @module XMenucolorBase
+ * XMenuColorBase 模块.
+ * @module XMenuColorBase
  */
-export default XMenucolorBase;
+export default XMenuColorBase;

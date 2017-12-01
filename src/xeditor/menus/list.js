@@ -13,6 +13,7 @@ import code from './code';
 import full from './full';
 import backcolor from './backcolor';
 import forecolor from './forecolor';
+import video from './video';
 
 const list = {};
 
@@ -31,5 +32,6 @@ list.code = code;
 list.full = full;
 list.backcolor = backcolor;
 list.forecolor = forecolor;
+list.video = video;
 
 export default list;

@@ -18,8 +18,6 @@ class XMenuImage extends Base {
     this.now = 0;
     // 图片点击记录
     this.$selectedImg = null;
-    // 当前菜单的状态
-    this.status = '';
     // 是 base64 还是 ajax
     this.imageType = this.editor.cfg.image.type;
   }
@@ -33,12 +31,12 @@ class XMenuImage extends Base {
       }
       // 如果选中了
       if (this.$selectedImg) {
-        if (this.status === 'modify') {
-          this.removeSetImageDialog();
+        if (this.editor.menu.status === 'modify') {
+          this.removeDialog();
         } else {
           this.modifyImageDialog();
         }
-      } else if (this.status === 'new') {
+      } else if (this.editor.menu.status === 'new') {
         this.removeDialog();
       } else {
         this.createDialog();
@@ -55,7 +53,7 @@ class XMenuImage extends Base {
         editor.selection.createRangeByElem($img);
         this.restoreSelection();
         // 点击图片其他地方 删除 dialog
-        this.removeAllDialog();
+        this.removeDialog();
         // 更新图片菜单状态
         this.isActive();
       }).on('click  keyup', (ev = window.evente) => {
@@ -66,7 +64,7 @@ class XMenuImage extends Base {
         // 删除记录
         this.$selectedImg = null;
         // 点击图片其他地方 删除 dialog
-        this.removeAllDialog();
+        this.removeDialog();
         // 更新图片菜单状态
         this.isActive();
         return false;
@@ -75,7 +73,9 @@ class XMenuImage extends Base {
   }
   // 修改
   modifyImageDialog() {
-    this.status = 'modify';
+    this.removeDialog();
+
+    this.editor.menu.status = 'modify';
     const { uid, cfg } = this.editor;
     const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog"></div>`);
     this.$editor.append($dialog);
@@ -86,7 +86,7 @@ class XMenuImage extends Base {
     </a>`);
     this.$setImageDialog.append($close);
     $(`#xe-dialog-close${uid}`).on('click', () => {
-      this.removeSetImageDialog();
+      this.removeDialog();
     });
 
     const $header = $(`<div id="xe-dialog-header${uid}" class="xe-dialog-header"></div>`);
@@ -136,13 +136,15 @@ class XMenuImage extends Base {
       this.$selectedImg = null;
       // 恢复选区，不然添加不上
       this.restoreSelection();
-      this.removeSetImageDialog();
+      this.removeDialog();
       this.isActive();
     });
   }
   // 创建
   createDialog() {
-    this.status = 'new';
+    this.removeDialog();
+
+    this.editor.menu.status = 'new';
     const { uid, cfg } = this.editor;
     const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog"></div>`);
     this.$editor.append($dialog);
@@ -219,21 +221,9 @@ class XMenuImage extends Base {
   }
   // 删除
   removeDialog() {
-    this.$dialog.remove();
-    this.status = '';
-  }
-  // 删除
-  removeSetImageDialog() {
-    this.$setImageDialog.remove();
-    this.status = '';
-  }
-  // 删除所有 dialog
-  removeAllDialog() {
-    if (this.status === 'new') {
-      this.removeDialog();
-    } else if (this.status === 'modify') {
-      this.removeSetImageDialog();
-    }
+    const { menu } = this.editor;
+    menu.remove();
+    menu.status = '';
   }
 
   tab(now) {

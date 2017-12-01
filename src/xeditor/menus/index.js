@@ -16,6 +16,8 @@ const XMenu = class {
     this.editor = editor;
     this.$editor = editor.$editor;
     this.cfg = editor.cfg;
+    // 当前菜单的状态, 用于图片那里
+    this.status = '';
     this.btns = [];
     // 初始化菜单
     this.createMenu();
@@ -65,6 +67,10 @@ const XMenu = class {
         btn.isDisable();
       }
     });
+  }
+  // 删除
+  remove() {
+    $(`#xe-dialog${this.editor.uid}`).remove();
   }
 };
 /**

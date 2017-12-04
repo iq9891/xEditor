@@ -1,12 +1,11 @@
 // XDom 主类
 import $ from '../dom';
 /**
-* XMenuBase 对象
-* bold，inserthorizontalrule，italic，justifycenter，justifyfull，justifyleft，justifyright，underline 继承
+* XMenuCode 对象
 * @example
-* new XMenuBase(editor);
+* new XMenuCode(editor);
 */
-const XMenuBase = class {
+const XMenuCode = class {
   /**
    * 构造函数
    *
@@ -68,7 +67,7 @@ const XMenuBase = class {
   }
 };
 /**
- * XMenuBase 模块.
- * @module XMenuBase
+ * XMenuCode 模块.
+ * @module XMenuCode
  */
-export default XMenuBase;
+export default XMenuCode;

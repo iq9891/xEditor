@@ -14,6 +14,7 @@ import full from './full';
 import backcolor from './backcolor';
 import forecolor from './forecolor';
 import video from './video';
+import table from './table';
 
 const list = {};
 
@@ -33,5 +34,6 @@ list.full = full;
 list.backcolor = backcolor;
 list.forecolor = forecolor;
 list.video = video;
+list.table = table;
 
 export default list;

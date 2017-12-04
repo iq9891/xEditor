@@ -133,6 +133,21 @@ $input-size: $handle-size - 21;
     }
   }
 
+  &-table {
+    width: calc(100% - 48px);
+    display: inline-block;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        appearance: none !important;
+        margin: 0;
+    }
+
+    &-box {
+      margin: 8px 0;
+    }
+  }
+
   &-width {
     margin: 0 0 16px;
     padding: 0 28px 0 8px;
@@ -317,5 +332,5 @@ $input-size: $handle-size - 21;
       padding: 0 26px;
       text-decoration: none;
     }
-  }
+  } // end color
 }

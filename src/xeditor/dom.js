@@ -342,6 +342,27 @@ const XDom = class {
     return this;
   }
   /**
+   * XDom 向前添加元素元素
+   *
+   * @param {Object} child 要添加的 XDom 对象
+   * @private
+   * @example
+   $('div').before($('<div><p>xeditor</p></div>'))
+   * @returns {Object} XDOM 对象
+   */
+  before(child) {
+    this.forEach((elem) => {
+      child.forEach((cd) => {
+        const $parent = new XDom(elem).parent();
+        $parent[0].insertBefore(
+          cd.cloneNode(true),
+          elem,
+        );
+      });
+    });
+    return this;
+  }
+  /**
    * XDom 删除这个元素
    * @returns {Object} XDOM 对象
    */

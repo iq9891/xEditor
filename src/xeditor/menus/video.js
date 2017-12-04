@@ -63,7 +63,7 @@ class XMenuVideo extends Base {
     this.$contentUrl = $(`#xe-dialog-content-url2${uid}`);
     this.$contentBox = $(`#xe-dialog-url-box${uid}`);
     this.$url = $(`#xe-dialog-url${uid}`);
-    const $width = $(`<input id="xe-dialog-width${uid}" type="text" class="xe-input xe-dialog-width" placeholder="">`);
+    const $width = $(`<input id="xe-dialog-width${uid}" type="text" class="xe-input xe-dialog-url" placeholder="">`);
     $width.attr('placeholder', '格式如：<iframe src="..."></iframe>');
     this.$contentBox.append($width);
     const $video = $(`#xe-dialog-width${uid}`);

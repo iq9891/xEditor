@@ -52,7 +52,7 @@ const XMenuBase = class {
       }
     });
   }
-  // 是否是加粗
+  // 是否是选中
   isActive() {
     const { type, editor } = this;
     if (type.indexOf('justify') > -1) {

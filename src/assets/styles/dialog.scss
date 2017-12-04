@@ -9,6 +9,7 @@ $input-size: $handle-size - 21;
   top: 33px;
   left: calc(50% - 160px);
   user-select:none;
+  background: #fff;
 
   &-close {
     &::before,
@@ -141,6 +142,20 @@ $input-size: $handle-size - 21;
     &::-webkit-inner-spin-button {
         appearance: none !important;
         margin: 0;
+    }
+
+    &-content {
+      display: flex;
+      padding: 16px;
+    }
+
+    &-btn {
+      cursor: pointer;
+      margin: 0 4px;
+    }
+
+    &-dialog {
+      width: 386px;
     }
 
     &-box {

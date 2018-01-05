@@ -33,9 +33,7 @@ const XText = class {
     const $children = $text.children();
     // 如果是空的
     if (!$children.length) {
-      this.$line2 = $('<p>这里是内容</p>');
       this.$line1 = $('<p>这里是内容</p>');
-      this.$text.append(this.$line2);
       this.$text.append(this.$line1);
       this.cursorEnd();
     }

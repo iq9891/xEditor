@@ -39,27 +39,29 @@ class XMenuTable extends Base {
       uid, cfg, selection,
     } = this.editor;
 
+    this.$text = $(`#xe-text${uid}`);
+
     const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog xe-dialog-table-dialog"></div>`);
     this.$editor.append($dialog);
-    this.$setVideoDialog = $(`#xe-dialog${uid}`);
+    this.$setTableDialog = $(`#xe-dialog${uid}`);
 
     const $close = $(`<a id="xe-dialog-close${uid}" href="javascript:;" class="xe-dialog-close-btn">
       <i class="xe-dialog-close"></i>
     </a>`);
-    this.$setVideoDialog.append($close);
+    this.$setTableDialog.append($close);
     $(`#xe-dialog-close${uid}`).on('click', () => {
       this.remove();
     });
 
     const $header = $(`<div id="xe-dialog-header${uid}" class="xe-dialog-header"></div>`);
-    this.$setVideoDialog.append($header);
+    this.$setTableDialog.append($header);
     this.$header = $(`#xe-dialog-header${uid}`);
 
-    const $videoBtn = $(`<a href="javascript:;" class="xe-dialog-title xe-dialog-title-active">${cfg.lang[this.type]}</a>`);
-    this.$header.append($videoBtn);
+    const $tableBtn = $(`<a href="javascript:;" class="xe-dialog-title xe-dialog-title-active">${cfg.lang[this.type]}</a>`);
+    this.$header.append($tableBtn);
 
     const $box = $(`<div id="xe-dialog-box${uid}" class="xe-dialog-box"></div>`);
-    this.$setVideoDialog.append($box);
+    this.$setTableDialog.append($box);
     this.$box = $(`#xe-dialog-box${uid}`);
 
     const $contentTable = $(`<div id="xe-dialog-content-table${uid}" class="xe-dialog-content xe-dialog-table-content">
@@ -127,25 +129,25 @@ class XMenuTable extends Base {
 
     const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog"></div>`);
     this.$editor.append($dialog);
-    this.$setVideoDialog = $(`#xe-dialog${uid}`);
+    this.$setTableDialog = $(`#xe-dialog${uid}`);
 
     const $close = $(`<a id="xe-dialog-close${uid}" href="javascript:;" class="xe-dialog-close-btn">
       <i class="xe-dialog-close"></i>
     </a>`);
-    this.$setVideoDialog.append($close);
+    this.$setTableDialog.append($close);
     $(`#xe-dialog-close${uid}`).on('click', () => {
       this.remove();
     });
 
     const $header = $(`<div id="xe-dialog-header${uid}" class="xe-dialog-header"></div>`);
-    this.$setVideoDialog.append($header);
+    this.$setTableDialog.append($header);
     this.$header = $(`#xe-dialog-header${uid}`);
 
-    const $videoBtn = $(`<a href="javascript:;" class="xe-dialog-title xe-dialog-title-active">${cfg.lang[this.type]}</a>`);
-    this.$header.append($videoBtn);
+    const $tableBtn = $(`<a href="javascript:;" class="xe-dialog-title xe-dialog-title-active">${cfg.lang[this.type]}</a>`);
+    this.$header.append($tableBtn);
 
     const $box = $(`<div id="xe-dialog-box${uid}" class="xe-dialog-box"></div>`);
-    this.$setVideoDialog.append($box);
+    this.$setTableDialog.append($box);
     this.$box = $(`#xe-dialog-box${uid}`);
 
     const $contentTable = $(`<div id="xe-dialog-content-table${uid}" class="xe-dialog-content xe-dialog-content-url">
@@ -257,6 +259,7 @@ class XMenuTable extends Base {
     for (let trIndex = 0, trLen = trs.length; trIndex < trLen; trIndex++) {
       if (trIndex === now.tr.index) {
         $(trs[trIndex]).remove();
+        this.reset();
         break;
       }
     }
@@ -286,6 +289,7 @@ class XMenuTable extends Base {
       for (let tdIndex = 0, tdLen = tds.length; tdIndex < tdLen; tdIndex++) {
         if (tdIndex === now.td.index) {
           $(tds[tdIndex]).remove();
+          this.reset();
           break;
         }
       }
@@ -298,6 +302,10 @@ class XMenuTable extends Base {
   // 删除
   remove() {
     this.editor.menu.remove();
+  }
+  // 删除行|列之后，失去焦点并回复 elem
+  reset() {
+    this.$elem = null;
   }
   // 是否是选中
   isActive() {

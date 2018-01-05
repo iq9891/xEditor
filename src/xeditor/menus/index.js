@@ -67,6 +67,13 @@ const XMenu = class {
         btn.isDisable();
       }
     });
+    const $link = $('.xe-menu-link');
+    if (this.editor.code) {
+      $link.addClass('xe-menu-link-disable');
+      $('#xe-code1').removeClass('xe-menu-link-disable');
+    } else {
+      $link.removeClass('xe-menu-link-disable');
+    }
   }
   // 删除
   remove() {

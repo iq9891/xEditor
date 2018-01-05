@@ -5,8 +5,11 @@
 
   &-link {
     display: flex;
-    // margin: 0 8px;
     margin: 8px;
+
+    &-disable {
+      cursor: no-drop;
+    }
 
     &-font {
       text-decoration: none;

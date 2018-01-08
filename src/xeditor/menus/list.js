@@ -16,6 +16,7 @@ import forecolor from './forecolor';
 import video from './video';
 import table from './table';
 import link from './link';
+import cut from './cut';
 
 const list = {};
 
@@ -37,5 +38,6 @@ list.forecolor = forecolor;
 list.video = video;
 list.table = table;
 list.link = link;
+list.cut = cut;
 
 export default list;

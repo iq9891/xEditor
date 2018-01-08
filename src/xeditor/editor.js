@@ -25,7 +25,8 @@ const XEditor = class {
     this.uid = editorId++;
     this.$editor = $(selector);
     this.cfg = config;
-    this.code = false;
+    this.code = false; // 源代码
+    this.handle = false; // 复制|剪切
     // 获取之前的内容
     this.childrens = this.getChilds();
   }

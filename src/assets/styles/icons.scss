@@ -406,4 +406,24 @@
       background-position: -48px -240px;
     }
   }
+  // 剪切
+  &-cut {
+    background-position: 0 -448px;
+
+    &:hover {
+      background-position: -24px -448px;
+    }
+
+    &-active,
+    &-active:hover,
+    &:active {
+      background-position: -72px -448px;
+    }
+
+    &-disable,
+    &-disable:hover,
+    &-disable:active {
+      background-position: -48px -448px;
+    }
+  }
 }

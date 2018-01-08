@@ -27,7 +27,8 @@ export default {
     'table', // 表格
     'underline', // 下划线
     'undo', // 撤销
-    'video', // 插入视频
+    'video', // 插入视频 剪切
+    'cut', // 剪切
   ],
   lang: {
     backcolor: '背景颜色',
@@ -56,6 +57,7 @@ export default {
     underline: '下划线',
     undo: '撤销',
     video: '插入视频',
+    cut: '剪切',
   },
   image: {
     type: 'ajax', // 上传图片显示的类型, base64, ajax

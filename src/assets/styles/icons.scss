@@ -426,4 +426,24 @@
       background-position: -48px -448px;
     }
   }
+  // 复制
+  &-copy {
+    background-position: 0 -464px;
+
+    &:hover {
+      background-position: -24px -464px;
+    }
+
+    &-active,
+    &-active:hover,
+    &:active {
+      background-position: -72px -464px;
+    }
+
+    &-disable,
+    &-disable:hover,
+    &-disable:active {
+      background-position: -48px -464px;
+    }
+  }
 }

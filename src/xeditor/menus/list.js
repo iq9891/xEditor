@@ -17,6 +17,7 @@ import video from './video';
 import table from './table';
 import link from './link';
 import cut from './cut';
+import copy from './copy';
 
 const list = {};
 
@@ -39,5 +40,6 @@ list.video = video;
 list.table = table;
 list.link = link;
 list.cut = cut;
+list.copy = copy;
 
 export default list;

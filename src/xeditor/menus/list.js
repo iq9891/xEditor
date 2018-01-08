@@ -15,6 +15,7 @@ import backcolor from './backcolor';
 import forecolor from './forecolor';
 import video from './video';
 import table from './table';
+import link from './link';
 
 const list = {};
 
@@ -35,5 +36,6 @@ list.backcolor = backcolor;
 list.forecolor = forecolor;
 list.video = video;
 list.table = table;
+list.link = link;
 
 export default list;

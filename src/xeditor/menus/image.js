@@ -240,7 +240,7 @@ class XMenuImage extends Base {
     const imgPattern = /https?:\/\/.+\.(jpg|gif|png|svg)/;
 
     if (imgPattern.test(urlVal) || result) {
-      this.editor.text.handle('insertHTML', `<img src="${urlVal}" />`);
+      this.editor.text.handle('insertHTML', `<img class="xe-text-img" src="${urlVal}" />`);
     } else {
       // 恢复选区，不然添加不上
       this.restoreSelection();

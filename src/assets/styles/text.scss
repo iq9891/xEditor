@@ -18,7 +18,12 @@
     width: calc(100% - 2px);
   }
 
-  & img {
+  &-link {
+    text-decoration: none;
+    color: $blue;
+  }
+
+  &-img {
     cursor: pointer;
 
     &:hover {

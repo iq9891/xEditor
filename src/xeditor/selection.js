@@ -115,6 +115,14 @@ const XSelection = class {
     }
   }
   /**
+  * 获取选中的内容
+  * @return {String} 选中的内容
+  */
+  getSelectionText() {
+    const range = this.curRange;
+    return range ? range.toString() : '';
+  }
+  /**
   * 自定义 insertHTML 事件
   * @param {String} html 添加的内容
   */

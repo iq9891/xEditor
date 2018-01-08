@@ -59,7 +59,7 @@ export default {
   },
   image: {
     type: 'ajax', // 上传图片显示的类型, base64, ajax
-    ajaxurl: 'http://gateway.inner.evente.cn:8000/public/upload', // ajax 类型的上传地址
+    ajaxurl: 'https://www.easy-mock.com/mock/5a2e29ed89d2205cbfe7a459/emfe/upload', // ajax 类型的上传地址
     emptyLinkTip: 'xEditor: 请设置请求链接', // 空连接报错提示信息
     LinkErrorTip: 'xEditor: 请求链接错误', // 错误连接报错提示信息
     success(res) { // 上传成功的处理， 需要返回 url 才能真正的添加内容

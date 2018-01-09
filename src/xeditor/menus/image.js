@@ -1,7 +1,7 @@
 // XDom 主类
 import $ from '../dom';
 import Base from './base';
-import Upload from '../upload';
+import inset from '../tools/inset';
 /**
 * XMenuImage 对象
 * @example
@@ -145,7 +145,7 @@ class XMenuImage extends Base {
     this.removeDialog();
 
     this.editor.menu.status = 'new';
-    const { uid, cfg } = this.editor;
+    const { uid, cfg, text } = this.editor;
     const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog"></div>`);
     this.$editor.append($dialog);
     this.$dialog = $(`#xe-dialog${uid}`);
@@ -194,7 +194,7 @@ class XMenuImage extends Base {
     </div>`);
     this.$contentUrl.append($btn);
     this.$btn = $(`#xe-dialog-btn${uid}`).on('click', () => {
-      this.insertImage();
+      inset(undefined, this);
       this.removeDialog();
     });
     // 上传 +
@@ -207,12 +207,7 @@ class XMenuImage extends Base {
     this.$contentUpload.append($file).on('change', (ev = window.event) => {
       const { files } = ev.target;
       this.$uploadText.addClass('xe-dialog-file-tip-uping');
-      // 如果是 base64
-      if (this.imageType === 'base64') {
-        Upload.base64(files, this);
-      } else if (this.imageType === 'ajax') {
-        Upload.ajax(files, this);
-      }
+      text.handleFiles(files, this);
     });
 
     this.$content = $('.xe-dialog-content');
@@ -229,23 +224,6 @@ class XMenuImage extends Base {
   tab(now) {
     this.$content.css('display', 'none').eq(now).css('display', 'block');
     this.$title.removeClass('xe-dialog-title-active').eq(now).addClass('xe-dialog-title-active');
-  }
-  // 插入图片
-  insertImage(result) {
-    const urlVal = result || this.$url.val();
-    // 恢复选区，不然添加不上
-    this.restoreSelection();
-    // 网址
-    /* eslint-disable */
-    const imgPattern = /https?:\/\/.+\.(jpg|gif|png|svg)/;
-
-    if (imgPattern.test(urlVal) || result) {
-      this.editor.text.handle('insertHTML', `<img class="xe-text-img" src="${urlVal}" />`);
-    } else {
-      // 恢复选区，不然添加不上
-      this.restoreSelection();
-      this.editor.text.handle('insertText', urlVal);
-    }
   }
   // 恢复选区
   restoreSelection() {

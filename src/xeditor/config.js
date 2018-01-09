@@ -103,4 +103,9 @@ export default {
     alert(info);
   },
   zindex: 10000, // 编辑器的层级
+  drag: { // 配置拖拽粘贴编辑
+    open: true,
+    drop: '释放鼠标', // 松手之后
+    enter: '将文件拖拽到此区域', // 进入区域之前
+  },
 };

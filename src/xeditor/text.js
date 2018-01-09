@@ -1,4 +1,5 @@
 import $ from './dom';
+import Upload from './upload';
 /**
 * XText 对象
 * 下面内容区
@@ -99,6 +100,10 @@ const XText = class {
     this.tab();
     // 清空之后
     this.empty();
+    if (this.editor.cfg.drag.open) {
+      // 拖拽粘贴
+      this.dragFn();
+    }
   }
   // 实时保存选取
   saveRangeRealTime() {
@@ -168,6 +173,68 @@ const XText = class {
       }
     });
   }
+  // 拖拽粘贴
+  dragFn() {
+    // 进入编辑器
+    this.$editor.on('dragenter', (e = window.event) => {
+      this.createDrag();
+      e.stopPropagation();
+      e.preventDefault();
+    });
+    // 移出编辑器
+    $(document).on('dragenter', (e = window.event) => {
+      this.removeDrag();
+      e.stopPropagation();
+      e.preventDefault();
+    });
+    // 进入内容页面
+    this.$text.on('dragenter', (e = window.event) => {
+      this.editDragText(this.editor.cfg.drag.drop);
+      e.stopPropagation();
+      e.preventDefault();
+    });
+    // 离开
+    this.$text.on('dragleave', (e = window.event) => {
+      e.stopPropagation();
+      e.preventDefault();
+    }, false);
+    // 释放
+    this.$text.on('drop', (e = window.event) => {
+      e.stopPropagation();
+      e.preventDefault();
+
+      this.handleFiles(e.dataTransfer.files, this);
+      this.removeDrag();
+    }, false);
+  }
+  // 处理拖拽文件
+  handleFiles(files, self) {
+    Object.keys(files).forEach((key) => {
+      const reader = new FileReader();
+      const isImage = files[key].type.indexOf('image') > -1;
+      const isText = files[key].type.indexOf('text') > -1;
+      // 如果读取的是图片
+      if (isImage) {
+        reader.readAsDataURL(files[key]);
+      } else if (isText) {
+        // 读取的是文件
+        reader.readAsText(files[key]);
+      }
+      reader.addEventListener('load', () => {
+        const { type } = self.editor.cfg.image;
+        // 如果是 图片
+        if (isImage) {
+          if (type === 'base64') {
+            Upload.base64(files, self);
+          } else if (type === 'ajax') {
+            Upload.ajax(files, self);
+          }
+        } else if (isText) {
+          Upload.base64(files, self, 'text');
+        }
+      }, false);
+    });
+  }
   /**
   * 按钮对文字的操作，如加粗。。
   * @param {String} name 操作的类型，name 的类型可以参照 https://developer.mozilla.org/zh-CN/docs/Web/API/Document/execCommand
@@ -182,6 +249,35 @@ const XText = class {
       // 可以多次操作
       selection.saveRange();
       selection.restoreSelection();
+    }
+  }
+  // 创建拖拽
+  createDrag() {
+    const { uid } = this.editor;
+    if (!this.$drag) {
+      this.$editor.append($(`<div id="xe-drag${uid}" class="xe-drag">
+        <p id="xe-drag-text${uid}" class="xe-drag-text"></p>
+      </div>`));
+      this.$drag = $(`#xe-drag${uid}`);
+      this.$dragText = $(`#xe-drag-text${uid}`);
+      this.editDragText();
+    }
+  }
+  // 创建拖拽
+  removeDrag() {
+    if (this.$drag && this.$drag.length > 0) {
+      this.$drag.remove();
+      this.$drag = null;
+      this.$dragText = null;
+    }
+  }
+  // 创建拖拽
+  editDragText(text = this.editor.cfg.drag.enter) {
+    if (this.$dragText && this.$dragText.length > 0) {
+      this.$dragText.html(text);
+    } else {
+      this.createDrag();
+      this.editDragText(this.editor.cfg.drag.drop);
     }
   }
 };

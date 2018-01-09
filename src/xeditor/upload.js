@@ -1,16 +1,25 @@
 import ajax from './ajax';
+import inset from './tools/inset';
 
 class Upload {
   /**
    * image -> base64
    * @param {Object} files 文件对象
    */
-  static base64(files, self) {
+  static base64(files, self, type = 'image') {
     Object.keys(files).forEach((file) => {
       const reader = new FileReader();
-      reader.readAsDataURL(files[file]);
+      const isImage = type === 'image';
+      if (isImage) {
+        reader.readAsDataURL(files[file]);
+      } else {
+        reader.readAsText(files[file]);
+      }
       reader.onload = () => {
-        self.insertImage(reader.result);
+        inset(reader.result, self, isImage);
+        if (self.removeDialog) {
+          self.removeDialog();
+        }
       };
     });
   }
@@ -41,14 +50,14 @@ class Upload {
               file: files[now],
               onSuccess: (res) => {
                 const url = success(res);
-                self.insertImage(url);
+                inset(url, self);
                 recursionAjax(--now);
               },
               onError: (err, response) => {
                 error(err, response, files[now]);
               },
             });
-          } else {
+          } else if (self.removeDialog) {
             self.removeDialog();
           }
         };

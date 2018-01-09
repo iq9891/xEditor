@@ -9,7 +9,7 @@ $input-size: $handle-size - 21;
   top: 33px;
   left: calc(50% - 160px);
   user-select:none;
-  background: #fff;
+  background: $white;
 
   &-close {
     &::before,
@@ -163,14 +163,22 @@ $input-size: $handle-size - 21;
     }
   }
 
+  &-textarea {
+    border: 1px solid $border-color;
+    margin: 0 0 8px;
+    height: 100px;
+    width: calc(100% - 18px);
+    resize: none;
+  }
+
   &-width {
-    margin: 0 0 16px;
+    margin: 0 0 8px;
     padding: 0 28px 0 8px;
     width: calc(100% - 36px);
   }
 
   &-url {
-    margin: 0 0 16px;
+    margin: 0 0 8px;
 
     &-box {
       position: relative;

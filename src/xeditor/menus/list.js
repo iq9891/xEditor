@@ -18,6 +18,9 @@ import table from './table';
 import link from './link';
 import cut from './cut';
 import copy from './copy';
+import paste from './paste';
+import plainpaste from './plainpaste';
+import wordpaste from './wordpaste';
 
 const list = {};
 
@@ -41,5 +44,8 @@ list.table = table;
 list.link = link;
 list.cut = cut;
 list.copy = copy;
+list.paste = paste;
+list.plainpaste = plainpaste;
+list.wordpaste = wordpaste;
 
 export default list;

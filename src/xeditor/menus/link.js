@@ -87,7 +87,7 @@ class XMenuLink extends Base {
     </div>`);
     this.$contentUrl.append($btn);
 
-    // 插入视频
+    // 插入链接
     this.$btn = $(`#xe-dialog-btn${uid}`).on('click', () => {
       // 恢复选区，不然添加不上
       selection.restoreSelection();

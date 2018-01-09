@@ -305,45 +305,45 @@
     &-disable:active {
       background-position: -48px -360px;
     }
+  }
+  // 无格式粘贴
+  &-plainpaste {
+    background-position: 0 -384px;
 
-    &-plainpaste {
-      background-position: 0 -384px;
-
-      &:hover {
-        background-position: -24px -384px;
-      }
-
-      &-active,
-      &-active:hover,
-      &:active {
-        background-position: -72px -384px;
-      }
-
-      &-disable,
-      &-disable:hover,
-      &-disable:active {
-        background-position: -48px -384px;
-      }
+    &:hover {
+      background-position: -24px -384px;
     }
 
-    &-wordpaste {
-      background-position: 0 -408px;
+    &-active,
+    &-active:hover,
+    &:active {
+      background-position: -72px -384px;
+    }
 
-      &:hover {
-        background-position: -24px -408px;
-      }
+    &-disable,
+    &-disable:hover,
+    &-disable:active {
+      background-position: -48px -384px;
+    }
+  }
+  // word 粘贴
+  &-wordpaste {
+    background-position: 0 -408px;
 
-      &-active,
-      &-active:hover,
-      &:active {
-        background-position: -72px -408px;
-      }
+    &:hover {
+      background-position: -24px -408px;
+    }
 
-      &-disable,
-      &-disable:hover,
-      &-disable:active {
-        background-position: -48px -408px;
-      }
+    &-active,
+    &-active:hover,
+    &:active {
+      background-position: -72px -408px;
+    }
+
+    &-disable,
+    &-disable:hover,
+    &-disable:active {
+      background-position: -48px -408px;
     }
   }
   // 表格

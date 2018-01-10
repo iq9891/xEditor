@@ -82,6 +82,13 @@ const XEditor = class {
   setHtml(html = '') {
     this.text.setHtml(html);
   }
+  /**
+  * 设置里面内容
+  * @return {Object} 编辑器对象
+  */
+  el() {
+    return this.$editor;
+  }
 };
 /**
  * XEditor 模块.

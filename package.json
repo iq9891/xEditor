@@ -1,8 +1,9 @@
 {
   "name": "xeditor",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Web富文本编辑器",
   "main": "dist/xeditor.js",
+  "unpkg": "dist/xeditor.js",
   "scripts": {
     "start": "export BABEL_ENV=development && export NODE_ENV=development && node build/dev-server.js",
     "dev": "set BABEL_ENV=development && set NODE_ENV=development && node build/dev-server.js",
@@ -11,7 +12,8 @@
     "build:lab": "export BABEL_ENV=labing && export NODE_ENV=labing && webpack --config build/webpack.build.config.js",
     "build:pro": "export BABEL_ENV=production && export NODE_ENV=production && webpack --config build/webpack.build.config.js",
     "doc": "./node_modules/.bin/jsdoc -c .jsdoc.js",
-    "changelog": "./node_modules/.bin/conventional-changelog -p jscs -i changelog.md -s -r 0"
+    "changelog": "./node_modules/.bin/conventional-changelog -p jscs -i changelog.md -s -r 0",
+    "prepublishOnly": "npm run build:test && npm run build:pro"
   },
   "repository": {
     "type": "git",

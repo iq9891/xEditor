@@ -17,7 +17,8 @@ if (process.env.NODE_ENV === 'testing') {
 
 module.exports = {
   build: {
-    dist: 'dist/'+env+'/'+pkg.version, // 打包生成文件夹
+    // dist: 'dist/'+env+'/'+pkg.version, // 打包生成文件夹
+    dist: 'dist', // 测试生成文件夹
     env: buildEnv,
     index: path.resolve(__dirname, '../dist/index.html'),
   },

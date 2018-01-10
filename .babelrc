@@ -1,0 +1,41 @@
+{
+  "presets": [
+    ["env", { "modules": false }],
+    "stage-2"
+  ],
+  "comments": false,
+  "env": {
+    "development": {
+      "plugins": [
+        "transform-runtime",
+        ["transform-strict-mode", {
+          "strict": false
+        }]
+      ]
+    },
+    "testing": {
+      "plugins": [
+        "transform-runtime",
+        ["transform-strict-mode", {
+          "strict": false
+        }],
+      ]
+    },
+    "labing": {
+      "plugins": [
+        "transform-runtime",
+        ["transform-strict-mode", {
+          "strict": false
+        }],
+      ]
+    },
+    "production": {
+      "plugins": [
+        "transform-runtime",
+        ["transform-strict-mode", {
+          "strict": false
+        }],
+      ]
+    }
+  }
+}

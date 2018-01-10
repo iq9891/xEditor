@@ -1,0 +1,33 @@
+.#{$prefix}text {
+  height: calc(100% - 32px);
+  width: calc(100% - 32px);
+  padding: 16px;
+  overflow: auto;
+  color: $color;
+  font-family: 'Microsoft YaHei', 'PingFangSC', 'Helvetica', sans-serif, 'Arial';
+
+  &:focus {
+    outline: none;
+  }
+
+  &-wrap {
+    border: 1px solid $border-color;
+    border-top: none;
+    background: $bg-main;
+    height: calc(100% - 35px);
+    width: calc(100% - 2px);
+  }
+
+  &-link {
+    text-decoration: none;
+    color: $blue;
+  }
+
+  &-img {
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0 0 8px $blue;
+    }
+  }
+}

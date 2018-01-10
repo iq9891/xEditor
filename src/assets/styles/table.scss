@@ -1,0 +1,10 @@
+.#{$prefix}table {
+  border: 1px solid $border-color;
+  width: 100%;
+
+  &-th,
+  &-td {
+    border: 1px solid $border-color;
+    text-align: left;
+  }
+}

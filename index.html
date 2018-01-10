@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>xEditor 页面</title>
+  </head>
+  <body>
+    <div id="xe" class="xe"></div>
+    <script>
+    var xEditor = new window.$xEditor('#xe')
+    xEditor.config({
+      menus: [
+        'bold',
+        'italic',
+        'underline',
+        'justifycenter',
+        'justifyfull',
+        'justifyleft',
+        'justifyright',
+        'inserthorizontalrule',
+        'image',
+        'fontname',
+        'fontsize',
+        'code',
+        'full',
+        'backcolor',
+        'forecolor',
+        'video',
+        'table',
+        'link',
+        'cut',
+        'copy',
+        'paste',
+        'plainpaste',
+        'wordpaste'
+      ]
+    });
+    xEditor.create();
+    // var xEditor = new window.$xEditor({id: 123})
+    // document.write(xEditor.name + '<br /> 正常运行');
+    </script>
+    <br>
+    <div class="xe">
+      <div class="xe-menu">
+        <a href="javascript:void('插入图像');" title="插入图像" class="xe-menu-link">
+          <i class="xe-icon xe-icon-image"></i>
+        </a>
+        <div class="xe-select">
+          <a href="javascript:void('插入图像');" title="插入图像" class="xe-select-btn">
+            <span class="xe-select-btn-font">字体</span>
+            <i class="xe-select-btn-arrow"></i>
+          </a>
+          <ul class="xe-select-list">
+            <li class="xe-select-list-item">字体字体字体字体字体字体字体字体字体字体字体字体</li>
+            <li class="xe-select-list-item">22</li>
+            <li class="xe-select-list-item">22</li>
+            <li class="xe-select-list-item">22</li>
+            <li class="xe-select-list-item">22</li>
+            <li class="xe-select-list-item">22</li>
+          </ul>
+        </div>
+      </div>
+      <div class="xe-text-wrap">
+        <div contenteditable="true" class="xe-text"></div>
+      </div>
+      <!-- 颜色 -->
+      <div class="xe-dialog">
+        <a href="javascript:;" class="xe-dialog-close-btn">
+          <i class="xe-dialog-close"></i>
+        </a>
+        <div class="xe-dialog-header">
+          <a href="javascript:;" class="xe-dialog-title xe-dialog-title-active">颜色</a>
+        </div>
+        <div class="xe-dialog-color-box">
+          <div class="xe-dialog-color" style="background-color: rgb(78, 42, 176);">
+            <div class="xe-dialog-color-inner"></div>
+          </div>
+          <div class="xe-dialog-color-hue">
+            <div class="xe-dialog-color-hue-move">
+              <i class="xe-dialog-color-hue-left"></i>
+              <i class="xe-dialog-color-hue-right"></i>
+            </div>
+          </div>
+          <div class="xe-dialog-color-handle">
+            <div class="xe-dialog-color-show-color">
+              <div class="xe-dialog-color-new-color" style="background: rgb(0, 255, 0);"></div>
+              <div class="xe-dialog-color-current-color" style="background: rgb(0, 255, 0);"></div>
+            </div>
+            <div class="xe-dialog-color-field">
+              <p class="xe-dialog-color-title">R</p>
+              <input type="tel" maxlength="3" size="3" class="xe-dialog-color-inp">
+            </div>
+            <div class="xe-dialog-color-field">
+              <p class="xe-dialog-color-title">G</p>
+              <input type="tel" maxlength="3" size="3" class="xe-dialog-color-inp">
+            </div>
+            <div class="xe-dialog-color-field">
+              <p class="xe-dialog-color-title">B</p>
+              <input type="tel" maxlength="3" size="3" class="xe-dialog-color-inp">
+            </div>
+            <div class="xe-dialog-color-field">
+              <p class="xe-dialog-color-title">#</p>
+              <input type="tel" maxlength="6" size="6" class="xe-dialog-color-inp">
+            </div>
+            <a class="xe-dialog-color-sub my-sub" href="javascript:;">确定</a>
+          </div>
+        </div>
+      </div>
+      <!-- 图片修改 -->
+      <!-- <div class="xe-dialog">
+        <a href="javascript:;" class="xe-dialog-close-btn">
+          <i class="xe-dialog-close"></i>
+        </a>
+        <div class="xe-dialog-header">
+          <a href="javascript:;" class="xe-dialog-title xe-dialog-title-active">图片宽度：</a>
+        </div>
+        <div class="xe-dialog-box">
+          <div class="xe-dialog-content-url">
+            <div class="xe-dialog-url-box">
+              <input type="tel" minlength="1" maxlength="3" class="xe-input xe-dialog-url2" value="100" placeholder="图片宽度">
+              <i class="xe-dialog-url-symbol">%</i>
+            </div>
+            <div class="xe-dialog-btn-box">
+              <button class="xe-button xe-dialog-btn">删除</button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- 图片上传 -->
+      <!-- <div class="xe-dialog">
+        <a href="javascript:;" class="xe-dialog-close-btn">
+          <i class="xe-dialog-close"></i>
+        </a>
+        <div class="xe-dialog-header">
+          <a href="javascript:;" class="xe-dialog-title xe-dialog-title-active">上传</a>
+          <a href="javascript:;" class="xe-dialog-title">图片</a>
+        </div>
+        <div class="xe-dialog-box">
+          <div class="xe-dialog-content-url">
+            <input type="text" class="xe-input xe-dialog-url" placeholder="图片链接">
+            <div class="xe-dialog-btn-box">
+              <button class="xe-button xe-dialog-btn">插入</button>
+            </div>
+          </div>
+          <div class="xe-dialog-content-upload">
+            <i class="xe-dialog-upload">+</i>
+            <input class="xe-dialog-file" type="file">
+          </div>
+        </div>
+      </div> -->
+      <div class="xe-drag">
+        <p class="xe-drag-text">将文件拖拽到此区域</p>
+      </div>
+    </div>
+    <!-- <div class="xe">
+      <div class="xe-menu">
+        <a href="javascript:void('粘贴');" title="粘贴" class="xe-menu-link">
+          <i class="xe-icon xe-icon-paste"></i>
+        </a>
+        <a href="javascript:void('粘贴为无格式文本');" title="粘贴为无格式文本" class="xe-menu-link">
+          <i class="xe-icon xe-icon-paste-plainpaste"></i>
+        </a>
+        <a href="javascript:void('从 MS Word 粘贴');" title="从 MS Word 粘贴" class="xe-menu-link">
+          <i class="xe-icon xe-icon-paste-wordpaste"></i>
+        </a>
+        <a href="javascript:void('文本颜色');" title="文本颜色" class="xe-menu-link">
+          <i class="xe-icon xe-icon-forecolor"></i>
+        </a>
+        <a href="javascript:void('背景颜色');" title="背景颜色" class="xe-menu-link">
+          <i class="xe-icon xe-icon-backcolor"></i>
+        </a>
+        <a href="javascript:void('插入图像');" title="插入图像" class="xe-menu-link">
+          <i class="xe-icon xe-icon-image"></i>
+        </a>
+        <a href="javascript:void('插入媒体');" title="插入媒体" class="xe-menu-link">
+          <i class="xe-icon xe-icon-video"></i>
+        </a>
+        <a href="javascript:void('表格');" title="表格" class="xe-menu-link">
+          <i class="xe-icon xe-icon-table"></i>
+        </a>
+        <a href="javascript:void('链接');" title="源代码" class="xe-menu-link">
+          <i class="xe-icon xe-icon-link"></i>
+        </a>
+        <a href="javascript:void('源代码');" title="源代码" class="xe-menu-link">
+          <i class="xe-icon xe-icon-code"></i>
+        </a>
+        <a href="javascript:void('全屏');" title="全屏" class="xe-menu-link">
+          <i class="xe-icon xe-icon-full"></i>
+        </a>
+      </div>
+      <div class="xe-text-wrap">
+        <div contenteditable="true" class="xe-text"></div>
+      </div>
+    </div> -->
+  </body>
+</html>

@@ -1,0 +1,7 @@
+.Ds_store
+node_modules
+*.swp
+.tmp
+*.log
+.idea
+dist/

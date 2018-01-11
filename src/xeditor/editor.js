@@ -66,6 +66,10 @@ const XEditor = class {
    */
   config(cfg) {
     this.cfg = Object.assign({}, this.cfg, cfg);
+    // 空处理
+    if (this.cfg.menus.length === 0) {
+      this.cfg.menus = config.menus.slice();
+    }
   }
   /**
   * 获取之前里面内容

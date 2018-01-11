@@ -5,6 +5,8 @@ export default {
     'backcolor', // 背景颜色
     'bold', // 加粗
     'code', // 源代码
+    'copy', // 剪切
+    'cut', // 剪切
     'forecolor', // 文本颜色
     'full', // 全屏
     'fontname', // 字体
@@ -16,24 +18,25 @@ export default {
     'justifyleft', // 左对齐
     'justifyright', // 右对齐
     'inserthorizontalrule', // 插入水平线
-    'insertorderedlist', // 有序列表
-    'insertUnorderedList', // 无序列表
+    // 'insertorderedlist', // 有序列表
+    // 'insertUnorderedlist', // 无序列表
     'link', // 插入链接
     'paste', // 普通粘贴
     'plainpaste', // 粘贴为无格式文本
-    'redo', // 反撤销
-    'removeFormat', // 删除样式
+    // 'redo', // 反撤销
+    // 'removeformat', // 删除样式
     'wordpaste', // 从 MS Word 粘贴
     'table', // 表格
     'underline', // 下划线
-    'undo', // 撤销
-    'video', // 插入视频 剪切
-    'cut', // 剪切
+    // 'undo', // 撤销
+    'video', // 插入视频
   ],
   lang: {
     backcolor: '背景颜色',
     bold: '加粗',
     code: '源代码',
+    copy: '复制',
+    cut: '剪切',
     forecolor: '文本颜色',
     full: '全屏',
     fontname: '字体',
@@ -57,7 +60,6 @@ export default {
     underline: '下划线',
     undo: '撤销',
     video: '插入视频',
-    cut: '剪切',
   },
   image: {
     type: 'ajax', // 上传图片显示的类型, base64, ajax

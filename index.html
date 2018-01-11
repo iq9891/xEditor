@@ -7,39 +7,13 @@
   <body>
     <div id="xe" class="xe"></div>
     <script>
-    var xEditor = new window.$xEditor('#xe')
-    xEditor.config({
-      menus: [
-        'bold',
-        'italic',
-        'underline',
-        'justifycenter',
-        'justifyfull',
-        'justifyleft',
-        'justifyright',
-        'inserthorizontalrule',
-        'image',
-        'fontname',
-        'fontsize',
-        'code',
-        'full',
-        'backcolor',
-        'forecolor',
-        'video',
-        'table',
-        'link',
-        'cut',
-        'copy',
-        'paste',
-        'plainpaste',
-        'wordpaste'
-      ]
+    var myEditor = new window.xEditor('#xe')
+    myEditor.config({
+      menus: []
     });
-    xEditor.create();
-    // var xEditor = new window.$xEditor({id: 123})
-    // document.write(xEditor.name + '<br /> 正常运行');
+    myEditor.create();
     </script>
-    <br>
+    <!-- <br>
     <div class="xe">
       <div class="xe-menu">
         <a href="javascript:void('插入图像');" title="插入图像" class="xe-menu-link">
@@ -63,7 +37,6 @@
       <div class="xe-text-wrap">
         <div contenteditable="true" class="xe-text"></div>
       </div>
-      <!-- 颜色 -->
       <div class="xe-dialog">
         <a href="javascript:;" class="xe-dialog-close-btn">
           <i class="xe-dialog-close"></i>
@@ -105,7 +78,7 @@
             <a class="xe-dialog-color-sub my-sub" href="javascript:;">确定</a>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- 图片修改 -->
       <!-- <div class="xe-dialog">
         <a href="javascript:;" class="xe-dialog-close-btn">

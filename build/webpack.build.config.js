@@ -76,7 +76,7 @@ module.exports = merge(webpackBaseConfig, {
     path: path.resolve(__dirname, '../'+dist),
     publicPath: '/'+ dist +'/',
     filename: pkg.name + (isPro ? '.min' : '') +'.js',
-    library: pkg.name,
+    // library: pkg.name,
     libraryTarget: 'umd',
     umdNamedDefine: true
   },

@@ -1,0 +1,44 @@
+body {
+  margin: 0;
+  color: #333;
+}
+
+header {
+  text-align: center;
+  padding: 48px 0;
+  background: #f3f3f3;
+}
+
+nav {
+  text-align: center;
+  padding: 36px 0 24px;
+}
+
+a {
+  margin: 0 16px;
+  color: #1996fa;
+  text-decoration: none;
+}
+
+p {
+  width: 70%;
+  margin: 48px auto;
+}
+
+ul {
+  width: 70%;
+  margin: 0 auto;
+}
+
+footer {
+  border-top: 1px solid #f3f3f3;
+  width: 70%;
+  margin: 48px auto 0;
+  padding: 24px 0;
+  text-align: center;
+}
+
+.xe {
+  width: 70%;
+  margin: 0 auto;
+}

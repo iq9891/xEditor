@@ -6,11 +6,16 @@ Web富文本编辑器
 [![Package Quality](http://npm.packagequality.com/shield/xeditor.svg)](http://packagequality.com/#?package=xeditor)
 [![NPM downloads](https://img.shields.io/npm/dt/xeditor.svg?style=flat-square)](https://npmjs.org/package/xeditor)
 
+<iframe src="http://output.jsbin.com/qiqibif"></iframe>
+
 ## 介绍
 
-xEditor 是 Web 端富文本编辑器。支持 IE10+。目前暂不支持 Vue， React 或者 Angular 。
+xEditor 是 Web 端富文本编辑器。支持 IE10+。目前暂不支持 Vue， React 或者 Angular 。[在线预览](http://output.jsbin.com/qiqibif)
 
 - 源码： [https://github.com/iq9891/xEditor](https://github.com/iq9891/xEditor) （欢迎 star）
+- CDN
+  - [unpkg](https://unpkg.com/xeditor)
+  - [jsdelivr](https://cdn.jsdelivr.net/npm/xeditor@latest/dist/)
 
 ## 使用
 

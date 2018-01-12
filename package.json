@@ -4,6 +4,10 @@
   "description": "Web富文本编辑器",
   "main": "dist/xeditor.js",
   "unpkg": "dist/xeditor.js",
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "start": "export BABEL_ENV=development && export NODE_ENV=development && node build/dev-server.js",
     "dev": "set BABEL_ENV=development && set NODE_ENV=development && node build/dev-server.js",

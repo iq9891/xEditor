@@ -14,6 +14,7 @@ xEditor 是 Web 端富文本编辑器。支持 IE10+。目前暂不支持 Vue，
   - [unpkg](https://unpkg.com/xeditor)
   - [jsdelivr](https://cdn.jsdelivr.net/npm/xeditor@latest/dist/)
 - [各版本下载 https://github.com/iq9891/xEditor/releases](https://github.com/iq9891/xEditor/releases)
+- [更新记录](https://github.com/iq9891/xEditor/blob/master/changelog.md)
 
 ## 使用
 

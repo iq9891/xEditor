@@ -2,7 +2,8 @@
   display: flex;
   border: 1px solid $border-color;
   background: $menu-color;
-  overflow-x: auto;
+  flex-direction: row;
+  flex-wrap: wrap;
 
   &-link {
     display: flex;

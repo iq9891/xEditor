@@ -65,11 +65,33 @@ const XEditor = class {
    * @returns {}
    */
   config(cfg) {
-    this.cfg = Object.assign({}, this.cfg, cfg);
-    // 空处理
-    if (this.cfg.menus.length === 0) {
-      this.cfg.menus = config.menus.slice();
-    }
+    Object.keys(cfg).forEach((conf) => {
+      if (typeof cfg[conf] === 'object' && !Array.isArray(cfg[conf])) {
+        // 继承子级
+        Object.keys(cfg[conf]).forEach((confChild) => {
+          if (typeof cfg[conf][confChild] === 'object' && !Array.isArray(cfg[conf][confChild])) {
+            // 不为空
+            if (JSON.stringify(cfg[conf][confChild]) !== '{}') {
+              this.cfg[conf][confChild] = Object.assign({}, cfg[conf][confChild]);
+            }
+          } else if (Array.isArray(cfg[conf][confChild])) {
+            // 不为空
+            if (cfg[conf][confChild].length > 0) {
+              this.cfg[conf][confChild] = cfg[conf][confChild].slice();
+            }
+          } else {
+            this.cfg[conf][confChild] = cfg[conf][confChild];
+          }
+        });
+      } else if (Array.isArray(cfg[conf])) {
+        // 不为空
+        if (cfg[conf].length > 0) {
+          this.cfg[conf] = cfg[conf].slice();
+        }
+      } else {
+        this.cfg[conf] = cfg[conf];
+      }
+    });
   }
   /**
   * 获取之前里面内容

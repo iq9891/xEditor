@@ -8,6 +8,7 @@
 
 xEditor 是 Web 端富文本编辑器。支持 IE10+。目前暂不支持 Vue， React 或者 Angular 。[在线预览](http://output.jsbin.com/qiqibif)
 
+- 文档地址： [https://www.kancloud.cn/iq9891/xeditor/500799](https://www.kancloud.cn/iq9891/xeditor/500799)
 - 源码： [https://github.com/iq9891/xEditor](https://github.com/iq9891/xEditor) （欢迎 star）
 - CDN
   - [unpkg](https://unpkg.com/xeditor)

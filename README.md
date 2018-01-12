@@ -1,12 +1,8 @@
 # xeditor
-Web富文本编辑器
 
 [![xeditor](https://img.shields.io/npm/v/xeditor.svg?style=flat-square)](https://www.npmjs.org/package/xeditor)
 [![NPM downloads](http://img.shields.io/npm/dm/xeditor.svg?style=flat-square)](https://npmjs.org/package/xeditor)
-[![Package Quality](http://npm.packagequality.com/shield/xeditor.svg)](http://packagequality.com/#?package=xeditor)
 [![NPM downloads](https://img.shields.io/npm/dt/xeditor.svg?style=flat-square)](https://npmjs.org/package/xeditor)
-
-<iframe src="http://output.jsbin.com/qiqibif"></iframe>
 
 ## 介绍
 
@@ -16,6 +12,7 @@ xEditor 是 Web 端富文本编辑器。支持 IE10+。目前暂不支持 Vue，
 - CDN
   - [unpkg](https://unpkg.com/xeditor)
   - [jsdelivr](https://cdn.jsdelivr.net/npm/xeditor@latest/dist/)
+- [各版本下载 https://github.com/iq9891/xEditor/releases](https://github.com/iq9891/xEditor/releases)
 
 ## 使用
 
@@ -25,26 +22,17 @@ xEditor 是 Web 端富文本编辑器。支持 IE10+。目前暂不支持 Vue，
 <html>
   <head>
     <meta charset="utf-8">
-    <title>xEditor</title>
+    <title>xeditor</title>
+    <script src="https://unpkg.com/xeditor"></script>
   </head>
   <body>
     <div id="xe" class="xe"></div>
     <script>
     var myEditor = new window.xEditor('#xe')
-    myEditor.config({
-      menus: []
-    });
     myEditor.create();
     </script>
   </body>
 </html>
-```
-
-- js 代码
-```js
-var X = window.xEditor
-var editor = new X('#xeditor');
-editor.create();
 ```
 
 ## 运行 demo

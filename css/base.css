@@ -20,9 +20,9 @@ a {
   text-decoration: none;
 }
 
-p {
+h2 {
   width: 70%;
-  margin: 48px auto;
+  margin: 36px auto 24px;
 }
 
 ul {

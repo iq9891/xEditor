@@ -25,7 +25,7 @@ module.exports = {
   dev: {
     dist: 'dist', // 测试生成文件夹
     env: require('./dev.env'),
-    port: 7700,
+    port: 7702,
     autoOpenBrowser: true,
   }
 }

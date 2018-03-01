@@ -30,7 +30,7 @@ const XMenu = class {
    * @param {Object} editor 编辑器的对象
    */
   createMenu() {
-    this.$menuTem = $('<div class="xe-menu"></div>');
+    this.$menuTem = $(`<div id="xe-menu${this.editor.uid}" class="xe-menu"></div>`);
     this.$editor.append(this.$menuTem);
   }
   /**
@@ -46,7 +46,7 @@ const XMenu = class {
       tems.push($tem);
       this.btns.push(menuBtn);
     });
-    $('.xe-menu').append(tems);
+    $(`#xe-menu${this.editor.uid}`).append(tems);
 
     this.btns.forEach((btn) => {
       btn.bind();

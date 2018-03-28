@@ -1,13 +1,15 @@
-## Version [1.2.4](https://github.com/iq9891/xEditor/compare/v1.2.3...v1.2.4) (2018-03-01)
+# Version [1.3.0](https://github.com/iq9891/xEditor/compare/v1.2.3...v1.3.0) (2018-03-28)
 
 
 ### feature
 
 * add changelog ([638e040](https://github.com/iq9891/xEditor/commit/638e040)) (李梦龙)
+* add setInsertHtml replace setHtml ([ceef546](https://github.com/iq9891/xEditor/commit/ceef546)) (李梦龙)
 
 ### fix
 
 * Adding multiple editor menus on the page many times ([c0e7676](https://github.com/iq9891/xEditor/commit/c0e7676)) (李梦龙)
+* edit changelog ([f6a14b5](https://github.com/iq9891/xEditor/commit/f6a14b5)) (李梦龙)
 * edit readme ([00edbc8](https://github.com/iq9891/xEditor/commit/00edbc8)) (李梦龙)
 
 

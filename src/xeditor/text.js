@@ -43,7 +43,15 @@ const XText = class {
   * 新建一行 <p><br/></p>
   * @param {String} html 内容
   */
-  setHtml(html = '') {
+  setHtml(html = '<p><br/></p>') {
+    this.$text.html(html);
+    this.cursorEnd();
+  }
+  /**
+  * 新建一行 <p><br/></p>
+  * @param {String} html 内容
+  */
+  setInertHtml(html = '') {
     if (html) {
       this.$text.append($(html));
     } else {

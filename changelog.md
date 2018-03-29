@@ -1,3 +1,13 @@
+## Version [1.3.1](https://github.com/iq9891/xEditor/compare/v1.3.0...v1.3.1) (2018-03-29)
+
+
+### fix
+
+* edit changelog ([a6a21fb](https://github.com/iq9891/xEditor/commit/a6a21fb)) (李梦龙)
+* setHtml error ([bab4b45](https://github.com/iq9891/xEditor/commit/bab4b45)) (李梦龙)
+
+
+
 # Version [1.3.0](https://github.com/iq9891/xEditor/compare/v1.2.3...v1.3.0) (2018-03-28)
 
 

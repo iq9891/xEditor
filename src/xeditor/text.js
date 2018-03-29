@@ -85,7 +85,7 @@ const XText = class {
     const { $text } = this;
     const $last = $text.children().last();
     let range = null;
-    if (window.getSelection) {
+    if (window.getSelection && $last.length) {
       $last[0].focus();
       range = window.getSelection();
       range.selectAllChildren($last[0]);

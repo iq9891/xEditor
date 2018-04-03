@@ -78,7 +78,10 @@ class XMenuVideo extends Base {
     // 插入视频
     this.$btn = $(`#xe-dialog-btn${uid}`).on('click', () => {
       let val = $video.val();
-      val = val.replace(/(width|height)="(\d+)"/g, '');
+      // 删除宽高
+      val = val.replace(/(width|height)="?(\d+)"?/g, '');
+      // 替换 https
+      val = val.replace(/http:\/\//g, 'https://');
       // 恢复选区，不然添加不上
       selection.restoreSelection();
       text.handle('insertHTML', val);

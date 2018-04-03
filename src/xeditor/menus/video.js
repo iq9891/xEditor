@@ -77,7 +77,8 @@ class XMenuVideo extends Base {
     // <iframe frameborder="0" width="640" height="498" src="https://v.qq.com/iframe/player.html?vid=f0024uul5px&tiny=0&auto=0" allowfullscreen></iframe>
     // 插入视频
     this.$btn = $(`#xe-dialog-btn${uid}`).on('click', () => {
-      const val = $video.val();
+      let val = $video.val();
+      val = val.replace(/(width|height)="(\d+)"/g, '');
       // 恢复选区，不然添加不上
       selection.restoreSelection();
       text.handle('insertHTML', val);

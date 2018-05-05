@@ -110,4 +110,9 @@ export default {
     drop: '释放鼠标', // 松手之后
     enter: '将文件拖拽到此区域', // 进入区域之前
   },
+  name: {
+    prefix: '',
+    menu: '',
+    wrap: '',
+  },
 };

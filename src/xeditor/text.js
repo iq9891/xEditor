@@ -18,7 +18,9 @@ const XText = class {
   }
 
   create() {
-    this.$tem = $(`<div id="xe-wrap${this.editor.uid}" class="xe-text-wrap">
+    const { prefix, wrap } = this.cfg.name;
+
+    this.$tem = $(`<div id="xe-wrap${this.editor.uid}" class="xe-text-wrap${wrap ? ` ${prefix}${wrap}` : ''}">
         <div id="xe-text${this.editor.uid}" contenteditable="true" class="xe-text"></div>
         </div>`);
     this.$editor.append(this.$tem);

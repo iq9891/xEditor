@@ -16,6 +16,7 @@
     background: $bg-main;
     height: calc(100% - 35px);
     width: calc(100% - 2px);
+    box-sizing: content-box;
   }
 
   &-link {

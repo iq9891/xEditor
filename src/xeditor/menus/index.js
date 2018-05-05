@@ -30,7 +30,8 @@ const XMenu = class {
    * @param {Object} editor 编辑器的对象
    */
   createMenu() {
-    this.$menuTem = $(`<div id="xe-menu${this.editor.uid}" class="xe-menu"></div>`);
+    const { prefix, menu } = this.cfg.name;
+    this.$menuTem = $(`<div id="xe-menu${this.editor.uid}" class="xe-menu${menu ? ` ${prefix}${menu}` : ''}"></div>`);
     this.$editor.append(this.$menuTem);
   }
   /**

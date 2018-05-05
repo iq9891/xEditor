@@ -1,3 +1,30 @@
+# Version [1.4.0](https://github.com/iq9891/xEditor/compare/v1.3.3...v1.4.0) (2018-05-05)
+
+
+
+
+## Version [1.3.3](https://github.com/iq9891/xEditor/compare/v1.3.2...v1.3.3) (2018-04-03)
+
+
+### hotfix
+
+* video style in iframe v2 ([3b0f1d7](https://github.com/iq9891/xEditor/commit/3b0f1d7)) (李梦龙)
+
+
+
+## Version [1.3.2](https://github.com/iq9891/xEditor/compare/v1.3.1...v1.3.2) (2018-04-03)
+
+
+### fix
+
+* edit 1.3.1 changelog ([3758787](https://github.com/iq9891/xEditor/commit/3758787)) (李梦龙)
+
+### hotfix
+
+* video style in iframe ([9e7fb43](https://github.com/iq9891/xEditor/commit/9e7fb43)) (李梦龙)
+
+
+
 ## Version [1.3.1](https://github.com/iq9891/xEditor/compare/v1.3.0...v1.3.1) (2018-03-29)
 
 

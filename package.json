@@ -1,6 +1,6 @@
 {
   "name": "xeditor",
-  "version": "1.3.3",
+  "version": "1.4.0",
   "description": "Web富文本编辑器",
   "main": "dist/xeditor.js",
   "unpkg": "dist/xeditor.js",

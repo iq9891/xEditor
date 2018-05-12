@@ -1,19 +1,20 @@
+## Version [1.4.1](https://github.com/iq9891/xEditor/compare/v1.4.0...v1.4.1) (2018-05-12)
+
+* fix($name): wrong method name
+
 # Version [1.4.0](https://github.com/iq9891/xEditor/compare/v1.3.3...v1.4.0) (2018-05-05)
 
-
-
+* feat($name): class name can be configured
 
 ## Version [1.3.3](https://github.com/iq9891/xEditor/compare/v1.3.2...v1.3.3) (2018-04-03)
 
+* fix($name): wrong method namehotfix: video style in iframe v2
 
 ### hotfix
 
 * video style in iframe v2 ([3b0f1d7](https://github.com/iq9891/xEditor/commit/3b0f1d7)) (李梦龙)
 
-
-
 ## Version [1.3.2](https://github.com/iq9891/xEditor/compare/v1.3.1...v1.3.2) (2018-04-03)
-
 
 ### fix
 
@@ -23,10 +24,7 @@
 
 * video style in iframe ([9e7fb43](https://github.com/iq9891/xEditor/commit/9e7fb43)) (李梦龙)
 
-
-
 ## Version [1.3.1](https://github.com/iq9891/xEditor/compare/v1.3.0...v1.3.1) (2018-03-29)
-
 
 ### fix
 
@@ -198,6 +196,3 @@
 ### feature
 
 * create package.json ([8fe5724](https://github.com/iq9891/xEditor/commit/8fe5724)) (李梦龙)
-
-
-

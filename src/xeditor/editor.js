@@ -44,7 +44,7 @@ const XEditor = class {
     this.selection = new Selection(this);
     // 修复之前的内容
     if (this.childrens.length > 0) {
-      this.setInertHtml();
+      this.setInsertHtml();
     } else {
       // 新建一行
       this.text.newline();
@@ -106,7 +106,7 @@ const XEditor = class {
   * @param {Object} html 内容
   */
   setInsertHtml(html = '') {
-    this.text.setInertHtml(html);
+    this.text.setInsertHtml(html);
   }
   /**
   * 设置里面内容

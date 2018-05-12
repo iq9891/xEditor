@@ -53,7 +53,7 @@ const XText = class {
   * 新建一行 <p><br/></p>
   * @param {String} html 内容
   */
-  setInertHtml(html = '') {
+  setInsertHtml(html = '') {
     if (html) {
       this.$text.append($(html));
     } else {

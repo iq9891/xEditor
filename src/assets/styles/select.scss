@@ -3,6 +3,17 @@
   position: relative;
   font-size: 12px;
 
+  &-disable {
+    & .xe-select-btn,
+    & .xe-select-btn-font {
+      cursor: no-drop;
+    }
+
+    & .xe-select-btn-arrow {
+      border-top-color: $disable;
+    }
+  }
+
   &-btn {
     padding: 8px 24px 8px 8px;
     text-decoration: none;
@@ -34,6 +45,7 @@
       position: absolute;
       right: 8px;
       top: 14px;
+      transition: border-top-color 0.5s;
 
       &-disable {
         border-top-color: $icon-color;

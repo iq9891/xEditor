@@ -228,11 +228,11 @@ class XMenuImage extends Base {
   // 是否是选中
   isActive() {
     const { type, editor } = this;
-    const $item = $(`#xe-${type}${editor.uid} .xe-icon-${type}`);
+    const $item = $(`#xe-${type}${editor.uid}`);
     if (this.$selectedImg) {
-      $item.addClass(`xe-icon-${type}-active`);
+      $item.addClass('xe-menu-link-active');
     } else {
-      $item.removeClass(`xe-icon-${type}-active`);
+      $item.removeClass('xe-menu-link-active');
     }
   }
 }

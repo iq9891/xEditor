@@ -1,5 +1,6 @@
 // XDom 主类
 import $ from '../dom';
+import svgFn from '../tools/svg';
 /**
 * XMenuCode 对象
 * @example
@@ -24,9 +25,8 @@ const XMenuCode = class {
   create() {
     const { cfg, type, editor } = this;
     const { lang } = cfg;
-    this.$tem = $(`<a id="xe-${type}${editor.uid}" href="javascript:void('${lang[type]}');" title="${lang[type]}" class="xe-menu-link">
-      <i class="xe-icon xe-icon-${type}"></i>
-    </a>`);
+    this.$tem = $(`<a id="xe-${type}${editor.uid}" href="javascript:void('${lang[type]}');" title="${lang[type]}" class="xe-menu-link"><?xml version="1.0" encoding="UTF-8"?></a>`);
+    svgFn(this.$tem, type);
   }
 
   bind() {
@@ -58,11 +58,11 @@ const XMenuCode = class {
   // 是否是源代码
   isActive() {
     const { type, editor } = this;
-    const $item = $(`#xe-${type}${editor.uid} .xe-icon-${type}`);
+    const $item = $(`#xe-${type}${editor.uid}`);
     if (editor.code) {
-      $item.addClass(`xe-icon-${type}-active`);
+      $item.addClass('xe-menu-link-active');
     } else {
-      $item.removeClass(`xe-icon-${type}-active`);
+      $item.removeClass('xe-menu-link-active');
     }
   }
 };

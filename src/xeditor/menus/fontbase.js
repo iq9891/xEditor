@@ -142,17 +142,6 @@ const XMenuFont = class {
       this.$font.html(placeholder);
     }
   }
-  // 禁用
-  isDisable() {
-    const { editor } = this;
-    if (editor.code) {
-      this.$font.addClass('xe-select-btn-font-disable');
-      this.$arrow.addClass('xe-select-btn-arrow-disable');
-    } else {
-      this.$font.removeClass('xe-select-btn-font-disable');
-      this.$arrow.removeClass('xe-select-btn-arrow-disable');
-    }
-  }
 };
 /**
  * XMenuFont 模块.

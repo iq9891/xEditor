@@ -156,12 +156,12 @@ class XMenuLink extends Base {
     const getSelectElem = selection.getSelectionContainerElem();
     if (getSelectElem && getSelectElem.length) {
       const selectElem = getSelectElem[0];
-      const $elem = $(`#xe-${type}${uid} .xe-icon-${type}`);
+      const $elem = $(`#xe-${type}${uid}`);
 
       if (selectElem.tagName === 'A') {
-        $elem.addClass(`xe-icon-${type}-active`);
+        $elem.addClass('xe-menu-link-active');
       } else {
-        $elem.removeClass(`xe-icon-${type}-active`);
+        $elem.removeClass('xe-menu-link-active');
       }
     }
   }

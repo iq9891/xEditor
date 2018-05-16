@@ -24,8 +24,27 @@
     display: flex;
     margin: 8px;
 
+    & g {
+      transition: fill 0.5s;
+    }
+
+    &:hover g {
+      fill: $blue;
+    }
+
     &-disable {
       cursor: no-drop;
+
+      & g,
+      &:hover g {
+        fill: $disable;
+      }
+    }
+
+    &-active g,
+    &-active:hover g,
+    &:active g {
+      fill: $blue;
     }
 
     &-font {

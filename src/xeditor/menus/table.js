@@ -290,15 +290,15 @@ class XMenuTable extends Base {
   isActive() {
     const { type, editor } = this;
     const { selection } = this.editor;
-    const $item = $(`#xe-${type}${editor.uid} .xe-icon-${type}`);
+    const $item = $(`#xe-${type}${editor.uid}`);
 
     const $elem = selection.getSelectionContainerElem(selection.getRange());
 
     if ($elem[0].tagName === 'TD' || $elem[0].tagName === 'TH') {
-      $item.addClass(`xe-icon-${type}-active`);
+      $item.addClass('xe-menu-link-active');
       this.$elem = $elem;
     } else {
-      $item.removeClass(`xe-icon-${type}-active`);
+      $item.removeClass('xe-menu-link-active');
       this.$elem = null;
     }
   }

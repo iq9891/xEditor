@@ -2,6 +2,7 @@
 import $ from '../dom';
 import { getElementLeft, getElementTop } from '../tools/el';
 import color from '../tools/color';
+import svgFn from '../tools/svg';
 
 // 小圆点的固定宽高边框阴影
 const dot = 5;
@@ -56,9 +57,8 @@ const XMenuColorBase = class {
   create() {
     const { cfg, type, editor } = this;
     const { lang } = cfg;
-    this.$tem = $(`<a id="xe-${type}${editor.uid}" href="javascript:void('${lang[type]}');" title="${lang[type]}" class="xe-menu-link xe-menu-link-font">
-      <i id="xe-icon-${type}${editor.uid}" class="xe-icon xe-icon-${type}">A</i>
-    </a>`);
+    this.$tem = $(`<a id="xe-${type}${editor.uid}" href="javascript:void('${lang[type]}');" title="${lang[type]}" class="xe-menu-link xe-menu-link-font"><?xml version="1.0" encoding="UTF-8"?></a>`);
+    svgFn(this.$tem, type);
   }
 
   bind() {
@@ -202,7 +202,7 @@ const XMenuColorBase = class {
     });
     this.$hue = $(`#xe-dialog-hue${uid}`);
 
-    this.$icon = $(`#xe-icon-${this.type}${uid}`);
+    this.$link = $(`#xe-${this.type}${uid} g`);
 
     this.someEvent();
     this.setRgbVal();
@@ -441,14 +441,14 @@ const XMenuColorBase = class {
     const { selection, uid } = this.editor;
     const $rang = selection.getSelectionContainerElem(selection.getRange());
 
-    if (this.$icon && $rang) {
+    if (this.$link && $rang) {
       if (this.type === 'backcolor') {
         const color = this.getBackColor($rang);
-        this.$icon.css('background', /rgba/.test(color) ? '#666' : color);
+        this.$link.css('fill', /rgba/.test(color) ? '#666' : color);
         ;
       } else {
         const color = $rang.css('color');
-        this.$icon.css('color', /rgba/.test(color) ? '#666' : color);
+        this.$link.css('fill', /rgba/.test(color) ? '#666' : color);
       }
     }
   }
@@ -468,16 +468,6 @@ const XMenuColorBase = class {
     }
 
     return backColor;
-  }
-  // 禁用
-  isDisable() {
-    const { type, editor } = this;
-    const $item = $(`#xe-${type}${editor.uid} .xe-icon-${type}`);
-    if (editor.code) {
-      $item.addClass(`xe-icon-${type}-disable`);
-    } else {
-      $item.removeClass(`xe-icon-${type}-disable`);
-    }
   }
 };
 /**

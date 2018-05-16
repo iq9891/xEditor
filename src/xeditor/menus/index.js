@@ -114,17 +114,15 @@ const XMenu = class {
   }
   // 设置|取消禁用状态
   testDisable() {
-    this.btns.forEach((btn) => {
-      if (btn.isDisable) {
-        btn.isDisable();
-      }
-    });
     const $link = $('.xe-menu-link');
+    const $select = $('.xe-select');
     if (this.editor.code) {
       $link.addClass('xe-menu-link-disable');
+      $select.addClass('xe-select-disable');
       $('#xe-code1').removeClass('xe-menu-link-disable');
     } else {
       $link.removeClass('xe-menu-link-disable');
+      $select.removeClass('xe-select-disable');
     }
   }
   // 删除

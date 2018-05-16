@@ -66,7 +66,7 @@ const XEditor = class {
    */
   config(cfg) {
     Object.keys(cfg).forEach((conf) => {
-      if (typeof cfg[conf] === 'object' && !Array.isArray(cfg[conf])) {
+      if (this.cfg[conf] && typeof cfg[conf] === 'object' && !Array.isArray(cfg[conf])) {
         // 继承子级
         Object.keys(cfg[conf]).forEach((confChild) => {
           if (typeof cfg[conf][confChild] === 'object' && !Array.isArray(cfg[conf][confChild])) {
@@ -83,7 +83,7 @@ const XEditor = class {
             this.cfg[conf][confChild] = cfg[conf][confChild];
           }
         });
-      } else if (Array.isArray(cfg[conf])) {
+      } else if (this.cfg[conf] && Array.isArray(cfg[conf])) {
         // 不为空
         if (cfg[conf].length > 0) {
           this.cfg[conf] = cfg[conf].slice();

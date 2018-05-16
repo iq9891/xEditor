@@ -30,9 +30,9 @@ class XMenuVideo extends Base {
     this.remove();
 
     const {
-      uid, cfg, selection, text,
+      uid, cfg, selection, text, menu,
     } = this.editor;
-    const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog"></div>`);
+    const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog" style="top: ${menu.$menu.css('height')}"></div>`);
     this.$editor.append($dialog);
     this.$setVideoDialog = $(`#xe-dialog${uid}`);
 

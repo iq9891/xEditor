@@ -62,9 +62,6 @@ const XMenuColorBase = class {
   }
 
   bind() {
-    // this.panel();
-    // this.setPanelColor('#1996f9');
-
     const { type, editor } = this;
     $(`#xe-${type}${editor.uid}`).on('click', () => {
       const { selection, code } = editor;
@@ -75,16 +72,27 @@ const XMenuColorBase = class {
       // 只有选中了才有效果
       if (!selection.isSelectionEmpty()) {
         this.panel();
+        this.setColor();
       }
     });
   }
+  // 设置当前颜色
+  setColor() {
+    const { selection } = this.editor;
+    const $range = selection.getSelectionContainerElem(selection.getRange());
+    if ($range) {
+      const oldColor = $range.css(this.type === 'backcolor' ? 'background' : 'color');
+      console.log(oldColor, 'oldColor');
+      this.setOldColor(oldColor);
+    }
+  }
   // 创建颜色面板
   panel() {
-    const { uid, cfg } = this.editor;
+    const { uid, cfg, menu } = this.editor;
 
     this.remove();
 
-    const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog"></div>`);
+    const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog" style="top: ${menu.$menu.css('height')}"></div>`);
     this.$editor.append($dialog);
     $colorDialog = $(`#xe-dialog${uid}`);
 
@@ -190,16 +198,7 @@ const XMenuColorBase = class {
     });
     this.$new = $(`#xe-dialog-new${uid}`);
     this.$old = $(`#xe-dialog-old${uid}`).on('click', () => {
-      const rgbMatch = this.oldColor.match(/rgb\((.+)\)/);
-      if (rgbMatch[1]) {
-        const rgb = rgbMatch[1].split(',');
-        const hex = color.rgbToHex({
-          r: rgb[0] - 0,
-          g: rgb[1] - 0,
-          b: rgb[2] - 0,
-        });
-        this.setPanelColor(`#${hex}`);
-      }
+      this.setOldColor(this.oldColor);
     });
     this.$hue = $(`#xe-dialog-hue${uid}`);
 
@@ -208,6 +207,18 @@ const XMenuColorBase = class {
     this.someEvent();
     this.setRgbVal();
   } // end panel
+  setOldColor(value) {
+    const rgbMatch = value.match(/rgba?\((.+)\)/);
+    if (rgbMatch[1]) {
+      const rgb = rgbMatch[1].split(',');
+      const hex = color.rgbToHex({
+        r: rgb[0] - 0,
+        g: rgb[1] - 0,
+        b: rgb[2] - 0,
+      });
+      this.setPanelColor(`#${hex}`);
+    }
+  }
   // 输入色值
   writeColor(type = 'rgb') {
     const r = this.$r.val() - 0;
@@ -430,7 +441,7 @@ const XMenuColorBase = class {
     const { selection, uid } = this.editor;
     const $rang = selection.getSelectionContainerElem(selection.getRange());
 
-    if (this.$icon) {
+    if (this.$icon && $rang) {
       if (this.type === 'backcolor') {
         const color = this.getBackColor($rang);
         this.$icon.css('background', /rgba/.test(color) ? '#666' : color);
@@ -447,12 +458,15 @@ const XMenuColorBase = class {
     const getback = ($rang) => {
       const $parent = $rang.parent();
       backColor = $rang.css('background-color');
-      console.log(123, $parent[0].tagName, backColor);
       if (/rgba/.test(backColor) && $parent.length > 0 && $parent[0].tagName !== 'P' && $rang[0].tagName !== 'P') {
         getback($parent);
       }
     }
-    getback($rang);
+
+    if ($rang) {
+      getback($rang);
+    }
+
     return backColor;
   }
   // 禁用

@@ -71,34 +71,42 @@ class XMenuImage extends Base {
       });
     }, 0);
   }
-  // 修改
-  modifyImageDialog() {
+  dialogOrigin() {
     this.removeDialog();
 
-    this.editor.menu.status = 'modify';
-    const { uid, cfg } = this.editor;
-    const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog"></div>`);
+    const {
+      uid, menu,
+    } = this.editor;
+
+    const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog" style="top: ${menu.$menu.css('height')}"></div>`);
     this.$editor.append($dialog);
-    this.$setImageDialog = $(`#xe-dialog${uid}`);
+    this.$dialog = $(`#xe-dialog${uid}`);
 
     const $close = $(`<a id="xe-dialog-close${uid}" href="javascript:;" class="xe-dialog-close-btn">
       <i class="xe-dialog-close"></i>
     </a>`);
-    this.$setImageDialog.append($close);
+    this.$dialog.append($close);
     $(`#xe-dialog-close${uid}`).on('click', () => {
       this.removeDialog();
     });
 
     const $header = $(`<div id="xe-dialog-header${uid}" class="xe-dialog-header"></div>`);
-    this.$setImageDialog.append($header);
+    this.$dialog.append($header);
     this.$header = $(`#xe-dialog-header${uid}`);
+
+    const $box = $(`<div id="xe-dialog-box${uid}" class="xe-dialog-box"></div>`);
+    this.$dialog.append($box);
+    this.$box = $(`#xe-dialog-box${uid}`);
+  }
+  // 修改
+  modifyImageDialog() {
+    this.editor.menu.status = 'modify';
+    const { uid, cfg } = this.editor;
+
+    this.dialogOrigin();
 
     const $upload = $('<a href="javascript:;" class="xe-dialog-title xe-dialog-title-active">图片宽度</a>');
     this.$header.append($upload);
-
-    const $box = $(`<div id="xe-dialog-box${uid}" class="xe-dialog-box"></div>`);
-    this.$setImageDialog.append($box);
-    this.$box = $(`#xe-dialog-box${uid}`);
 
     const $contentUrl = $(`<div id="xe-dialog-content-url2${uid}" class="xe-dialog-content xe-dialog-content-url">
       <div id="xe-dialog-url-box${uid}" class="xe-dialog-url-box">
@@ -146,21 +154,8 @@ class XMenuImage extends Base {
 
     this.editor.menu.status = 'new';
     const { uid, cfg, text } = this.editor;
-    const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog"></div>`);
-    this.$editor.append($dialog);
-    this.$dialog = $(`#xe-dialog${uid}`);
 
-    const $close = $(`<a id="xe-dialog-close${uid}" href="javascript:;" class="xe-dialog-close-btn">
-      <i class="xe-dialog-close"></i>
-    </a>`);
-    this.$dialog.append($close);
-    $(`#xe-dialog-close${uid}`).on('click', () => {
-      this.removeDialog();
-    });
-
-    const $header = $(`<div id="xe-dialog-header${uid}" class="xe-dialog-header"></div>`);
-    this.$dialog.append($header);
-    this.$header = $(`#xe-dialog-header${uid}`);
+    this.dialogOrigin();
 
     const $upload = $('<a href="javascript:;" class="xe-dialog-title">上传</a>');
     this.$header.append($upload);
@@ -171,10 +166,6 @@ class XMenuImage extends Base {
       this.now = $(e.target).index();
       this.tab(this.now);
     });
-
-    const $box = $(`<div id="xe-dialog-box${uid}" class="xe-dialog-box"></div>`);
-    this.$dialog.append($box);
-    this.$box = $(`#xe-dialog-box${uid}`);
 
     const $contentUpload = $(`<div id="xe-dialog-content-upload${uid}" class="xe-dialog-content xe-dialog-content-upload">
       <div id="xe-dialog-upload${uid}" class="xe-dialog-upload"></div>

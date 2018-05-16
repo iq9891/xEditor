@@ -36,98 +36,49 @@ class XMenuTable extends Base {
     this.remove();
 
     const {
-      uid, cfg, selection,
+      uid,
     } = this.editor;
 
     this.$text = $(`#xe-text${uid}`);
 
-    const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog xe-dialog-table-dialog"></div>`);
-    this.$editor.append($dialog);
-    this.$setTableDialog = $(`#xe-dialog${uid}`);
+    this.dialogOrigin('table');
 
-    const $close = $(`<a id="xe-dialog-close${uid}" href="javascript:;" class="xe-dialog-close-btn">
-      <i class="xe-dialog-close"></i>
-    </a>`);
-    this.$setTableDialog.append($close);
-    $(`#xe-dialog-close${uid}`).on('click', () => {
-      this.remove();
-    });
-
-    const $header = $(`<div id="xe-dialog-header${uid}" class="xe-dialog-header"></div>`);
-    this.$setTableDialog.append($header);
-    this.$header = $(`#xe-dialog-header${uid}`);
-
-    const $tableBtn = $(`<a href="javascript:;" class="xe-dialog-title xe-dialog-title-active">${cfg.lang[this.type]}</a>`);
-    this.$header.append($tableBtn);
-
-    const $box = $(`<div id="xe-dialog-box${uid}" class="xe-dialog-box"></div>`);
-    this.$setTableDialog.append($box);
-    this.$box = $(`#xe-dialog-box${uid}`);
-
-    const $contentTable = $(`<div id="xe-dialog-content-table${uid}" class="xe-dialog-content xe-dialog-table-content">
-      <button id="xe-dialog-addrow${uid}" class="xe-button xe-dialog-table-btn">增加行</button>
-    </div>`);
-    this.$box.append($contentTable);
-    this.$contentTable = $(`#xe-dialog-content-table${uid}`);
+    this.createBtn('添加行', 'addrow');
+    this.createBtn('删除行', 'delrow');
+    this.createBtn('添加列', 'addcol');
+    this.createBtn('删除列', 'delcol');
+    this.createBtn('删除表格', 'del');
+  }
+  /*
+   * 修改表格的时候的按钮
+   * @params btnText String must 按钮的文字
+   * @params btnName String must 按钮的 class
+   */
+  createBtn(btnText, btnName) {
+    const {
+      uid, selection,
+    } = this.editor;
     // 删除行
-    const $delrow = $(`<button id="xe-dialog-delrow${uid}" class="xe-button xe-dialog-table-btn">删除行</button>`);
-    this.$contentTable.append($delrow);
-    // 增加列
-    const $addcol = $(`<button id="xe-dialog-addcol${uid}" class="xe-button xe-dialog-table-btn">增加列</button>`);
-    this.$contentTable.append($addcol);
-    // 删除列
-    const $delcol = $(`<button id="xe-dialog-delcol${uid}" class="xe-button xe-dialog-table-btn">删除列</button>`);
-    this.$contentTable.append($delcol);
-    // 删除表格
-    const $btn = $(`<button id="xe-dialog-del${uid}" class="xe-button xe-dialog-table-btn">删除表格</button>`);
-    this.$contentTable.append($btn);
-
-    // 添加行
-    $(`#xe-dialog-addrow${uid}`).on('click', () => {
-      // 恢复选区，不然添加不上
-      selection.restoreSelection();
-      this.addRow();
-      this.remove();
-    });
+    this.$contentTable.append($(`<button id="xe-dialog-${btnName}${uid}" class="xe-button xe-dialog-table-btn">${btnText}</button>`));
     // 删除行
-    $(`#xe-dialog-delrow${uid}`).on('click', () => {
+    $(`#xe-dialog-${btnName}${uid}`).on('click', () => {
       // 恢复选区，不然添加不上
       selection.restoreSelection();
-      this.removeRow();
-      this.remove();
-    });
-    // 添加列
-    $(`#xe-dialog-addcol${uid}`).on('click', () => {
-      // 恢复选区，不然添加不上
-      selection.restoreSelection();
-      this.addCol();
-      this.remove();
-    });
-    // 删除列
-    $(`#xe-dialog-delcol${uid}`).on('click', () => {
-      // 恢复选区，不然添加不上
-      selection.restoreSelection();
-      this.removeCol();
-      this.remove();
-    });
-
-    // 删除表格
-    $(`#xe-dialog-del${uid}`).on('click', () => {
-      // 恢复选区，不然添加不上
-      selection.restoreSelection();
-      this.removeTable();
+      this[btnName]();
       this.remove();
     });
   }
-  // 创建弹出框
-  createDialog() {
+
+  dialogOrigin(name) {
     this.remove();
 
     const {
-      uid, cfg, selection,
+      uid,
+      cfg,
+      menu,
     } = this.editor;
 
-    const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog"></div>`);
+    const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog${name ? ' xe-dialog-table-dialog' : ''}" style="top: ${menu.$menu.css('height')}"></div>`);
     this.$editor.append($dialog);
     this.$setTableDialog = $(`#xe-dialog${uid}`);
 
@@ -150,11 +101,25 @@ class XMenuTable extends Base {
     this.$setTableDialog.append($box);
     this.$box = $(`#xe-dialog-box${uid}`);
 
-    const $contentTable = $(`<div id="xe-dialog-content-table${uid}" class="xe-dialog-content xe-dialog-content-url">
-      <div id="xe-dialog-table-row${uid}">行：</div>
-    </div>`);
+    const tableName = name ? ' xe-dialog-table-content' : ' xe-dialog-content-url';
+
+    const $contentTable = $(`<div id="xe-dialog-content-table${uid}" class="xe-dialog-content${tableName}"></div>`);
     this.$box.append($contentTable);
     this.$contentTable = $(`#xe-dialog-content-table${uid}`);
+
+    if (!name) {
+      const $row = $(`<div id="xe-dialog-table-row${uid}">行：</div>`);
+      this.$contentTable.append($row);
+    }
+  }
+  // 创建弹出框
+  createDialog() {
+    const {
+      uid, selection,
+    } = this.editor;
+
+    this.dialogOrigin();
+
     this.$rowBox = $(`#xe-dialog-table-row${uid}`);
 
     const $rowTem = $(`<input id="xe-dialog-row${uid}" type="number" class="xe-input xe-dialog-table" value="3">`);
@@ -234,7 +199,7 @@ class XMenuTable extends Base {
     return result;
   }
   // 添加行
-  addRow() {
+  addrow() {
     const now = this.getTd();
     const trs = this.$elem.parent().parent()[0].children;
 
@@ -252,20 +217,24 @@ class XMenuTable extends Base {
     }
   }
   // 删除行
-  removeRow() {
+  delrow() {
     const now = this.getTd();
     const trs = this.$elem.parent().parent()[0].children;
-
-    for (let trIndex = 0, trLen = trs.length; trIndex < trLen; trIndex++) {
-      if (trIndex === now.tr.index) {
-        $(trs[trIndex]).remove();
-        this.reset();
-        break;
+    // 一行的时候直接删除表格
+    if (trs.length < 2) {
+      this.del();
+    } else {
+      for (let trIndex = 0, trLen = trs.length; trIndex < trLen; trIndex++) {
+        if (trIndex === now.tr.index) {
+          $(trs[trIndex]).remove();
+          this.reset();
+          break;
+        }
       }
     }
   }
   // 添加列
-  addCol() {
+  addcol() {
     const now = this.getTd();
     const trs = this.$elem.parent().parent()[0].children;
 
@@ -280,24 +249,34 @@ class XMenuTable extends Base {
     }
   }
   // 删除列
-  removeCol() {
+  delcol() {
     const now = this.getTd();
     const trs = this.$elem.parent().parent()[0].children;
+    let oneCol = false;
 
     for (let trIndex = 0, trLen = trs.length; trIndex < trLen; trIndex++) {
       const tds = trs[trIndex].children;
-      for (let tdIndex = 0, tdLen = tds.length; tdIndex < tdLen; tdIndex++) {
-        if (tdIndex === now.td.index) {
-          $(tds[tdIndex]).remove();
-          this.reset();
-          break;
+      if (tds.length < 2) {
+        oneCol = true;
+        break;
+      } else {
+        for (let tdIndex = 0, tdLen = tds.length; tdIndex < tdLen; tdIndex++) {
+          if (tdIndex === now.td.index) {
+            $(tds[tdIndex]).remove();
+            this.reset();
+            break;
+          }
         }
       }
     }
+    if (oneCol) {
+      this.del();
+    }
   }
   // 删除表格
-  removeTable() {
+  del() {
     this.$elem.parent().parent().parent().remove();
+    this.isActive();
   }
   // 删除
   remove() {

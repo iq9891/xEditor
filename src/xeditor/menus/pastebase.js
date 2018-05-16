@@ -34,10 +34,10 @@ class XMenuPasteBase extends Base {
     this.remove();
 
     const {
-      uid, cfg, selection,
+      uid, cfg, selection, menu,
     } = this.editor;
 
-    const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog"></div>`);
+    const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog" style="top: ${menu.$menu.css('height')}"></div>`);
     this.$editor.append($dialog);
     this.$setLinkDialog = $(`#xe-dialog${uid}`);
 

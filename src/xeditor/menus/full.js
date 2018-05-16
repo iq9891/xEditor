@@ -16,7 +16,7 @@ const XMenuFull = class {
     this.$editor = editor.$editor;
     this.cfg = editor.cfg;
     this.type = 'full';
-    this.full = null;
+    this.full = false;
     this.style = null;
     // 初始化
     this.create();
@@ -36,8 +36,18 @@ const XMenuFull = class {
   }
 
   bind() {
-    const { type, editor } = this;
+    const { type, cfg, editor } = this;
+    const {
+      before, after, full, small,
+    } = cfg.full || {
+      before() {},
+      after() {},
+      full() {},
+      small() {},
+    };
+
     $(`#xe-${type}${editor.uid}`).on('click', () => {
+      before(this.full);
       if (this.full) {
         this.reset();
       } else {
@@ -46,6 +56,12 @@ const XMenuFull = class {
         this.createCode();
       }
       this.full = !this.full;
+      after(this.full);
+      if (this.full) {
+        full(this.full);
+      } else {
+        small(this.full);
+      }
       this.isActive();
     });
   }

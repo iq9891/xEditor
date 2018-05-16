@@ -30,9 +30,13 @@ class XMenuLink extends Base {
     this.remove();
 
     const {
-      uid, cfg, selection,
+      uid,
+      cfg,
+      selection,
+      menu,
     } = this.editor;
-    const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog"></div>`);
+
+    const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog" style="top: ${menu.$menu.css('height')}"></div>`);
     this.$editor.append($dialog);
     this.$setLinkDialog = $(`#xe-dialog${uid}`);
 
@@ -127,11 +131,14 @@ class XMenuLink extends Base {
     let text = selection.getSelectionText();
 
     if (!text) {
-      const selectElem = selection.getSelectionContainerElem()[0];
+      const getSelectElem = selection.getSelectionContainerElem();
+      if (getSelectElem && getSelectElem.length) {
+        const selectElem = getSelectElem[0];
 
-      if (selectElem.tagName === 'A') {
-        this.$elem = $(selectElem);
-        text = selectElem.innerHTML;
+        if (selectElem.tagName === 'A') {
+          this.$elem = $(selectElem);
+          text = selectElem.innerHTML;
+        }
       }
     }
 
@@ -146,13 +153,16 @@ class XMenuLink extends Base {
   isActive() {
     const { editor, type } = this;
     const { selection, uid } = editor;
-    const selectElem = selection.getSelectionContainerElem()[0];
-    const $elem = $(`#xe-${type}${uid} .xe-icon-${type}`);
+    const getSelectElem = selection.getSelectionContainerElem();
+    if (getSelectElem && getSelectElem.length) {
+      const selectElem = getSelectElem[0];
+      const $elem = $(`#xe-${type}${uid} .xe-icon-${type}`);
 
-    if (selectElem.tagName === 'A') {
-      $elem.addClass(`xe-icon-${type}-active`);
-    } else {
-      $elem.removeClass(`xe-icon-${type}-active`);
+      if (selectElem.tagName === 'A') {
+        $elem.addClass(`xe-icon-${type}-active`);
+      } else {
+        $elem.removeClass(`xe-icon-${type}-active`);
+      }
     }
   }
 }

@@ -1,4 +1,5 @@
 import svgPath from './svgpath';
+import cfg from '../config';
 /**
  * 输出 svg 的图片
  *
@@ -6,7 +7,10 @@ import svgPath from './svgpath';
  */
 function svg($parent, type) {
   let pathTem = '';
-  svgPath[type].forEach((path) => {
+  // 支持可配置的 svg 路径
+  const svgPathData = (cfg.svg && cfg.svg[type]) || svgPath[type];
+  // 循环添加 path
+  svgPathData.forEach((path) => {
     pathTem += `<path d="${path}"></path>`;
   });
 

@@ -219,31 +219,30 @@ const XText = class {
   }
   // 处理拖拽文件
   handleFiles(files, self) {
-    Object.keys(files).forEach((key) => {
-      const reader = new FileReader();
-      const isImage = files[key].type.indexOf('image') > -1;
-      const isText = files[key].type.indexOf('text') > -1;
-      // 如果读取的是图片
+    const reader = new FileReader();
+    const key = 0;
+    const isImage = files[key].type.indexOf('image') > -1;
+    const isText = files[key].type.indexOf('text') > -1;
+    // 如果读取的是图片
+    if (isImage) {
+      reader.readAsDataURL(files[key]);
+    } else if (isText) {
+      // 读取的是文件
+      reader.readAsText(files[key]);
+    }
+    reader.addEventListener('load', () => {
+      const { type } = self.editor.cfg.image;
+      // 如果是 图片
       if (isImage) {
-        reader.readAsDataURL(files[key]);
-      } else if (isText) {
-        // 读取的是文件
-        reader.readAsText(files[key]);
-      }
-      reader.addEventListener('load', () => {
-        const { type } = self.editor.cfg.image;
-        // 如果是 图片
-        if (isImage) {
-          if (type === 'base64') {
-            Upload.base64(files, self);
-          } else if (type === 'ajax') {
-            Upload.ajax(files, self);
-          }
-        } else if (isText) {
-          Upload.base64(files, self, 'text');
+        if (type === 'base64') {
+          Upload.base64(files, self);
+        } else if (type === 'ajax') {
+          Upload.ajax(files, self);
         }
-      }, false);
-    });
+      } else if (isText) {
+        Upload.base64(files, self, 'text');
+      }
+    }, false);
   }
   /**
   * 按钮对文字的操作，如加粗。。

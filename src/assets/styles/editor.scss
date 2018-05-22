@@ -28,4 +28,17 @@
   :-moz-placeholder { /* Firefox 18- */
     color: $title-color;
   }
+
+  & * {
+    box-sizing: content-box !important;
+  }
+
+  & strong,
+  & b {
+    font-weight: bold !important;
+  }
+
+  & i {
+    font-style: italic !important;
+  }
 }

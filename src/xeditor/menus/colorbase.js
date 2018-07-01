@@ -82,7 +82,6 @@ const XMenuColorBase = class {
     const $range = selection.getSelectionContainerElem(selection.getRange());
     if ($range) {
       const oldColor = $range.css(this.type === 'backcolor' ? 'background' : 'color');
-      console.log(oldColor, 'oldColor');
       this.setOldColor(oldColor);
     }
   }
@@ -216,7 +215,7 @@ const XMenuColorBase = class {
         g: rgb[1] - 0,
         b: rgb[2] - 0,
       });
-      this.setPanelColor(`#${hex}`);
+      this.setPanelColor(hex);
     }
   }
   // 输入色值
@@ -243,7 +242,7 @@ const XMenuColorBase = class {
       this.$r.val(rgb.r);
       this.$g.val(rgb.g);
       this.$b.val(rgb.b);
-      this.setPanelColor(`#${w}`);
+      this.setPanelColor(w);
     }
   }
   // 设置初始颜色
@@ -257,14 +256,16 @@ const XMenuColorBase = class {
 
     this.setMoveElem();
     this.setInnerElem();
+    this.setHubVal();
 
     this.rgb = color.hsbToRgb({ h: this.hsb.h, s: 100, b: 100 });
     // 主色系渲染
     this.$color.css('background-color', `#${color.rgbToHex(this.rgb)}`);
-    // 设置新颜色
-    this.$new.css('background', newColor);
     // 备份新颜色，切换颜色的时候替换旧颜色
     this.oldColor = newColor;
+    this.hex = newColor;
+    this.defaultHex = newColor;
+    this.setRgbVal();
   }
   // 确定
   sub() {

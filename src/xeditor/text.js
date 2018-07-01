@@ -11,6 +11,7 @@ const XText = class {
     this.editor = editor;
     this.$editor = editor.$editor;
     this.cfg = editor.cfg;
+    this.canDrag = false;
     // 初始化内容
     this.create();
     // 绑定事件
@@ -129,7 +130,9 @@ const XText = class {
     };
     // 按键后保存
     $textElem.on('keyup', saveRange);
-    $textElem.on('mousedown', () => {
+    $textElem.on('mousedown', (e = window.event) => {
+      // 如果不是编辑器里面的图片
+      this.canDrag = $(e.target).attr('class') !== 'xe-text-img';
       // mousedown 状态下，鼠标滑动到编辑区域外面，也需要保存选区
       $textElem.on('mouseleave', saveRange);
     });
@@ -263,7 +266,7 @@ const XText = class {
   // 创建拖拽
   createDrag() {
     const { uid } = this.editor;
-    if (!this.$drag) {
+    if (!this.$drag && this.canDrag) {
       this.$editor.append($(`<div id="xe-drag${uid}" class="xe-drag">
         <p id="xe-drag-text${uid}" class="xe-drag-text"></p>
       </div>`));
@@ -282,11 +285,13 @@ const XText = class {
   }
   // 创建拖拽
   editDragText(text = this.editor.cfg.drag.enter) {
-    if (this.$dragText && this.$dragText.length > 0) {
-      this.$dragText.html(text);
-    } else {
-      this.createDrag();
-      this.editDragText(this.editor.cfg.drag.drop);
+    if (this.canDrag) {
+      if (this.$dragText && this.$dragText.length > 0) {
+        this.$dragText.html(text);
+      } else {
+        this.createDrag();
+        this.editDragText(this.editor.cfg.drag.drop);
+      }
     }
   }
 };

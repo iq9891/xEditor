@@ -190,7 +190,9 @@ const XText = class {
   dragFn() {
     // 进入编辑器
     this.$editor.on('dragenter', (e = window.event) => {
-      this.createDrag();
+      if (e.dataTransfer.files.length) {
+        this.createDrag();
+      }
       e.stopPropagation();
       e.preventDefault();
     });
@@ -202,7 +204,9 @@ const XText = class {
     });
     // 进入内容页面
     this.$text.on('dragenter', (e = window.event) => {
-      this.editDragText(this.editor.cfg.drag.drop);
+      if (e.dataTransfer.files.length) {
+        this.editDragText(this.editor.cfg.drag.drop);
+      }
       e.stopPropagation();
       e.preventDefault();
     });
@@ -215,9 +219,10 @@ const XText = class {
     this.$text.on('drop', (e = window.event) => {
       e.stopPropagation();
       e.preventDefault();
-
-      this.handleFiles(e.dataTransfer.files, this);
-      this.removeDrag();
+      if (e.dataTransfer.files) {
+        this.handleFiles(e.dataTransfer.files, this);
+        this.removeDrag();
+      }
     }, false);
   }
   // 处理拖拽文件

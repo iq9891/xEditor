@@ -18,6 +18,7 @@ const XMenuFont = class {
     this.cfg = editor.cfg;
     this.type = type;
     this.pf = `xe-${this.type}`;
+    this.hasChinese = this.cfg.font[type].filter(font => /[^\u0000-\u00FF]/.test(font)).length > 0;
     // 初始化
     this.create();
   }
@@ -108,12 +109,18 @@ const XMenuFont = class {
     selection.restoreSelection();
     if (type === 'fontname') {
       html = $(target).html();
-      this.$font.html(html);
+      this.editor.text.handle(type, html);
     } else if (type === 'fontsize') {
-      html = $(target).index() + 1;
-      this.$font.html(cfg.font[type][html - 1]);
+      html = cfg.font[type][$(target).index()];
+      console.log(this.hasChinese, 'this.hasChinese');
+      // 如果是之前中文匹配
+      if (this.hasChinese) {
+        this.editor.text.handle(type, $(target).index() + 1);
+      } else {
+        this.editor.text.handle('insertHTML', `<span style="font-size: ${html}px">${selection.getSelectionText()}</span>`);
+      }
     }
-    this.editor.text.handle(type, html);
+    this.$font.html(html.toString());
     // 删除列表
     this.removeList();
   }
@@ -130,14 +137,15 @@ const XMenuFont = class {
       if (type === 'fontname') {
         font = $(selectFont[0]).css('font-family');
       } else if (type === 'fontsize') {
-        font = $(selectFont[0]).attr('size');
+        font = this.hasChinese ? $(selectFont[0]).attr('size') : $(selectFont[0]).css('font-size');
+        console.log($(selectFont[0]).css('font-size'), 'font');
       }
     }
 
     if (type === 'fontname' && family.some(fml => fml === font)) {
       this.$font.html(family.find(fml => fml === font));
-    } else if (type === 'fontsize' && !(/px/.test(font)) && font) {
-      this.$font.html(family[font - 1]);
+    } else if (type === 'fontsize' && (!this.hasChinese || !(/px/.test(font))) && font) {
+      this.$font.html(this.hasChinese ? family[font - 1] : font.replace(/px/, ''));
     } else {
       this.$font.html(placeholder);
     }

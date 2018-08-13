@@ -26,6 +26,7 @@ export default {
     'table', // 表格
     'video', // 插入视频
     'formatblock', // 引用
+    'redo', // 撤销
   ],
   lang: {
     backcolor: '背景颜色',
@@ -49,7 +50,6 @@ export default {
     link: '插入链接',
     paste: '普通粘贴',
     plainpaste: '粘贴为无格式文本',
-    redo: '反撤销',
     removeFormat: '删除样式',
     wordpaste: '从 MS Word 粘贴',
     table: '表格',
@@ -57,6 +57,7 @@ export default {
     undo: '撤销',
     video: '插入视频',
     formatblock: '引用',
+    redo: '反撤销',
   },
   image: {
     type: 'ajax', // 上传图片显示的类型, base64, ajax

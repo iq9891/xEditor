@@ -140,6 +140,19 @@ const XSelection = class {
       range.pasteHTML(html);
     }
   }
+  /**
+  * 自定义 deleteHTML 事件
+  */
+  delete() {
+    const range = this.getRange();
+    if (document.queryCommandSupported('delete')) {
+      // W3C
+      document.execCommand('delete');
+    } else if (range.deleteContents) {
+      // IE
+      range.deleteContents();
+    }
+  }
 };
 /**
  * XSelection 模块.

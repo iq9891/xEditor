@@ -25,6 +25,7 @@ export default {
     'wordpaste', // 从 MS Word 粘贴
     'table', // 表格
     'video', // 插入视频
+    'formatblock', // 引用
   ],
   lang: {
     backcolor: '背景颜色',
@@ -55,6 +56,7 @@ export default {
     underline: '下划线',
     undo: '撤销',
     video: '插入视频',
+    formatblock: '引用',
   },
   image: {
     type: 'ajax', // 上传图片显示的类型, base64, ajax

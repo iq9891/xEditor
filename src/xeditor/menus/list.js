@@ -21,6 +21,7 @@ import copy from './copy';
 import paste from './paste';
 import plainpaste from './plainpaste';
 import wordpaste from './wordpaste';
+import formatblock from './formatblock';
 
 const list = {};
 
@@ -47,5 +48,6 @@ list.copy = copy;
 list.paste = paste;
 list.plainpaste = plainpaste;
 list.wordpaste = wordpaste;
+list.formatblock = formatblock;
 
 export default list;

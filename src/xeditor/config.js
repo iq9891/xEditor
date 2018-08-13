@@ -29,6 +29,7 @@ export default {
     'redo', // 反撤销
     'undo', // 撤销
     'indent', // 缩进
+    'removeformat', // 清除样式
   ],
   lang: {
     backcolor: '背景颜色',
@@ -62,6 +63,7 @@ export default {
     redo: '反撤销',
     undo: '撤销',
     indent: '缩进',
+    removeformat: '清除样式',
   },
   image: {
     type: 'ajax', // 上传图片显示的类型, base64, ajax

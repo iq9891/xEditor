@@ -25,6 +25,7 @@ import formatblock from './formatblock';
 import redo from './redo';
 import undo from './undo';
 import indent from './indent';
+import removeformat from './removeformat';
 
 const list = {};
 
@@ -55,5 +56,6 @@ list.formatblock = formatblock;
 list.redo = redo;
 list.undo = undo;
 list.indent = indent;
+list.removeformat = removeformat;
 
 export default list;

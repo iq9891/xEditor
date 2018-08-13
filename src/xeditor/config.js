@@ -26,7 +26,8 @@ export default {
     'table', // 表格
     'video', // 插入视频
     'formatblock', // 引用
-    'redo', // 撤销
+    'redo', // 反撤销
+    'undo', // 撤销
   ],
   lang: {
     backcolor: '背景颜色',
@@ -58,6 +59,7 @@ export default {
     video: '插入视频',
     formatblock: '引用',
     redo: '反撤销',
+    undo: '撤销',
   },
   image: {
     type: 'ajax', // 上传图片显示的类型, base64, ajax

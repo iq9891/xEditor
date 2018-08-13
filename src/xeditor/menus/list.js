@@ -23,6 +23,7 @@ import plainpaste from './plainpaste';
 import wordpaste from './wordpaste';
 import formatblock from './formatblock';
 import redo from './redo';
+import undo from './undo';
 
 const list = {};
 
@@ -51,5 +52,6 @@ list.plainpaste = plainpaste;
 list.wordpaste = wordpaste;
 list.formatblock = formatblock;
 list.redo = redo;
+list.undo = undo;
 
 export default list;

@@ -24,6 +24,7 @@ import wordpaste from './wordpaste';
 import formatblock from './formatblock';
 import redo from './redo';
 import undo from './undo';
+import indent from './indent';
 
 const list = {};
 
@@ -53,5 +54,6 @@ list.wordpaste = wordpaste;
 list.formatblock = formatblock;
 list.redo = redo;
 list.undo = undo;
+list.indent = indent;
 
 export default list;

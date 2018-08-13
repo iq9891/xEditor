@@ -180,7 +180,7 @@ const XDom = class {
     }
     return this.forEach((elem) => {
       Object.keys(params).forEach((paramsKey) => {
-        elem.style[paramsKey] = paramsKey === 'zIndex' ? params[paramsKey] : px(params[paramsKey]);
+        elem.style[paramsKey] = paramsKey === 'zIndex' || paramsKey === 'text-indent' ? params[paramsKey] : px(params[paramsKey]);
       });
     });
   }

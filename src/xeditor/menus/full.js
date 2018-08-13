@@ -27,6 +27,10 @@ const XMenuFull = class {
     const { cfg, type, editor } = this;
     const { lang } = cfg;
     this.$tem = $(`<a id="xe-${type}${editor.uid}" href="javascript:void('${lang[type]}');" title="${lang[type]}" class="xe-menu-link"><?xml version="1.0" encoding="UTF-8"?></a>`);
+    // 如果设置参数那么就右上
+    if (this.cfg.full.type === 'righttop') {
+      this.$tem.addClass(`xe-menu-link-${this.cfg.full.type}`);
+    }
     svgFn(this.$tem, type);
   }
   // 备份原始行间样式
@@ -38,7 +42,7 @@ const XMenuFull = class {
   bind() {
     const { type, cfg, editor } = this;
     const {
-      before, after, full, small,
+      before = () => {}, after = () => {}, full = () => {}, small = () => {},
     } = cfg.full || {
       before() {},
       after() {},

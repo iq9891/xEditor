@@ -26,6 +26,7 @@ import redo from './redo';
 import undo from './undo';
 import indent from './indent';
 import removeformat from './removeformat';
+import insertunorderedlist from './insertunorderedlist';
 
 const list = {};
 
@@ -57,5 +58,6 @@ list.redo = redo;
 list.undo = undo;
 list.indent = indent;
 list.removeformat = removeformat;
+list.insertunorderedlist = insertunorderedlist;
 
 export default list;

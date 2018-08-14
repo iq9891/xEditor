@@ -19,29 +19,54 @@ class XMenuFormatblock extends Base {
   bind() {
     const { type, editor } = this;
     $(`#xe-${type}${editor.uid}`).on('click', () => {
-      const { text, selection, code } = editor;
+      const { selection, code } = editor;
       // 如果是源代码
       if (code) {
         return;
       }
-      // 如果当前没选中
-      if (selection.isSelectionEmpty()) {
-        const $selectionElem = selection.getSelectionContainerElem();
-        const $blockquote = $('<blockquote></blockquote>');
-        $blockquote.append($selectionElem);
-        $selectionElem.before($blockquote);
-        // 创建当前光标行为选区
-        selection.createRangeByElem($selectionElem);
-        selection.restoreSelection();
-        // 删除当前选区
-        text.handle('delete');
-        // 随时保存选区
-        selection.saveRange();
-        selection.restoreSelection();
+      const $selectionElem = selection.getSelectionContainerElem();
+      // 如果选区容器存在，并且不是 xe-text 的情况下
+      if ($selectionElem && $selectionElem.length > 0 && !$selectionElem.attr('id')) {
+        const blocked = searchNode($selectionElem[0], 'BLOCKQUOTE');
+        // 如果当前没选中
+        if (selection.isSelectionEmpty()) {
+          if (blocked) {
+            this.deleteBlockquote();
+          } else {
+            this.createBlockquote();
+          }
 
-        this.isActive();
+          this.isActive();
+        }
       }
     });
+  }
+  // 删除引用
+  deleteBlockquote() {
+    const { text, selection } = this.editor;
+    const $selectionElem = selection.getSelectionContainerElem();
+    searchNode($selectionElem[0], 'BLOCKQUOTE', (elem) => {
+      const $elem = $(elem);
+      $elem.before($elem.children());
+      $elem.remove();
+      text.cursorEnd();
+    });
+  }
+  // 创建引用
+  createBlockquote() {
+    const { text, selection } = this.editor;
+    const $selectionElem = selection.getSelectionContainerElem();
+    const $blockquote = $('<blockquote></blockquote>');
+    $blockquote.append($selectionElem);
+    $selectionElem.before($blockquote);
+    // 创建当前光标行为选区
+    selection.createRangeByElem($selectionElem);
+    selection.restoreSelection();
+    // 删除当前选区
+    text.handle('delete');
+    // 随时保存选区
+    selection.saveRange();
+    selection.restoreSelection();
   }
   // 是否是选中
   isActive() {

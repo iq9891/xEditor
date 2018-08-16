@@ -166,4 +166,64 @@ export default {
     hsb.b *= 100 / 255;
     return hsb;
   },
+  // 选色板 start
+  hueStep: 2,
+  saturationStep: 15.85,
+  saturationStep2: 5,
+  brightnessStep1: 5,
+  brightnessStep2: 15,
+  lightColorCount: 5,
+  darkColorCount: 4,
+  colorPalette(oldColor, index) {
+    const isLight = index <= 6;
+    const hsb = this.rgbToHsb(this.hexToRgb(oldColor));
+    const i = isLight ? (this.lightColorCount + 1) - index : (index - this.lightColorCount) - 1;
+    return `#${this.rgbToHex(this.hsbToRgb({
+      h: this.getHue(hsb, i, isLight),
+      s: this.getSaturation(hsb, i, isLight),
+      b: this.getBrightness(hsb, i, isLight),
+    }))}`;
+  },
+  getHue(hsb, index, isLight) {
+    let hue;
+    const computeHue = this.hueStep * index;
+    if (hsb.h >= 60 && hsb.h <= 240) {
+      hue = isLight ? hsb.h - computeHue : hsb.h + computeHue;
+    } else {
+      hue = isLight ? hsb.h + computeHue : hsb.h - computeHue;
+    }
+    if (hue < 0) {
+      hue += 360;
+    } else if (hue >= 360) {
+      hue -= 360;
+    }
+    return hue;
+  },
+  getSaturation(hsb, index, isLight) {
+    let saturation;
+    if (isLight) {
+      saturation = hsb.s - (this.saturationStep * index);
+    } else if (index === this.darkColorCount) {
+      saturation = hsb.s + (this.saturationStep);
+    } else {
+      saturation = hsb.s + (this.saturationStep2 * index);
+    }
+    if (saturation > 100) {
+      saturation = 100;
+    }
+    if (isLight && index === this.lightColorCount && saturation > 10) {
+      saturation = 10;
+    }
+    if (saturation < 6) {
+      saturation = 6;
+    }
+    return saturation;
+  },
+  getBrightness(hsb, index, isLight) {
+    if (isLight) {
+      return Math.round(hsb.b);
+    }
+    return Math.round(hsb.b) - (this.brightnessStep2 * index);
+  },
+  // 选色板 end
 };

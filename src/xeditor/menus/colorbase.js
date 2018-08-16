@@ -3,6 +3,7 @@ import $ from '../dom';
 import { getElementLeft, getElementTop } from '../tools/el';
 import color from '../tools/color';
 import svgFn from '../tools/svg';
+import { isTwoArray } from '../tools/typeof';
 
 // 小圆点的固定宽高边框阴影
 const dot = 5;
@@ -13,6 +14,7 @@ const dotMaxX = 172 - 5;
 const dotMaxY = 172 - 5;
 // hue 最大的 top
 const hueMaxY = 172 - 3;
+const hueNumber = 10;
 // 颜色对话框对象
 let $colorDialog = {
   remove() {},
@@ -62,7 +64,10 @@ const XMenuColorBase = class {
   }
 
   bind() {
-    const { type, editor } = this;
+    const { type, editor, cfg } = this;
+    const {
+      mode,
+    } = cfg.color;
     $(`#xe-${type}${editor.uid}`).on('click', () => {
       const { selection, code } = editor;
       // 如果是源代码
@@ -71,10 +76,146 @@ const XMenuColorBase = class {
       }
       // 只有选中了才有效果
       if (!selection.isSelectionEmpty()) {
-        this.panel();
-        this.setColor();
+        if (mode === 'palette') {
+          this.createPalette();
+        } else {
+          this.panel();
+          this.setColor();
+        }
       }
     });
+  }
+  // 创建颜色板
+  createPalette() {
+    const { uid, cfg, menu } = this.editor;
+    const {
+      base,
+      standard,
+    } = cfg.color;
+
+    this.remove();
+
+    const itemWidth = 14;
+    const itemMarginRight = 2;
+    const paletteWidth = (base.length * itemWidth) + ((base.length - 1) * itemMarginRight);
+
+    const $palette = $(`<div id="xe-palette${uid}" class="xe-palette" style="top: ${menu.$menu.css('height')}; width: ${paletteWidth + 20}px"></div>`);
+    this.$editor.append($palette);
+    $colorDialog = $(`#xe-palette${uid}`);
+
+    const $close = $(`<a id="xe-dialog-close${uid}" href="javascript:;" class="xe-dialog-close-btn">
+      <i class="xe-dialog-close"></i>
+    </a>`);
+    $colorDialog.append($close);
+    $(`#xe-dialog-close${uid}`).on('click', () => {
+      this.remove();
+    });
+
+    const $header = $(`<div class="xe-dialog-header">
+      <a href="javascript:;" class="xe-dialog-title xe-dialog-title-active">${cfg.lang[this.type]}</a>
+    </div>`);
+    $colorDialog.append($header);
+
+    const $title1 = $('<p class="xe-palette-title">主题色</p>');
+    $colorDialog.append($title1);
+    // 主体颜色的盒子
+    const $main = $(`<div id="xe-palette-main${uid}" class="xe-palette-main"></div>`);
+    $colorDialog.append($main);
+    this.$main = $(`#xe-palette-main${uid}`);
+
+    // 渲染主题色 start
+    let colorMainHtml = '';
+
+    if (isTwoArray(base)) {
+      base.forEach((baseColor) => {
+        colorMainHtml += '<ul class="xe-palette-list">';
+        baseColor.forEach((specificColor) => {
+          colorMainHtml += `<li class="xe-palette-item" color="${specificColor}" style="background:
+      ${specificColor};"></li>`;
+        });
+        colorMainHtml += '</ul>';
+      });
+    } else {
+      base.forEach((baseColor) => {
+        colorMainHtml += '<ul class="xe-palette-list">';
+        for (let i = 0; i < hueNumber; i++) {
+          colorMainHtml += `<li class="xe-palette-item" color="${color
+            .colorPalette(baseColor, i + 1)}" style="background:
+      ${color.colorPalette(baseColor, i + 1)};"></li>`;
+        }
+        colorMainHtml += '</ul>';
+      });
+    }
+    this.$main.html(colorMainHtml);
+    // 渲染主题色 end
+    const $title2 = $('<p class="xe-palette-title">标准颜色</p>');
+    $colorDialog.append($title2);
+    // 标准颜色的盒子
+    const $standard = $(`<ul id="xe-palette-standard${uid}" class="xe-palette-standard"></ul>`);
+    $colorDialog.append($standard);
+    this.$standard = $(`#xe-palette-standard${uid}`);
+    // 渲染标准色
+    let colorStandardHtml = '';
+    standard.forEach((standardColor) => {
+      const border = standardColor === '#ffffff' ? 'border: 1px solid #dcdcdc;width: 12px;height: 12px;' : '';
+      colorStandardHtml += `<li class="xe-palette-standard-item" color="${standardColor}" style="background: ${standardColor};${border}"></li>`;
+    });
+    this.$standard.html(colorStandardHtml);
+    // 自定义颜色
+    const $title3 = $('<p class="xe-palette-title">自定义颜色</p>');
+    $colorDialog.append($title3);
+    const $diyBoxTem = $(`<div id="xe-palette-diy${uid}" class="xe-palette-diy">
+      <div id="xe-palette-diy-box${uid}" class="xe-palette-diy-box"></div>
+    </div>`);
+    $colorDialog.append($diyBoxTem);
+    this.$diy = $(`#xe-palette-diy${uid}`);
+    this.$diyBox = $(`#xe-palette-diy-box${uid}`);
+    const $diyIcon = $('<span class="xe-palette-diy-icon">#</span>');
+    this.$diyBox.append($diyIcon);
+    const $diyInputTem = $(`<input id="xe-palette-diy-input${uid}" type="tel" maxlength="6" size="6" class="xe-palette-diy-input">`);
+    this.$diyBox.append($diyInputTem);
+    this.$diyInput = $(`#xe-palette-diy-input${uid}`);
+    const $diyOkTem = $(`<a id="xe-palette-ok${uid}" class="xe-palette-ok" href="javascript:;">确认</a>`);
+    this.$diy.append($diyOkTem);
+    this.$diyOk = $(`#xe-palette-ok${uid}`);
+    const $diyClearTem = $(`<a id="xe-palette-clear${uid}" class="xe-palette-ok" href="javascript:;">透明</a>`);
+    this.$diy.append($diyClearTem);
+    this.$diyClear = $(`#xe-palette-clear${uid}`);
+
+    this.$link = $(`#xe-${this.type}${uid} g`);
+
+    // 获取当前颜色
+    this.getColor();
+    // 绑定事件
+    $colorDialog.on('click', 'li', (ev) => {
+      this.subPalette($(ev.target).attr('color'));
+    });
+    this.$diyOk.on('click', () => {
+      this.subPalette();
+    });
+    this.$diyClear.on('click', () => {
+      this.subPalette('#ffffff');
+    });
+  }
+  // 颜色板出来的时候获取一下当前颜色
+  getColor() {
+    const { selection } = this.editor;
+    const $range = selection.getSelectionContainerElem(selection.getRange());
+    if ($range) {
+      this.oldColor = $range.css(this.type === 'backcolor' ? 'background' : 'color');
+    }
+  }
+  // 确定
+  subPalette(value) {
+    const { editor } = this;
+    const { selection, text } = editor;
+    // 恢复选区，不然添加不上
+    selection.restoreSelection();
+
+    const type = this.type.replace(/(c)o/, $1 => `${$1[0].toUpperCase()}${$1[1]}`);
+
+    text.handle(type, value || `#${this.$diyInput.val()}`);
+    this.remove();
   }
   // 设置当前颜色
   setColor() {
@@ -180,7 +321,7 @@ const XMenuColorBase = class {
     this.$box.append($handle);
 
     $(`#xe-dialog-sub${uid}`).on('click', () => {
-      this.sub();
+      this.subPanel();
     });
 
     this.$r = $(`#xe-dialog-r${uid}`).on('input', () => {
@@ -268,7 +409,7 @@ const XMenuColorBase = class {
     this.setRgbVal();
   }
   // 确定
-  sub() {
+  subPanel() {
     const { editor } = this;
     const { selection, text } = editor;
     // 恢复选区，不然添加不上

@@ -52,7 +52,7 @@ const XMenu = class {
 
     this.$menu = $(`#xe-menu${uid}`);
     // 如果有配置
-    if (this.oftenText && this.highText && this.highMenus.length) {
+    if (this.highMenus.length) {
       this.$oftenTem = $(`<div id="xe-menu-often${uid}" class="xe-menu-often${menu ? ` ${prefix}${menu}-often` : ''}">
         <h2 class="xe-menu-title${menu ? ` ${prefix}-menu-title` : ''}">${this.oftenText}</h2>
       </div>`);
@@ -73,7 +73,7 @@ const XMenu = class {
    */
   renderBtns() {
     // 如果有配置
-    if (this.oftenText && this.highText && this.highMenus.length) {
+    if (this.highMenus.length) {
       const highTems = [];
       const oftenTems = [];
       this.cfg.menus.forEach((menu) => {

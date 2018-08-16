@@ -6,6 +6,7 @@ export default {
     'forecolor', // 文本颜色
     'fontname', // 字体
     'fontsize', // 字号
+    'lineheight', // 行高
     'inserthorizontalrule', // 插入水平线
     'link', // 插入链接
     'bold', // 加粗
@@ -54,6 +55,7 @@ export default {
     full: '全屏',
     fontname: '字体',
     fontsize: '字号',
+    lineheight: '行高',
     image: '插入图像',
     italic: '倾斜',
     justifycenter: '居中对齐',
@@ -127,6 +129,16 @@ export default {
       72,
     ],
     fontsizeplaceholder: '字号',
+    lineheight: [
+      1,
+      1.5,
+      1.75,
+      2,
+      3,
+      4,
+      5,
+    ],
+    lineheightplaceholder: '行高',
   },
   debug: false, // debug 为 true ，抛出错误
   alert(info) { // 错误提示
@@ -209,5 +221,5 @@ export default {
       '#ffffff',
       '#000000',
     ],
-  },
+  }, // color end
 };

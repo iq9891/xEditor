@@ -118,6 +118,9 @@ const XMenuFont = class {
       } else {
         this.editor.text.handle('insertHTML', `<span style="font-size: ${html}px">${selection.getSelectionText()}</span>`);
       }
+    } else if (type === 'lineheight') {
+      html = $(target).html();
+      this.editor.text.handle('insertHTML', `<span style="line-height: ${html}em">${selection.getSelectionText()}</span>`);
     }
     this.$font.html(html.toString());
     // 删除列表

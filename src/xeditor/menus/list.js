@@ -28,6 +28,7 @@ import indent from './indent';
 import removeformat from './removeformat';
 import insertunorderedlist from './insertunorderedlist';
 import insertorderedlist from './insertorderedlist';
+import lineheight from './lineheight';
 
 const list = {};
 
@@ -61,5 +62,6 @@ list.indent = indent;
 list.removeformat = removeformat;
 list.insertunorderedlist = insertunorderedlist;
 list.insertorderedlist = insertorderedlist;
+list.lineheight = lineheight;
 
 export default list;

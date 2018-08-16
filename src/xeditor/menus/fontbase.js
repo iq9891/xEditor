@@ -112,7 +112,6 @@ const XMenuFont = class {
       this.editor.text.handle(type, html);
     } else if (type === 'fontsize') {
       html = cfg.font[type][$(target).index()];
-      console.log(this.hasChinese, 'this.hasChinese');
       // 如果是之前中文匹配
       if (this.hasChinese) {
         this.editor.text.handle(type, $(target).index() + 1);
@@ -138,7 +137,6 @@ const XMenuFont = class {
         font = $(selectFont[0]).css('font-family');
       } else if (type === 'fontsize') {
         font = this.hasChinese ? $(selectFont[0]).attr('size') : $(selectFont[0]).css('font-size');
-        console.log($(selectFont[0]).css('font-size'), 'font');
       }
     }
 

@@ -120,7 +120,8 @@ const XMenuFont = class {
       }
     } else if (type === 'lineheight') {
       html = $(target).html();
-      this.editor.text.handle('insertHTML', `<span style="line-height: ${html}em">${selection.getSelectionText()}</span>`);
+      const $elem = selection.getSelectionContainerElem(selection.getRange());
+      $elem.css('line-height', `${html}em`);
     }
     this.$font.html(html.toString());
     // 删除列表
@@ -133,13 +134,16 @@ const XMenuFont = class {
     const family = cfg.font[type];
     const placeholder = cfg.font[`${type}placeholder`];
     const selectFont = selection.getSelectionContainerElem(selection.getRange());
+    const fontSize = $(selectFont[0]).css('font-size');
 
     let font = null;
     if (selectFont) {
       if (type === 'fontname') {
         font = $(selectFont[0]).css('font-family');
       } else if (type === 'fontsize') {
-        font = this.hasChinese ? $(selectFont[0]).attr('size') : $(selectFont[0]).css('font-size');
+        font = this.hasChinese ? $(selectFont[0]).attr('size') : fontSize;
+      } else if (type === 'lineheight') {
+        font = parseFloat($(selectFont[0]).css('line-height')) / parseFloat(fontSize);
       }
     }
 
@@ -147,6 +151,8 @@ const XMenuFont = class {
       this.$font.html(family.find(fml => fml === font));
     } else if (type === 'fontsize' && (!this.hasChinese || !(/px/.test(font))) && font) {
       this.$font.html(this.hasChinese ? family[font - 1] : font.replace(/px/, ''));
+    } else if (type === 'lineheight' && family.some(fml => fml === font)) {
+      this.$font.html(family.find(fml => fml === font).toString());
     } else {
       this.$font.html(placeholder);
     }

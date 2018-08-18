@@ -116,7 +116,7 @@ const XMenuColorBase = class {
     </div>`);
     $colorDialog.append($header);
 
-    const $title1 = $('<p class="xe-palette-title">主题色</p>');
+    const $title1 = $('<div class="xe-palette-title">主题色</div>');
     $colorDialog.append($title1);
     // 主体颜色的盒子
     const $main = $(`<div id="xe-palette-main${uid}" class="xe-palette-main"></div>`);
@@ -148,7 +148,7 @@ const XMenuColorBase = class {
     }
     this.$main.html(colorMainHtml);
     // 渲染主题色 end
-    const $title2 = $('<p class="xe-palette-title">标准颜色</p>');
+    const $title2 = $('<div class="xe-palette-title">标准颜色</div>');
     $colorDialog.append($title2);
     // 标准颜色的盒子
     const $standard = $(`<ul id="xe-palette-standard${uid}" class="xe-palette-standard"></ul>`);
@@ -162,7 +162,7 @@ const XMenuColorBase = class {
     });
     this.$standard.html(colorStandardHtml);
     // 自定义颜色
-    const $title3 = $('<p class="xe-palette-title">自定义颜色</p>');
+    const $title3 = $('<div class="xe-palette-title">自定义颜色</div>');
     $colorDialog.append($title3);
     const $diyBoxTem = $(`<div id="xe-palette-diy${uid}" class="xe-palette-diy">
       <div id="xe-palette-diy-box${uid}" class="xe-palette-diy-box"></div>

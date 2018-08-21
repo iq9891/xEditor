@@ -15,6 +15,10 @@
     "build:pro": "export BABEL_ENV=production && export NODE_ENV=production && webpack --config build/webpack.build.config.js",
     "doc": "./node_modules/.bin/jsdoc -c .jsdoc.js",
     "changelog": "./node_modules/.bin/conventional-changelog -p jscs -i changelog.md -s -r 0",
+    "eslint": "eslint --ext .js,.vue src --fix",
+    "stylelint": "stylelint src/**/*.scss",
+    "lint": "npm run eslint && npm run stylelint",
+    "lint-staged": "lint-staged",
     "prepublishOnly": "yarn build:pro && yarn build:test"
   },
   "repository": {
@@ -81,8 +85,8 @@
     "webpackbar": "^2.6.3"
   },
   "engines": {
-    "node": ">= 4.0.0",
-    "npm": ">= 3.0.0"
+    "node": ">= 9.0.0",
+    "npm": ">= 6.0.0"
   },
   "browserslist": [
     "> 1%",
@@ -91,5 +95,19 @@
     "last 2 versions",
     "not ie <= 8"
   ],
-  "dependencies": {}
+  "lint-staged": {
+    "src/xeditor/**/*.js": [
+      "npm run eslint"
+    ],
+    "src/assets/styles/*.scss": [
+      "npm run stylelint"
+    ]
+  },
+  "pre-commit": [
+    "lint-staged"
+  ],
+  "dependencies": {
+    "lint-staged": "^7.2.2",
+    "pre-commit": "^1.2.2"
+  }
 }

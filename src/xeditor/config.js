@@ -7,6 +7,7 @@ export default {
     'fontname', // 字体
     'fontsize', // 字号
     'lineheight', // 行高
+    'removeformat', // 清除样式 1.6.0 新增
     'inserthorizontalrule', // 插入水平线
     'link', // 插入链接
     'bold', // 加粗
@@ -30,7 +31,6 @@ export default {
     'redo', // 反撤销 1.6.0 新增
     'undo', // 撤销 1.6.0 新增
     'indent', // 缩进 1.6.0 新增
-    'removeformat', // 清除样式 1.6.0 新增
     'insertunorderedlist', // 无序列表 1.6.0 新增
     'insertorderedlist', // 有序列表 1.6.0 新增
   ],

@@ -18,7 +18,7 @@ const XMenuFont = class {
     this.cfg = editor.cfg;
     this.type = type;
     this.pf = `xe-${this.type}`;
-    this.hasChinese = this.cfg.font[type].filter(font => /[^\u0000-\u00FF]/.test(font)).length > 0;
+    this.hasChinese = this.cfg.font[type].filter(font => /[^\\u0000-\\u00FF]/.test(font)).length > 0;
     // 初始化
     this.create();
   }

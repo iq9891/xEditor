@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var merge = require('webpack-merge');
+const WebpackBar = require('webpackbar')
 
 var webpackBaseConfig = require('./webpack.base.config.js');
 var config = require('../config');
@@ -19,10 +20,14 @@ var plugins = [
   new webpack.DefinePlugin({
     ENV: JSON.stringify(env),
   }),
+  new WebpackBar({
+    name: 'Client',
+    color: '#41b883',
+    compiledIn: false
+  }),
 ];
 
 //设置 生成的文件夹目录
-
 if (isDev) {
   dist = config.dev.dist;
 } else {
@@ -50,13 +55,12 @@ if (isDev) {
   });
 }
 
-// 如果是开发
+// 如果生产清除目录从心开始
 if (isPro) {
-  // 压缩
-  plugins.push(new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: false
-    }
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  plugins.push(new CleanWebpackPlugin(['dist'], {
+    root: path.resolve(__dirname, '../'),
+    verbose: true,
   }));
 }
 
@@ -80,11 +84,13 @@ module.exports = merge(webpackBaseConfig, {
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
+  stats: 'errors-only', // 只有报错会提示
+  mode: isPro ? 'production' : 'development',
   resolve: {
     alias: {
       '@': resolve('src'),
       'assets': resolve('src/assets'),
     }
   },
-  plugins: plugins
+  plugins,
 });

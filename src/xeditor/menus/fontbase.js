@@ -134,10 +134,10 @@ const XMenuFont = class {
     const family = cfg.font[type];
     const placeholder = cfg.font[`${type}placeholder`];
     const selectFont = selection.getSelectionContainerElem(selection.getRange());
-    const fontSize = $(selectFont[0]).css('font-size');
 
     let font = null;
     if (selectFont) {
+      const fontSize = $(selectFont[0]).css('font-size');
       if (type === 'fontname') {
         font = $(selectFont[0]).css('font-family');
       } else if (type === 'fontsize') {

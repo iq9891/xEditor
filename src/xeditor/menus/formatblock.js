@@ -74,10 +74,12 @@ class XMenuFormatblock extends Base {
     const { selection } = editor;
     const $item = $(`#xe-${type}${editor.uid}`);
     const $selectionElem = selection.getSelectionContainerElem();
-    if (searchNode($selectionElem[0], 'BLOCKQUOTE')) {
-      $item.addClass('xe-menu-link-active');
-    } else {
-      $item.removeClass('xe-menu-link-active');
+    if ($selectionElem && $selectionElem.length) {
+      if (searchNode($selectionElem[0], 'BLOCKQUOTE')) {
+        $item.addClass('xe-menu-link-active');
+      } else {
+        $item.removeClass('xe-menu-link-active');
+      }
     }
   }
 }

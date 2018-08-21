@@ -294,12 +294,14 @@ class XMenuTable extends Base {
 
     const $elem = selection.getSelectionContainerElem(selection.getRange());
 
-    if ($elem[0].tagName === 'TD' || $elem[0].tagName === 'TH') {
-      $item.addClass('xe-menu-link-active');
-      this.$elem = $elem;
-    } else {
-      $item.removeClass('xe-menu-link-active');
-      this.$elem = null;
+    if ($elem && $elem.length > 0) {
+      if ($elem[0].tagName === 'TD' || $elem[0].tagName === 'TH') {
+        $item.addClass('xe-menu-link-active');
+        this.$elem = $elem;
+      } else {
+        $item.removeClass('xe-menu-link-active');
+        this.$elem = null;
+      }
     }
   }
 }

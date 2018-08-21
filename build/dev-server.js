@@ -1,8 +1,7 @@
 require('./check-versions')()
 
-var config = require('../config')
 if (!process.env.NODE_ENV) {
-  process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
+  process.env.NODE_ENV = 'development';
 }
 
 var opn = require('opn')
@@ -13,17 +12,17 @@ var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.build.config')
 
 // 监听的端口
-var port = process.env.PORT || config.dev.port
+var port = process.env.PORT || 8099;
 // 自动打开浏览器
-var autoOpenBrowser = !!config.dev.autoOpenBrowser;
+var autoOpenBrowser = true;
 // 预览地址
-var uri = 'http://localhost:' + port + '/' + config.dev.dist + '/index.html';
+var uri = 'http://localhost:' + port + '/dist/index.html';
 
 var app = express()
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
-  publicPath: '/'+ config.dev.dist +'/',
+  publicPath: '/dist/',
   inline: true,
   quiet: true
 })

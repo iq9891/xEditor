@@ -4,22 +4,17 @@ var merge = require('webpack-merge');
 const WebpackBar = require('webpackbar')
 
 var webpackBaseConfig = require('./webpack.base.config.js');
-var config = require('../config');
 var pkg = require('../package.json');
 
-var env = config.build.env;
-var isPro = env.NODE_ENV === '"production"';
-var isDev = env.NODE_ENV === '"development"';
-var dist = ''; // 生成的文件夹目录是可以配的，根据环境的不同生成的文件夹不同
+var isPro = process.env.NODE_ENV === 'production';
+var isDev = process.env.NODE_ENV === 'development';
+var dist = 'dist'; // 生成的文件夹目录是可以配的，根据环境的不同生成的文件夹不同
 
 var entry = {
   main: ['./src/xeditor/index.js']
 };
 
 var plugins = [
-  new webpack.DefinePlugin({
-    ENV: JSON.stringify(env),
-  }),
   new WebpackBar({
     name: 'Client',
     color: '#41b883',
@@ -27,12 +22,6 @@ var plugins = [
   }),
 ];
 
-//设置 生成的文件夹目录
-if (isDev) {
-  dist = config.dev.dist;
-} else {
-  dist = config.build.dist;
-}
 // 注入内容
 var oTime = new Date();
 var oAllTime = oTime.getFullYear() + '-' + (oTime.getMonth()+1) + '-' + oTime.getDate() + ' ' + oTime.getHours() + ':' + oTime.getMinutes() + ':' + oTime.getSeconds();
@@ -58,7 +47,7 @@ if (isDev) {
 // 如果生产清除目录从心开始
 if (isPro) {
   const CleanWebpackPlugin = require('clean-webpack-plugin');
-  plugins.push(new CleanWebpackPlugin(['dist'], {
+  plugins.push(new CleanWebpackPlugin([dist], {
     root: path.resolve(__dirname, '../'),
     verbose: true,
   }));

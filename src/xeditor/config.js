@@ -100,11 +100,21 @@ export default {
   },
   font: {
     fontname: [
-      '宋体',
-      '微软雅黑',
       'Arial',
       'Comic Sans MS',
       'Courier New',
+      'Georgia',
+      'Lucida Sans Unicode',
+      'Tahoma',
+      'Times New Roman',
+      'Trebuchet MS',
+      'Verdana',
+      'PingFang SC',
+      'Noto Sans CJK SC',
+      'WenQuanYi Micro Hei',
+      'sans-serif',
+      '宋体',
+      '微软雅黑',
     ],
     fontnameplaceholder: '字体',
     fontsize: [ // 1.6.0 新增 字号自定义

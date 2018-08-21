@@ -12,6 +12,9 @@ const XText = class {
     this.$editor = editor.$editor;
     this.cfg = editor.cfg;
     this.canDrag = false;
+    this.resetPosY = 0;
+    this.resetLastMove = 0;
+    this.$doc = $(document);
     // 初始化内容
     this.create();
     // 绑定事件
@@ -19,7 +22,11 @@ const XText = class {
   }
 
   create() {
-    const { prefix, wrap } = this.cfg.name;
+    const {
+      reset,
+      name,
+    } = this.cfg;
+    const { prefix, wrap } = name;
 
     this.$tem = $(`<div id="xe-wrap${this.editor.uid}" class="xe-text-wrap${wrap ? ` ${prefix}${wrap}` : ''}">
         <div id="xe-text${this.editor.uid}" contenteditable="true" class="xe-text"></div>
@@ -27,6 +34,34 @@ const XText = class {
     this.$editor.append(this.$tem);
     this.$text = $(`#xe-text${this.editor.uid}`);
     this.$wrap = $(`#xe-wrap${this.editor.uid}`);
+
+    if (reset) {
+      const $resetTem = $(`<div class="xe-reset">
+        <div id="xe-reset${this.editor.uid}" class="xe-reset-button-box"><div class="xe-reset-button"></div></div>
+      </div>`);
+      this.$editor.append($resetTem);
+      $(`#xe-reset${this.editor.uid}`).on('mousedown', this.resetDown.bind(this));
+    }
+  }
+  // 改变大小鼠标按下
+  resetDown(ev = window.event) {
+    this.resetPosY = ev.pageY;
+    this.$doc
+      .on('mousemove', this.resetMove.bind(this))
+      .on('mouseup', this.resetUp.bind(this));
+  }
+
+  resetMove(evMove = window.evente) {
+    const move = evMove.pageY - this.resetPosY;
+    const height = parseFloat(this.$editor.css('height'));
+    this.$editor.css('height', height + (move - this.resetLastMove));
+    this.resetLastMove = move;
+  }
+
+  resetUp() {
+    this.$doc.off('mousemove mouseup');
+    this.resetLastMove = 0;
+    this.resetPosY = 0;
   }
   /**
   * 新建一行 <p><br/></p>

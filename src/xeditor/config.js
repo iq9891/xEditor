@@ -140,6 +140,7 @@ export default {
     ],
     lineheightplaceholder: '行高',
   },
+  reset: true, // 改变内容区大小  1.6.0 新增
   debug: false, // debug 为 true ，抛出错误
   alert(info) { // 错误提示
     console.log(info);

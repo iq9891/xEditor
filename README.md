@@ -1,6 +1,6 @@
 # xeditor
 
-> xEditor 是 Web 端富文本编辑器。目前暂不支持 React 和 Angular 。[在线预览](http://output.jsbin.com/qiqibif)
+> xEditor is a rich text editor on the web. React and Angular are currently not supported. 。[Online](http://output.jsbin.com/qiqibif)
 
 [![xeditor](https://img.shields.io/npm/v/xeditor.svg?style=flat-square)](https://www.npmjs.org/package/xeditor)
 [![NPM downloads](http://img.shields.io/npm/dm/xeditor.svg?style=flat-square)](https://npmjs.org/package/xeditor)

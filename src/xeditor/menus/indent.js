@@ -37,11 +37,13 @@ class XMenuIndent extends Base {
     const { selection } = editor;
     const $item = $(`#xe-${type}${editor.uid}`);
     const $selectionElem = selection.getSelectionContainerElem();
-    const indent = $selectionElem.css('text-indent');
-    if (indent === '0px') {
-      $item.removeClass('xe-menu-link-active');
-    } else {
-      $item.addClass('xe-menu-link-active');
+    if ($selectionElem && $selectionElem.length) {
+      const indent = $selectionElem.css('text-indent');
+      if (indent === '0px') {
+        $item.removeClass('xe-menu-link-active');
+      } else {
+        $item.addClass('xe-menu-link-active');
+      }
     }
   }
 }

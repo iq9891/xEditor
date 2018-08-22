@@ -9,10 +9,11 @@
     "src"
   ],
   "scripts": {
-    "start": "export BABEL_ENV=development && export NODE_ENV=development && node build/dev-server.js",
-    "dev": "set BABEL_ENV=development && set NODE_ENV=development && node build/dev-server.js",
+    "start": "vuepress dev site",
     "build:test": "export BABEL_ENV=testing && export NODE_ENV=testing && webpack --config build/webpack.build.config.js",
     "build:pro": "export BABEL_ENV=production && export NODE_ENV=production && webpack --config build/webpack.build.config.js",
+    "build:site": "export GH=1 && vuepress build site",
+    "deploy-gh": "yarn build:site && bash scripts/deploy-gh.sh",
     "changelog": "./node_modules/.bin/conventional-changelog -p angular -i changelog.md -s -r 0",
     "eslint": "eslint --ext .js,.vue src --fix",
     "stylelint": "stylelint src/**/*.scss",
@@ -75,6 +76,7 @@
     "stylelint-webpack-plugin": "^0.10.5",
     "uglifyjs-webpack-plugin": "^1.0.1",
     "url-loader": "^0.6.2",
+    "vuepress": "^0.14.2",
     "webpack": "^4.17.0",
     "webpack-chain": "^4.9.0",
     "webpack-cli": "^3.1.0",

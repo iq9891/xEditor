@@ -11,32 +11,33 @@
 
 ![xeditor preview](./xeditor.png)
 
-[中文 README](README-zh_CN.md)
+[README in English](README.md)
 
-## Features
+## 功能
 
-- Drag and drop upload
-- ajax image upload
-- base64 image display
-- extended class name
-- Multi-language support
-- Menu classification
-- Color configurable
-- Style customization
+- 拖拽上传
+- ajax 图片上传
+- base64 图片显示
+- 扩展 class 名
+- 多语言支持
+- 菜单分类
+- 颜色可配置
+- 样式自定义
 
-## Related Links
+## 相关链接
 
-- Document： [https://www.kancloud.cn/iq9891/xeditor/500799](https://www.kancloud.cn/iq9891/xeditor/500799)
+- 文档地址： [https://www.kancloud.cn/iq9891/xeditor/500799](https://www.kancloud.cn/iq9891/xeditor/500799)
 - CDN
   - [unpkg](https://unpkg.com/xeditor)
   - [jsdelivr](https://cdn.jsdelivr.net/npm/xeditor@latest/dist/)
-- [Download https://github.com/iq9891/xEditor/releases](https://github.com/iq9891/xEditor/releases)
+- [各版本下载 https://github.com/iq9891/xEditor/releases](https://github.com/iq9891/xEditor/releases)
 - [vue-xeditor](https://github.com/iq9891/vue-xeditor) Vue.js 的封装
-- [Update record](https://github.com/iq9891/xEditor/blob/master/changelog.md)
+- [更新记录](https://github.com/iq9891/xEditor/blob/master/changelog.md)
 
-## Usage
+## 使用
 
-``` html
+- html 代码
+```html
 <!DOCTYPE html>
 <html>
   <head>
@@ -54,10 +55,9 @@
 </html>
 ```
 
-## Run the demo
-
-- Download source `https://github.com/iq9891/xEditor.git`
-- Install or upgrade the latest version NodeJs (minimum v9.x.x)
-- Enter the directory, install the dependency package `cd xEditor && yarn install`
-- After the installation package is complete, the windows user runs `npm run dev` and the Mac user runs `npm start`
-- Open browser [http://localhost:8080/](http://localhost:8080/)
+## 运行 demo
+- 下载源码 `https://github.com/iq9891/xEditor.git`
+- 安装或者升级最新版本 nodeJS（最低v9.x.x）
+- 进入目录，安装依赖包 cd xEditor && yarn install
+- 安装包完成之后，windows 用户运行 `npm run dev`，Mac 用户运行 `npm start` 。
+- 打开浏览器 [http://localhost:8080/](http://localhost:8080/)

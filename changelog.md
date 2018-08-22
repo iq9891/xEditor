@@ -1,3 +1,19 @@
+<a name="1.6.1"></a>
+## [1.6.1](https://github.com/iq9891/xEditor/compare/v1.6.0...v1.6.1) (2018-08-22)
+
+
+### Bug Fixes
+
+* **$height:** Fix editor's true height display problem ([5dd25aa](https://github.com/iq9891/xEditor/commit/5dd25aa))
+* **$indent:** Solve the error ([2976336](https://github.com/iq9891/xEditor/commit/2976336))
+
+
+### Reverts
+
+* **$image:** modify xeditor.png v2 ([18dba2d](https://github.com/iq9891/xEditor/commit/18dba2d))
+
+
+
 <a name="1.6.0"></a>
 # [1.6.0](https://github.com/iq9891/xEditor/compare/v1.5.4...v1.6.0) (2018-08-21)
 
@@ -215,6 +231,3 @@
 
 <a name="1.0.0"></a>
 # 1.0.0 (2017-11-10)
-
-
-

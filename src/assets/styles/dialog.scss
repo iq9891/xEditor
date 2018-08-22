@@ -8,7 +8,7 @@ $input-size: $handle-size - 21;
   position: absolute;
   top: 33px;
   left: calc(50% - 160px);
-  user-select:none;
+  user-select: none;
   background: $white;
 
   &-close {
@@ -117,6 +117,7 @@ $input-size: $handle-size - 21;
       from {
         transform: rotate(0);
       }
+
       to {
         transform: rotate(360deg);
       }
@@ -140,8 +141,8 @@ $input-size: $handle-size - 21;
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
-        appearance: none !important;
-        margin: 0;
+      appearance: none !important;
+      margin: 0;
     }
 
     &-content {
@@ -220,16 +221,6 @@ $input-size: $handle-size - 21;
       background: #fff;
     }
 
-    &-inner {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      top: -4px;
-      left: -4px;
-      box-shadow: 0 0 0 1px #fff, 0 0 0 2px #000;
-      border-radius: 4px;
-    }
-
     &-hue {
       border: 1px solid #dcdcdc;
       width: 20px;
@@ -268,7 +259,6 @@ $input-size: $handle-size - 21;
       }
 
       &-right {
-        left: -5px;
         border-width: 5px 5px 5px 0;
         border-right-color: rgba(0, 0, 0, 0.3);
         left: auto;

@@ -2,8 +2,7 @@
   display: flex;
   border: 1px solid $border-color;
   background: $menu-color;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: row wrap;
 
   &-title {
     font-size: 14px;
@@ -16,8 +15,7 @@
   &-high {
     width: 100%;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: row wrap;
   }
 
   &-link {

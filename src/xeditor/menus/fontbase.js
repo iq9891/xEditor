@@ -80,7 +80,7 @@ const XMenuFont = class {
     const { font } = cfg;
     const fontCfg = font[type];
 
-    const $list = $(`<ul id="${pf}${uid}-l" class="xe-select-list"></ul>`);
+    const $list = $(`<ul id="${pf}${uid}-l" class="xe-select-list" style="top: ${editor.menu.$menu.css('height')}"></ul>`);
     this.$fontbox.append($list);
 
     this.$list = $(`#${pf}${uid}-l`).on('click', `.xe-select-list-item${uid}`, (ev = window.event) => {

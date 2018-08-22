@@ -37,17 +37,26 @@ class XMenuTable extends Base {
 
     const {
       uid,
+      cfg,
     } = this.editor;
+
+    const {
+      addrowplaceholder,
+      delrowplaceholder,
+      addcolplaceholder,
+      delcolplaceholder,
+      delplaceholder,
+    } = cfg.table;
 
     this.$text = $(`#xe-text${uid}`);
 
     this.dialogOrigin('table');
 
-    this.createBtn('添加行', 'addrow');
-    this.createBtn('删除行', 'delrow');
-    this.createBtn('添加列', 'addcol');
-    this.createBtn('删除列', 'delcol');
-    this.createBtn('删除表格', 'del');
+    this.createBtn(addrowplaceholder, 'addrow');
+    this.createBtn(delrowplaceholder, 'delrow');
+    this.createBtn(addcolplaceholder, 'addcol');
+    this.createBtn(delcolplaceholder, 'delcol');
+    this.createBtn(delplaceholder, 'del');
   }
   /*
    * 修改表格的时候的按钮
@@ -108,15 +117,23 @@ class XMenuTable extends Base {
     this.$contentTable = $(`#xe-dialog-content-table${uid}`);
 
     if (!name) {
-      const $row = $(`<div id="xe-dialog-table-row${uid}">行：</div>`);
+      const {
+        rowplaceholder,
+      } = cfg.table;
+      const $row = $(`<div id="xe-dialog-table-row${uid}">${rowplaceholder}：</div>`);
       this.$contentTable.append($row);
     }
   }
   // 创建弹出框
   createDialog() {
     const {
-      uid, selection,
+      uid, selection, cfg,
     } = this.editor;
+
+    const {
+      colplaceholder,
+      insertplaceholder,
+    } = cfg.table;
 
     this.dialogOrigin();
 
@@ -126,7 +143,7 @@ class XMenuTable extends Base {
     this.$rowBox.append($rowTem);
     this.$row = $(`#xe-dialog-row${uid}`);
     // col
-    const $colBox = $(`<div id="xe-dialog-table-col${uid}" class="xe-dialog-table-box">列：</div>`);
+    const $colBox = $(`<div id="xe-dialog-table-col${uid}" class="xe-dialog-table-box">${colplaceholder}：</div>`);
     this.$contentTable.append($colBox);
     this.$colBox = $(`#xe-dialog-table-col${uid}`);
 
@@ -135,7 +152,7 @@ class XMenuTable extends Base {
     this.$col = $(`#xe-dialog-col${uid}`);
     // 插入
     const $btn = $(`<div class="xe-dialog-btn-box">
-      <button id="xe-dialog-btn${uid}" class="xe-button xe-dialog-btn">插入</button>
+      <button id="xe-dialog-btn${uid}" class="xe-button xe-dialog-btn">${insertplaceholder}</button>
     </div>`);
     this.$contentTable.append($btn);
 

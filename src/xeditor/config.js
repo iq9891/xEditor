@@ -176,6 +176,16 @@ export default {
   full: { // 1.6.0 新增
     type: 'normal', // 正常 // righttop 右上
   },
+  table: { // 1.6.3 新增
+    rowplaceholder: '行', // 1.6.3 新增
+    colplaceholder: '列', // 1.6.3 新增
+    insertplaceholder: '插入', // 1.6.3 新增
+    addrowplaceholder: '添加行', // 1.6.3 新增
+    delrowplaceholder: '删除行', // 1.6.3 新增
+    addcolplaceholder: '添加列', // 1.6.3 新增
+    delcolplaceholder: '删除列', // 1.6.3 新增
+    delplaceholder: '删除表格', // 1.6.3 新增
+  },
   link: { // 1.6.2 新增
     linkplaceholder: 'http://', // 1.6.2 新增
     fontplaceholder: '链接文字', // 1.6.2 新增

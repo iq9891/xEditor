@@ -53,8 +53,8 @@ const XText = class {
 
   resetMove(evMove = window.evente) {
     const move = evMove.pageY - this.resetPosY;
-    const height = parseFloat(this.$editor.css('height'));
-    this.$editor.css('height', height + (move - this.resetLastMove));
+    const height = parseFloat(this.$wrap.css('height'));
+    this.$wrap.css('height', height + (move - this.resetLastMove));
     this.resetLastMove = move;
   }
 

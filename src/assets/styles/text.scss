@@ -14,7 +14,7 @@
     border: 1px solid $border-color;
     border-top: none;
     background: $bg-main;
-    height: calc(100% - 35px);
+    min-height: 300px;
     width: calc(100% - 2px);
     box-sizing: content-box;
   }

@@ -139,7 +139,8 @@ const XMenuFont = class {
     if (selectFont) {
       const fontSize = $(selectFont[0]).css('font-size');
       if (type === 'fontname') {
-        font = $(selectFont[0]).css('font-family');
+        // 有的时候选中英文的时候会有引号
+        font = $(selectFont[0]).css('font-family').replace(/"/g, '');
       } else if (type === 'fontsize') {
         font = this.hasChinese ? $(selectFont[0]).attr('size') : fontSize;
       } else if (type === 'lineheight') {

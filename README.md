@@ -1,6 +1,6 @@
 # xeditor
 
-> xEditor is a rich text editor on the web. React and Angular are currently not supported. 。[Online](http://output.jsbin.com/qiqibif)
+> xEditor is a rich text editor on the web. React and Angular are currently not supported. 。[Online](https://output.jsbin.com/vacacir)
 
 [![xeditor](https://img.shields.io/npm/v/xeditor.svg?style=flat-square)](https://www.npmjs.org/package/xeditor)
 [![NPM downloads](http://img.shields.io/npm/dm/xeditor.svg?style=flat-square)](https://npmjs.org/package/xeditor)

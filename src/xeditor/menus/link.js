@@ -36,6 +36,12 @@ class XMenuLink extends Base {
       menu,
     } = this.editor;
 
+    const {
+      linkplaceholder,
+      fontplaceholder,
+      insertplaceholder,
+    } = cfg.link;
+
     const $dialog = $(`<div id="xe-dialog${uid}" class="xe-dialog" style="top: ${menu.$menu.css('height')}"></div>`);
     this.$editor.append($dialog);
     this.$setLinkDialog = $(`#xe-dialog${uid}`);
@@ -73,7 +79,7 @@ class XMenuLink extends Base {
     if (linkText) {
       $linkTitleInput.attr('value', linkText);
     } else {
-      $linkTitleInput.attr('placeholder', '链接文字');
+      $linkTitleInput.attr('placeholder', fontplaceholder);
     }
     this.$contentBox.append($linkTitleInput);
 
@@ -82,12 +88,12 @@ class XMenuLink extends Base {
     if (linkText && this.$elem) {
       $linkInput.attr('value', this.$elem.attr('href'));
     } else {
-      $linkInput.attr('placeholder', 'http://');
+      $linkInput.attr('placeholder', linkplaceholder);
     }
     this.$contentBox.append($linkInput);
     // 插入
     const $btn = $(`<div class="xe-dialog-btn-box">
-      <button id="xe-dialog-btn${uid}" class="xe-button xe-dialog-btn">插入</button>
+      <button id="xe-dialog-btn${uid}" class="xe-button xe-dialog-btn">${insertplaceholder}</button>
     </div>`);
     this.$contentUrl.append($btn);
 

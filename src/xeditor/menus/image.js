@@ -103,9 +103,14 @@ class XMenuImage extends Base {
     this.editor.menu.status = 'modify';
     const { uid, cfg } = this.editor;
 
+    const {
+      widthplaceholder,
+      deleteplaceholder,
+    } = cfg.image;
+
     this.dialogOrigin();
 
-    const $upload = $('<a href="javascript:;" class="xe-dialog-title xe-dialog-title-active">图片宽度</a>');
+    const $upload = $(`<a href="javascript:;" class="xe-dialog-title xe-dialog-title-active">${widthplaceholder}</a>`);
     this.$header.append($upload);
 
     const $contentUrl = $(`<div id="xe-dialog-content-url2${uid}" class="xe-dialog-content xe-dialog-content-url">
@@ -124,7 +129,7 @@ class XMenuImage extends Base {
       widthVal = selectedStyle.match(new RegExp(`width:\\s?(\\d+)${cfg.image.unit};?`, 'i'));
     }
 
-    const $width = $(`<input id="xe-dialog-width${uid}" type="tel" minlength="1" maxlength="3" class="xe-input xe-dialog-width" value="${widthVal ? widthVal[1] : ''}" placeholder="图片宽度">`);
+    const $width = $(`<input id="xe-dialog-width${uid}" type="tel" minlength="1" maxlength="3" class="xe-input xe-dialog-width" value="${widthVal ? widthVal[1] : ''}" placeholder="${widthplaceholder}">`);
     this.$contentBox.append($width);
     $(`#xe-dialog-width${uid}`).on('input', (ev = window.event) => {
       this.changeImageWidth($(ev.target).val());
@@ -136,7 +141,7 @@ class XMenuImage extends Base {
     this.$contentBox.append($symbol);
     // 删除
     const $btn = $(`<div class="xe-dialog-btn-box">
-      <button id="xe-dialog-btn${uid}" class="xe-button xe-dialog-btn">删除</button>
+      <button id="xe-dialog-btn${uid}" class="xe-button xe-dialog-btn">${deleteplaceholder}</button>
     </div>`);
     this.$contentUrl.append($btn);
     this.$btn = $(`#xe-dialog-btn${uid}`).on('click', () => {
@@ -155,12 +160,19 @@ class XMenuImage extends Base {
     this.editor.menu.status = 'new';
     const { uid, cfg, text } = this.editor;
 
+    const {
+      uplodadplaceholder,
+      linkplaceholder,
+      imageplaceholder,
+      insertplaceholder,
+    } = cfg.image;
+
     this.dialogOrigin();
 
-    const $upload = $('<a href="javascript:;" class="xe-dialog-title">上传</a>');
+    const $upload = $(`<a href="javascript:;" class="xe-dialog-title">${uplodadplaceholder}</a>`);
     this.$header.append($upload);
 
-    const $url = $('<a href="javascript:;" class="xe-dialog-title">图片</a>');
+    const $url = $(`<a href="javascript:;" class="xe-dialog-title">${imageplaceholder}</a>`);
     this.$header.append($url);
     this.$title = $('.xe-dialog-title').on('click', (e) => {
       this.now = $(e.target).index();
@@ -174,14 +186,14 @@ class XMenuImage extends Base {
     this.$contentUpload = $(`#xe-dialog-upload${uid}`);
 
     const $contentUrl = $(`<div id="xe-dialog-content-url${uid}" class="xe-dialog-content xe-dialog-content-url">
-      <input id="xe-dialog-url${uid}" type="text" class="xe-input xe-dialog-url" placeholder="图片链接">
+      <input id="xe-dialog-url${uid}" type="text" class="xe-input xe-dialog-url" placeholder="${linkplaceholder}">
     </div>`);
     this.$box.append($contentUrl);
     this.$contentUrl = $(`#xe-dialog-content-url${uid}`);
     this.$url = $(`#xe-dialog-url${uid}`);
     // 插入
     const $btn = $(`<div class="xe-dialog-btn-box">
-      <button id="xe-dialog-btn${uid}" class="xe-button xe-dialog-btn">插入</button>
+      <button id="xe-dialog-btn${uid}" class="xe-button xe-dialog-btn">${insertplaceholder}</button>
     </div>`);
     this.$contentUrl.append($btn);
     this.$btn = $(`#xe-dialog-btn${uid}`).on('click', () => {

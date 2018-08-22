@@ -91,6 +91,11 @@ const XMenuColorBase = class {
     const {
       base,
       standard,
+      baseplaceholder,
+      standardplaceholder,
+      diyplaceholder,
+      okplaceholder,
+      clearplaceholder,
     } = cfg.color;
 
     this.remove();
@@ -116,7 +121,7 @@ const XMenuColorBase = class {
     </div>`);
     $colorDialog.append($header);
 
-    const $title1 = $('<div class="xe-palette-title">主题色</div>');
+    const $title1 = $(`<div class="xe-palette-title">${baseplaceholder}</div>`);
     $colorDialog.append($title1);
     // 主体颜色的盒子
     const $main = $(`<div id="xe-palette-main${uid}" class="xe-palette-main"></div>`);
@@ -148,7 +153,7 @@ const XMenuColorBase = class {
     }
     this.$main.html(colorMainHtml);
     // 渲染主题色 end
-    const $title2 = $('<div class="xe-palette-title">标准颜色</div>');
+    const $title2 = $(`<div class="xe-palette-title">${standardplaceholder}</div>`);
     $colorDialog.append($title2);
     // 标准颜色的盒子
     const $standard = $(`<ul id="xe-palette-standard${uid}" class="xe-palette-standard"></ul>`);
@@ -162,7 +167,7 @@ const XMenuColorBase = class {
     });
     this.$standard.html(colorStandardHtml);
     // 自定义颜色
-    const $title3 = $('<div class="xe-palette-title">自定义颜色</div>');
+    const $title3 = $(`<div class="xe-palette-title">${diyplaceholder}</div>`);
     $colorDialog.append($title3);
     const $diyBoxTem = $(`<div id="xe-palette-diy${uid}" class="xe-palette-diy">
       <div id="xe-palette-diy-box${uid}" class="xe-palette-diy-box"></div>
@@ -175,10 +180,10 @@ const XMenuColorBase = class {
     const $diyInputTem = $(`<input id="xe-palette-diy-input${uid}" type="tel" maxlength="6" size="6" class="xe-palette-diy-input">`);
     this.$diyBox.append($diyInputTem);
     this.$diyInput = $(`#xe-palette-diy-input${uid}`);
-    const $diyOkTem = $(`<a id="xe-palette-ok${uid}" class="xe-palette-ok" href="javascript:;">确认</a>`);
+    const $diyOkTem = $(`<a id="xe-palette-ok${uid}" class="xe-palette-ok" href="javascript:;">${okplaceholder}</a>`);
     this.$diy.append($diyOkTem);
     this.$diyOk = $(`#xe-palette-ok${uid}`);
-    const $diyClearTem = $(`<a id="xe-palette-clear${uid}" class="xe-palette-ok" href="javascript:;">透明</a>`);
+    const $diyClearTem = $(`<a id="xe-palette-clear${uid}" class="xe-palette-ok" href="javascript:;">${clearplaceholder}</a>`);
     this.$diy.append($diyClearTem);
     this.$diyClear = $(`#xe-palette-clear${uid}`);
 

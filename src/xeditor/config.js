@@ -94,6 +94,12 @@ export default {
     error() {
       alert('上传错误');
     },
+    uplodadplaceholder: '上传', // 1.6.2 新增
+    imageplaceholder: '图片', // 1.6.2 新增
+    widthplaceholder: '图片宽度', // 1.6.2 新增
+    linkplaceholder: '图片链接', // 1.6.2 新增
+    deleteplaceholder: '删除', // 1.6.2 新增
+    insertplaceholder: '插入', // 1.6.2 新增
     unit: '%',
     multiple: true, // 允许多选
     accept: 'image/jpg,image/jpeg,image/png,image/gif,image/bmp', // 选择的类型
@@ -170,8 +176,18 @@ export default {
   full: { // 1.6.0 新增
     type: 'normal', // 正常 // righttop 右上
   },
+  link: { // 1.6.2 新增
+    linkplaceholder: 'http://', // 1.6.2 新增
+    fontplaceholder: '链接文字', // 1.6.2 新增
+    insertplaceholder: '插入', // 1.6.2 新增
+  },
   color: { // 1.6.0 新增
     mode: 'palette', // palette: 取色板,  picker: 拾色器，之前的自己选
+    baseplaceholder: '主题色', // 1.6.2 新增
+    standardplaceholder: '标准色', // 1.6.2 新增
+    diyplaceholder: '自定义颜色', // 1.6.2 新增
+    okplaceholder: '确定', // 1.6.2 新增
+    clearplaceholder: '透明', // 1.6.2 新增
     base: [ // 主题色基础颜色
       '#f5222d',
       '#fa541c',

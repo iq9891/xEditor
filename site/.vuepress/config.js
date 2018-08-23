@@ -8,6 +8,19 @@ module.exports = {
   ],
   dest: './docs',
   serviceWorker: true,
+  configureWebpack: {
+    module: {
+      rules: [{
+        test: /\.html$/,
+        use: [ {
+          loader: 'html-loader',
+          options: {
+            minimize: true
+          }
+        }],
+      }],
+    },
+  },
   themeConfig: {
     repo: 'iq9891/xEditor',
     searchMaxSuggestions: 5,

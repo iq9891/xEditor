@@ -1,7 +1,7 @@
 // XEditor 主类
-import XEditor from './editor';
+import XEditor from './instance/editor';
 // XEditor 样式
-import '../assets/styles/editor.scss';
+import './style/editor.scss';
 
 if (typeof window !== 'undefined' && !window.xEditor) {
   window.xEditor = XEditor;
